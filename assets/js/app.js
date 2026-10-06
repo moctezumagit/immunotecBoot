@@ -15,7 +15,7 @@ const app = createApp({
         role: "Consultor de Bienestar y Salud Celular Immunotec",
         city: "México / Internacional",
         email: "equilibrionutricion8@gmail.com",
-        whatsappNumber: "522441235715",
+        whatsappNumber: "522227708716",
         whatsappDefaultMessage: "¡Hola! Vi tu página de Equilibrio y Bienestar y quiero información sobre los productos Immunotec."
       },
       socialLinks: {
@@ -23,9 +23,12 @@ const app = createApp({
         instagram: "https://www.instagram.com/equilibrionutricion8?stkn=NHp1MjhkYWFuenJ1",
         tiktok: "https://www.tiktok.com/@equilibriobienestarnut",
         youtube: "https://www.youtube.com/channel/UCixehQX5txYGv-WPZ8OeeeA",
-        whatsappDirect: "https://wa.me/522441235715"
+        whatsappDirect: "https://wa.me/522227708716"
       },
+      googleSheetsUrl: '',
       leadCaptureMethod: 'whatsapp',
+      formspreeId: '',
+      webhookUrl: '',
       pixels: {}
     };
 
@@ -409,7 +412,7 @@ const app = createApp({
 
     // Construcción del enlace personalizado de WhatsApp
     const buildWhatsAppUrl = (customText = null) => {
-      const phone = config.advisor.whatsappNumber || '522441235715';
+      const phone = config.advisor.whatsappNumber || '522227708716';
       let message = customText;
 
       if (!message) {
@@ -440,16 +443,78 @@ const app = createApp({
       window.open(url, '_blank');
     };
 
-    // Enviar WhatsApp directo con los datos de la Calculadora de Rutina
+    // Registro asíncrono en Google Sheets (Google Apps Script Web App)
+    const sendToGoogleSheets = async (data) => {
+      const endpoint = config.googleSheetsUrl || (config.leadCaptureMethod === 'webhook' ? config.webhookUrl : '');
+      if (!endpoint) return;
+
+      try {
+        await fetch(endpoint, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'text/plain;charset=utf-8'
+          },
+          body: JSON.stringify(data)
+        });
+        console.log('[Google Sheets] Solicitud registrada exitosamente en la hoja de cálculo.');
+      } catch (sheetsErr) {
+        console.warn('[Google Sheets] Advertencia al registrar en Google Sheets:', sheetsErr);
+      }
+    };
+
+    // Redirección obligatoria al formulario de contacto para capturar Nombre y Teléfono
+    const goToForm = (contextMessage = '', contextGoal = null) => {
+      // Si el usuario ya completó el formulario en esta sesión, abrir WhatsApp directamente
+      if (submitted.value) {
+        openWhatsApp(contextMessage || null);
+        return;
+      }
+
+      if (contextGoal) {
+        form.goal = contextGoal;
+      }
+      if (contextMessage && !form.message) {
+        form.message = contextMessage;
+      }
+
+      const formElement = document.getElementById('formulario');
+      if (formElement) {
+        formElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        setTimeout(() => {
+          const nameInput = document.getElementById('nombre');
+          if (nameInput) {
+            nameInput.focus();
+            nameInput.classList.add('ring-4', 'ring-emerald-400/50');
+            setTimeout(() => {
+              nameInput.classList.remove('ring-4', 'ring-emerald-400/50');
+            }, 1800);
+          }
+        }, 500);
+      }
+    };
+
+    // Enviar WhatsApp con datos de la Calculadora pasando obligatoriamente por el formulario
     const consultCalculatedRoutineOnWhatsApp = () => {
       const rec = calculatedRecommendation.value;
-      const text = `¡Hola ${config.advisor.name}! 👋 Utilicé la calculadora en tu página.\n\n` +
-                   `🎯 Mi meta: *${calc.goal.toUpperCase()}*\n` +
-                   `🏃 Nivel de actividad: *${calc.activity.toUpperCase()}*\n` +
-                   `🎂 Rango de edad: *${calc.age}*\n\n` +
-                   `💡 Me recomendó el *${rec.comboName}* (${rec.product} + ${rec.booster}).\n` +
-                   `¿Me podrías brindar precios y cómo adquirirlo en mi país con descuento oficial?`;
-      openWhatsApp(text);
+      const customMessage = `Hola, utilicé la calculadora en tu página. Me interesa el plan recomendado "${rec.comboName}" (${rec.product} + ${rec.booster}) para mi meta de ${calc.goal.toUpperCase()}. Quisiera recibir orientación de precios y cómo adquirirlo en mi país.`;
+
+      // Si ya llenó el formulario previamente, abrir WhatsApp directamente
+      if (submitted.value) {
+        openWhatsApp(customMessage);
+        return;
+      }
+
+      // Pre-cargar la meta y mensaje calculado en el formulario y llevarlo a completar Nombre y Teléfono
+      form.message = customMessage;
+      if (calc.goal) {
+        const foundGoal = wellnessGoals.find(g => g.id.toLowerCase() === calc.goal.toLowerCase());
+        if (foundGoal) {
+          form.goal = foundGoal.label;
+        }
+      }
+
+      goToForm(customMessage);
     };
 
     // Reiniciar formulario para nueva consulta
@@ -487,34 +552,36 @@ const app = createApp({
       });
 
       const payload = {
-        name: form.name,
-        email: form.email,
-        phone: form.phone,
+        name: form.name.trim(),
+        email: form.email.trim(),
+        phone: form.phone.trim(),
         goal: form.goal,
-        message: form.message,
+        message: form.message.trim(),
         contactPreference: 'whatsapp',
-        submittedAt: new Date().toISOString(),
+        submittedAt: new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' }),
+        source: utmParams.source || 'Directo',
+        campaign: utmParams.campaign || '',
         utm: { ...utmParams }
       };
 
       try {
+        // 1. Envío automático a Google Sheets (sin bloquear apertura de WhatsApp)
+        await sendToGoogleSheets(payload);
+
+        // 2. Envío a Formspree si está configurado
         if (config.leadCaptureMethod === 'formspree' && config.formspreeId) {
-          const response = await fetch(`https://formspree.io/f/${config.formspreeId}`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-            body: JSON.stringify(payload)
-          });
-          if (!response.ok) throw new Error('Error al enviar a Formspree');
-        } else if (config.leadCaptureMethod === 'webhook' && config.webhookUrl) {
-          await fetch(config.webhookUrl, {
-            method: 'POST',
-            mode: 'no-cors',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
+          try {
+            await fetch(`https://formspree.io/f/${config.formspreeId}`, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+          } catch (formspreeErr) {
+            console.warn('[Formspree] Error:', formspreeErr);
+          }
         }
 
-        // Respaldo de lead en localStorage
+        // 3. Respaldo de lead en localStorage del navegador
         try {
           const storedLeads = JSON.parse(localStorage.getItem('immunotec_leads') || '[]');
           storedLeads.push(payload);
@@ -588,6 +655,7 @@ const app = createApp({
       chatOptions,
       handleChatOptionClick,
       submitForm,
+      goToForm,
       openWhatsApp,
       resetForm,
       selectGoalAndScroll,

@@ -12,8 +12,8 @@ window.APP_CONFIG = {
     role: "Consultor de Bienestar y Salud Celular Immunotec",
     city: "México / Internacional",
     email: "equilibrionutricion8@gmail.com", // Tu correo electrónico oficial
-    // Número de WhatsApp con código de país 52 (México) + 2441235715 = 522441235715
-    whatsappNumber: "522441235715",
+    // Número de WhatsApp con código de país 52 (México) + 2227708716 = 522227708716
+    whatsappNumber: "522227708716",
     // Mensaje predeterminado al hacer clic en el botón flotante
     whatsappDefaultMessage: "¡Hola! Vi tu página de Equilibrio y Bienestar y quiero información personalizada sobre los productos Immunotec."
   },
@@ -24,21 +24,27 @@ window.APP_CONFIG = {
     instagram: "https://www.instagram.com/equilibrionutricion8?stkn=NHp1MjhkYWFuenJ1",
     tiktok: "https://www.tiktok.com/@equilibriobienestarnut",
     youtube: "https://www.youtube.com/channel/UCixehQX5txYGv-WPZ8OeeeA",
-    whatsappDirect: "https://wa.me/522441235715"
+    whatsappDirect: "https://wa.me/522227708716"
   },
 
-  // --- DESTINO DEL FORMULARIO DE LEADS ---
+  // --- CONEXIÓN AUTOMÁTICA A GOOGLE SHEETS ---
+  // Pega aquí la URL de tu aplicación web creada en Google Apps Script
+  // Cada vez que un usuario envíe el formulario o solicite su rutina, se guardará
+  // automáticamente una nueva fila en tu hoja de Google Sheets Y se abrirá WhatsApp.
+  // (Ver instrucciones en el archivo 'google-apps-script.js')
+  googleSheetsUrl: "https://script.google.com/macros/s/AKfycbx9eZqg145tH7e0u0n1n4UnOOcNN42YDEqu7_PXp9Kay2F1YPcCLKGCcch4PFuVDRvD/exec", // Ej: "https://script.google.com/macros/s/AKfycb.../exec"
+
+  // --- DESTINO ADICIONAL DEL FORMULARIO DE LEADS ---
   // Opciones disponibles:
-  // 'whatsapp': Redirige a WhatsApp con los datos completos del lead.
-  // 'formspree': Envía a tu endpoint de Formspree (crea uno gratis en https://formspree.io).
-  // 'webhook': Envía un POST JSON a tu webhook de Make, Zapier o Google Apps Script.
-  // 'simulation': Simula el envío con alerta visual exitosa (ideal para pruebas).
-  leadCaptureMethod: 'whatsapp', // Cambia a 'formspree', 'webhook' o 'whatsapp'
-  
+  // 'whatsapp': Redirige a WhatsApp con los datos completos del lead (predeterminado).
+  // 'formspree': Envía también a Formspree (crea uno gratis en https://formspree.io).
+  // 'webhook': Envía un POST JSON a otro webhook (Make, Zapier, etc.).
+  leadCaptureMethod: 'whatsapp',
+
   // Si usas Formspree, pega aquí tu ID de formulario (ej: "mdoqzkpq")
   formspreeId: "",
-  
-  // Si usas Webhook (Zapier/Make/Google Sheets), pega aquí tu URL completa
+
+  // Webhook alternativo (Zapier/Make/n8n)
   webhookUrl: "",
 
   // --- CÓDIGOS DE PÍXELES DE PUBLICIDAD (TRAFFIC TRACKING) ---

@@ -193,7 +193,7 @@
           </nav>
 
           <!-- Botón WhatsApp Secundario -->
-          <button @click="openWhatsApp()" 
+          <button @click="goToForm()" 
                   class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors cursor-pointer">
             <svg class="w-3.5 h-3.5 fill-current text-emerald-600" viewBox="0 0 24 24">
               <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
@@ -220,7 +220,7 @@
     <div class="lg:hidden bg-white/95 border-b border-slate-200/80 px-3 py-2 overflow-x-auto no-scrollbar shadow-xs">
       <div class="flex items-center gap-2 min-w-max">
         <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider pl-1">Acceso rápido:</span>
-        <button @click="openWhatsApp()" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500 text-white shadow-xs cursor-pointer">
+        <button @click="goToForm()" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500 text-white shadow-xs cursor-pointer">
           <span>💬 WhatsApp Asesor</span>
         </button>
         <button @click="scrollToSection('calculadora')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-brand-blue border border-blue-200 cursor-pointer">
@@ -287,7 +287,7 @@
                 </button>
 
                 <!-- CTA Secundario WhatsApp -->
-                <button @click="openWhatsApp()"
+                <button @click="goToForm()"
                         class="flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm sm:text-base text-slate-800 bg-white hover:bg-emerald-50 border-2 border-emerald-400/80 shadow-md shadow-emerald-500/10 hover:shadow-lg hover:-translate-y-0.5 transition-all">
                   <svg class="w-5 h-5 text-emerald-600 fill-current" viewBox="0 0 24 24">
                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
@@ -519,7 +519,7 @@
                           class="btn-shine px-6 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-brand-blue hover:bg-blue-700 shadow-md shadow-blue-800/20 transition-all cursor-pointer text-center">
                     {{ audienceData[activeAudienceTab].ctaText }} &rarr;
                   </button>
-                  <button @click="openWhatsApp('Hola, me interesa la información para ' + audienceData[activeAudienceTab].tag)"
+                  <button @click="goToForm('Hola, me interesa la información para ' + audienceData[activeAudienceTab].tag, audienceData[activeAudienceTab].ctaGoal)"
                           class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors flex items-center justify-center gap-2 cursor-pointer">
                     <span>Preguntar por WhatsApp</span>
                   </button>
@@ -980,7 +980,7 @@
 
               <!-- CTA sección -->
               <div class="flex flex-wrap items-center gap-3">
-                <button @click="openWhatsApp('Hola, leí sobre el respaldo de Immunotec y quiero información detallada')" 
+                <button @click="goToForm('Hola, leí sobre el respaldo de Immunotec y quiero información detallada', 'Sistema Inmune')" 
                         class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-emerald-600 hover:bg-emerald-700 shadow-md shadow-emerald-700/20 transition-all cursor-pointer">
                   <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
@@ -1216,7 +1216,7 @@
                   <div class="flex items-center gap-1.5 font-medium">✓ Sin compromisos de compra forzosa</div>
                 </div>
               </div>
-              <button @click="openWhatsApp('Hola, quiero conocer los paquetes con descuento mayorista de Immunotec en mi país')" 
+              <button @click="goToForm('Hola, quiero conocer los paquetes con descuento mayorista de Immunotec en mi país', 'Salud y Prevención')" 
                       class="btn-shine w-full py-2.5 px-3 rounded-xl bg-white text-emerald-800 hover:bg-emerald-50 font-bold text-xs transition-colors text-center cursor-pointer shadow-md">
                 Ver precios de combos en mi país &rarr;
               </button>
@@ -1335,7 +1335,7 @@
             <p class="text-xs sm:text-sm text-slate-700 font-medium mb-3">
               ¿Tienes una pregunta específica sobre tu caso o país?
             </p>
-            <button @click="openWhatsApp('Hola, tengo una pregunta puntual sobre Immunotec:')"
+            <button @click="goToForm('Hola, tengo una pregunta puntual sobre Immunotec:', 'Sistema Inmune')"
                     class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-emerald-600 hover:bg-emerald-700 transition-colors cursor-pointer">
               <span>Hacer una pregunta directa por WhatsApp</span>
             </button>
@@ -1427,6 +1427,7 @@
                     <input id="nombre" 
                            v-model="form.name"
                            type="text" 
+                           required
                            placeholder="Tu nombre y apellido"
                            class="w-full px-4 py-3 rounded-xl border bg-white text-slate-800 text-sm custom-input shadow-xs"
                            :class="errors.name ? 'border-red-400 bg-red-50/30' : 'border-slate-300 focus:border-brand-blue'">
@@ -1444,7 +1445,8 @@
                     <input id="telefono" 
                            v-model="form.phone"
                            type="tel" 
-                           placeholder="Ej: +52 244 123 4567"
+                           required
+                           placeholder="Ej: +52 222 770 8716"
                            class="w-full px-4 py-3 rounded-xl border bg-white text-slate-800 text-sm custom-input shadow-xs"
                            :class="errors.phone ? 'border-red-400 bg-red-50/30' : 'border-slate-300 focus:border-brand-blue'">
                   </div>
@@ -1528,14 +1530,12 @@
                   </span>
                 </button>
 
-                <button type="button" 
-                        @click="openWhatsApp()"
-                        class="w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm text-slate-700 hover:text-emerald-700 bg-slate-100/80 hover:bg-emerald-50 transition-colors flex items-center justify-center gap-2 cursor-pointer">
-                  <svg class="w-4 h-4 text-emerald-600 fill-current" viewBox="0 0 24 24">
+                <div class="py-2.5 px-3 rounded-xl bg-slate-50 border border-slate-200/80 text-center flex items-center justify-center gap-2 text-xs text-slate-600">
+                  <svg class="w-4 h-4 text-emerald-600 fill-current flex-shrink-0" viewBox="0 0 24 24">
                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
                   </svg>
-                  <span>¿Prefieres respuesta inmediata? Chatea directamente en WhatsApp</span>
-                </button>
+                  <span>Atención inmediata: Al enviar tus datos se abrirá WhatsApp directamente con tu asesor</span>
+                </div>
 
               </div>
 
@@ -1574,7 +1574,7 @@
                     class="btn-shine w-full sm:w-auto px-8 py-4 rounded-xl font-black text-sm sm:text-base text-brand-navy bg-white hover:bg-slate-100 shadow-xl shadow-black/20 transition-all cursor-pointer">
               Solicitar orientación sin compromiso &rarr;
             </button>
-            <button @click="openWhatsApp()" 
+            <button @click="goToForm()" 
                     class="w-full sm:w-auto px-7 py-4 rounded-xl font-bold text-sm sm:text-base text-white bg-emerald-600 hover:bg-emerald-500 shadow-lg shadow-emerald-900/30 transition-all flex items-center justify-center gap-2 cursor-pointer border border-emerald-400/30">
               <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
@@ -1666,7 +1666,7 @@
             <p class="text-xs text-slate-400 leading-relaxed mb-3">
               ¿Deseas comprar con precio preferente o unirte como distribuidor independiente?
             </p>
-            <button @click="openWhatsApp()" 
+            <button @click="goToForm()" 
                     class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm">
               <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                 <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
@@ -1700,7 +1700,7 @@
               Formulario
             </button>
             <span>&bull;</span>
-            <button @click="openWhatsApp()" class="hover:text-white underline cursor-pointer">
+            <button @click="goToForm()" class="hover:text-white underline cursor-pointer">
               WhatsApp
             </button>
             <span>&bull;</span>
@@ -1720,14 +1720,14 @@
       
       <!-- Mini Tooltip / Popover llamativo -->
       <div v-if="!floatingChatOpen" 
-           @click="openWhatsApp()"
+           @click="goToForm()"
            class="mb-2 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white text-slate-800 text-xs font-bold shadow-lg border border-slate-100 cursor-pointer animate-float">
         <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
         <span>¿Tienes dudas? Chatea aquí</span>
       </div>
 
       <!-- Botón Flotante Principal -->
-      <button @click="openWhatsApp()"
+      <button @click="goToForm()"
               title="Hablar con un asesor por WhatsApp"
               aria-label="Hablar con un asesor por WhatsApp"
               class="animate-pulse-glow w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center shadow-xl shadow-emerald-600/40 active:scale-90 transition-all relative cursor-pointer">

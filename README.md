@@ -26,8 +26,7 @@ Landing Page y Link-in-Bio corporativa inspirada en la arquitectura visual, mód
 4. **Ecosistema Immunotec (Bento Grid)**:
    - Cuadrícula moderna que explica la ciencia del Glutatión (GSH), el aval médico, la certificación deportiva, la asesoría humana 1:1 y la logística de fábrica.
 5. **Calculadora / Evaluador de Rutina Interactivo (Herramienta de Diagnóstico)**:
-   - Permite al visitante seleccionar su meta, nivel de actividad y rango de edad.
-   - Calcula al instante su combinación ideal (ej: *Combo Atleta Pro & Rendimiento*), beneficios estimados y le permite enviar esa configuración exacta por WhatsApp con un solo clic.
+   - Calcula al instante su combinación ideal (ej: *Combo Atleta Pro & Rendimiento*), beneficios estimados y canaliza la solicitud al formulario con captura en Google Sheets antes de abrir WhatsApp.
 6. **Catálogo Detallado con Fichas de Producto**:
    - Immunocal Regular, Immunocal Platinum, Booster Nrf2, Booster Energy Performance, Omega Gen V y Paquetes de Ahorro Mayorista.
 7. **Historias Reales / Testimonios Verificados**:
@@ -75,7 +74,7 @@ window.APP_CONFIG = {
     role: "Consultor de Bienestar y Salud Celular Immunotec",
     city: "México / Internacional",
     email: "equilibrionutricion8@gmail.com", // Tu correo electrónico oficial
-    whatsappNumber: "522441235715", // Tu número de WhatsApp oficial configurado
+    whatsappNumber: "522227708716", // Tu número de WhatsApp oficial configurado
     whatsappDefaultMessage: "¡Hola! Vi tu página de Equilibrio y Bienestar y quiero información sobre los productos Immunotec."
   },
 
@@ -84,8 +83,10 @@ window.APP_CONFIG = {
     instagram: "https://www.instagram.com/equilibrionutricion8?stkn=NHp1MjhkYWFuenJ1",
     tiktok: "https://www.tiktok.com/@equilibriobienestarnut",
     youtube: "https://www.youtube.com/channel/UCixehQX5txYGv-WPZ8OeeeA",
-    whatsappDirect: "https://wa.me/522441235715"
+    whatsappDirect: "https://wa.me/522227708716"
   },
+
+  googleSheetsUrl: "", // Pega aquí tu URL de Google Apps Script para guardar todas las solicitudes
 
   leadCaptureMethod: 'whatsapp', // 'whatsapp', 'formspree', 'webhook' o 'simulation'
   formspreeId: "",
@@ -98,6 +99,24 @@ window.APP_CONFIG = {
   }
 };
 ```
+
+---
+
+## 📊 Vinculación con Google Sheets (Hojas de cálculo de Google)
+
+Puedes almacenar cada solicitud de contacto enviada en un documento de Google Sheets en tiempo real mientras el cliente es redirigido a WhatsApp:
+
+1. Abre tu [Google Drive](https://drive.google.com) y crea una nueva **Hoja de cálculo de Google**.
+2. Ve a **Extensiones > Apps Script**.
+3. Abre el archivo [google-apps-script.js](file:///c:/Users/User/Documents/Nestor/Desarrollo/fanpage/google-apps-script.js) de este proyecto, copia todo su contenido y pégalo en Apps Script.
+4. Haz clic en **Implementar > Nueva implementación**, elige tipo **Aplicación web**:
+   - *Ejecutar como:* Yo
+   - *Quién tiene acceso:* Cualquier persona
+5. Copia la URL generada (`https://script.google.com/macros/s/.../exec`) y pégala en [assets/js/config.js](file:///c:/Users/User/Documents/Nestor/Desarrollo/fanpage/assets/js/config.js) en:
+   ```javascript
+   googleSheetsUrl: "https://script.google.com/macros/s/TU_URL_AQUI/exec"
+   ```
+6. Cada solicitud registrará automáticamente: *Fecha y Hora, Nombre, Teléfono / WhatsApp, Correo, Meta de Salud, Mensaje, Origen (Red Social) y un enlace directo para responderle al cliente*.
 
 ---
 
