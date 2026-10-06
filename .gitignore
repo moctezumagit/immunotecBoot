@@ -1,0 +1,13 @@
+# Logs and temporary files
+*.log
+Thumbs.db
+.DS_Store
+
+# Editor configurations
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?

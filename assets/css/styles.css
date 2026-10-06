@@ -1,0 +1,211 @@
+/* ==========================================================================
+   IMMUNOTEC LANDING PAGE & LINK-IN-BIO - HOTMART-INSPIRED DESIGN SYSTEM
+   Paleta: Azul Corporativo (#0046AD, #0B2545, #071E3D), 
+           Verde Menta Pastel (#E3F0D8, #86EFAC, #10B981, #059669),
+           Blanco Puro y Slate Neutro
+   ========================================================================== */
+
+:root {
+  --primary-blue: #0046AD;
+  --dark-blue: #0B2545;
+  --navy-deep: #071E3D;
+  --accent-green-pastel: #E3F0D8;
+  --accent-green-vibrant: #10B981;
+  --accent-green-light: #D1FAE5;
+  --brand-gradient: linear-gradient(135deg, #0046AD 0%, #0B3C82 50%, #071E3D 100%);
+  --mint-gradient: linear-gradient(135deg, #E3F0D8 0%, #BAF2BB 100%);
+  --cta-gradient: linear-gradient(135deg, #10B981 0%, #059669 100%);
+}
+
+/* Scroll suave en toda la página */
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Scrollbar estilizada */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #93c5fd;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #0046AD;
+}
+
+/* Efectos Glassmorphism modernos */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(241, 245, 249, 1);
+  box-shadow: 0 10px 30px -10px rgba(0, 70, 173, 0.08), 0 4px 12px -2px rgba(0, 0, 0, 0.03);
+}
+
+.glass-card-dark {
+  background: rgba(11, 37, 69, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Bento Grid Cards & Hover Effects */
+.bento-card {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  background: #ffffff;
+}
+.bento-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px -10px rgba(0, 70, 173, 0.12), 0 8px 16px -4px rgba(0, 0, 0, 0.04);
+  border-color: rgba(147, 197, 253, 0.9);
+}
+
+/* Micro-animaciones para engagement y CRO */
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: floatSlow 4s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.45);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 0 0 14px rgba(16, 185, 129, 0);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s infinite;
+}
+
+@keyframes pulseBlue {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(0, 70, 173, 0.35);
+  }
+  50% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 10px rgba(0, 70, 173, 0);
+  }
+}
+
+.animate-pulse-blue {
+  animation: pulseBlue 3s infinite;
+}
+
+/* Animación de entrada suave */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Fondo con degradado ambiental suave */
+.bg-ambient-gradient {
+  background: radial-gradient(circle at 10% 10%, rgba(227, 240, 216, 0.55) 0%, transparent 40%),
+              radial-gradient(circle at 90% 20%, rgba(0, 70, 173, 0.08) 0%, transparent 50%),
+              radial-gradient(circle at 50% 90%, rgba(227, 240, 216, 0.4) 0%, transparent 50%),
+              #F8FAFC;
+}
+
+/* Estilos de input al recibir foco */
+.custom-input {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.custom-input:focus {
+  outline: none;
+  border-color: #0046AD;
+  box-shadow: 0 0 0 4px rgba(0, 70, 173, 0.12);
+}
+
+/* Botón con efecto sheen metálico / brillante estilo Hotmart */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.28) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(30deg);
+  transition: all 0.8s ease;
+}
+.btn-shine:hover::after {
+  left: 130%;
+}
+
+/* Píldoras activas estilo Hotmart */
+.tab-pill {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* FAQ Accordion Transition */
+.accordion-content {
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+}
+
+/* Checkmark animado para prueba social */
+.check-pill {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.check-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px -4px rgba(0, 70, 173, 0.08);
+}
+
+/* Ocultar barra horizontal sin perder scroll en móviles */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Evitar FOUC con Vue v-cloak */
+[v-cloak] {
+  display: none !important;
+}

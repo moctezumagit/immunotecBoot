@@ -1,0 +1,1761 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Equilibrio y Bienestar | Asesoría y Nutrición Celular Immunotec</title>
+  <link rel="icon" type="image/jpeg" href="assets/img/logo.jpg">
+  
+  <!-- SEO & Meta Tags de Alta Conversión -->
+  <meta name="description" content="Descubre el ecosistema de bienestar celular Immunotec con Equilibrio y Bienestar. Orientación personalizada 1 a 1 para blindar tus defensas, elevar tu energía y mejorar tu rendimiento con Immunocal.">
+  <meta name="keywords" content="Equilibrio y Bienestar, Immunotec, Immunocal, bienestar, sistema inmune, glutatión, energía, nutrición celular, asesor independiente">
+  <meta name="author" content="Equilibrio y Bienestar - Asesor Independiente Immunotec">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Open Graph para compartir en WhatsApp, Facebook e Instagram -->
+  <meta property="og:title" content="Equilibrio y Bienestar | Una mejor rutina comienza con una buena orientación">
+  <meta property="og:description" content="Atención personalizada para tus metas de bienestar, defensas y vitalidad con el respaldo científico de Immunotec.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/img/logo.jpg">
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              blue: '#0046AD',
+              lightBlue: '#1D70B8',
+              deep: '#0B2545',
+              navy: '#071E3D',
+              light: '#F0F6FF'
+            },
+            accent: {
+              mint: '#E3F0D8',
+              mintDark: '#86EFAC',
+              emerald: '#10B981',
+              emeraldDark: '#059669'
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Estilos Personalizados y Animaciones -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+
+  <!-- ========================================================
+       CÓDIGOS DE PÍXELES DE PUBLICIDAD (TRAFFIC TRACKING)
+       ======================================================== -->
+
+  <!-- 1. Meta Pixel (Facebook / Instagram Ads) -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    
+    window.addEventListener('DOMContentLoaded', function() {
+      if (window.APP_CONFIG && window.APP_CONFIG.pixels && window.APP_CONFIG.pixels.metaPixelId) {
+        fbq('init', window.APP_CONFIG.pixels.metaPixelId);
+        fbq('track', 'PageView');
+        console.log('[Tracking] Meta Pixel inicializado:', window.APP_CONFIG.pixels.metaPixelId);
+      }
+    });
+  </script>
+
+  <!-- 2. TikTok Pixel -->
+  <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var i="https://analytics.tiktok.com/i18n/pixel/events.js";ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=i,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src=i+"?sdkid="+e+"&lib="+t;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(o,a)};
+    }(window, document, 'ttq');
+
+    window.addEventListener('DOMContentLoaded', function() {
+      if (window.APP_CONFIG && window.APP_CONFIG.pixels && window.APP_CONFIG.pixels.tiktokPixelId) {
+        ttq.load(window.APP_CONFIG.pixels.tiktokPixelId);
+        ttq.page();
+        console.log('[Tracking] TikTok Pixel inicializado:', window.APP_CONFIG.pixels.tiktokPixelId);
+      }
+    });
+  </script>
+</head>
+
+<body class="bg-ambient-gradient text-slate-800 antialiased min-h-screen flex flex-col selection:bg-brand-blue selection:text-white">
+
+  <!-- VUE 3 APP WRAPPER -->
+  <div id="app" v-cloak class="flex flex-col min-h-screen">
+
+    <!-- TOP NOTIFICATION BANNER (ESTILO HOTMART) -->
+    <aside aria-label="Notificación oficial" class="bg-gradient-to-r from-brand-navy via-brand-blue to-brand-navy text-white text-xs py-2 px-4 text-center font-medium shadow-sm">
+      <div class="max-w-7xl mx-auto flex items-center justify-center gap-2 flex-wrap">
+        <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mr-1.5 animate-ping"></span>
+          Atención Activa Hoy
+        </span>
+        <span>Envíos y asesoría directa para México, EE.UU., Colombia, Perú, Guatemala, España y +25 países.</span>
+        <button type="button" @click="scrollToSection('calculadora')" class="underline hover:text-accent-mint font-semibold cursor-pointer ml-1">
+          Calcular mi rutina &rarr;
+        </button>
+      </div>
+    </aside>
+
+    <!-- ========================================================
+         1. BARRA SUPERIOR / ENCABEZADO (Navbar Estilo Hotmart)
+         ======================================================== -->
+    <header class="sticky top-0 z-40 glass-nav transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex items-center justify-between gap-4">
+        
+        <!-- Logo & Marca Personal: Equilibrio y Bienestar -->
+        <a href="#" class="flex items-center gap-2.5 sm:gap-3 group">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white p-0.5 flex items-center justify-center shadow-md shadow-blue-900/10 border border-slate-200/80 group-hover:scale-105 transition-transform overflow-hidden flex-shrink-0">
+            <img src="assets/img/logo.jpg" alt="Equilibrio y Bienestar Logo" class="w-full h-full object-contain">
+          </div>
+          <div class="flex flex-col">
+            <span class="text-base sm:text-lg font-extrabold tracking-tight text-brand-navy leading-none">
+              Equilibrio y Bienestar <span class="text-brand-blue font-semibold text-xs sm:text-sm">| Immunotec</span>
+            </span>
+            <span class="text-[10px] text-slate-500 font-medium tracking-wide uppercase mt-0.5">
+              Asesor Independiente Certificado
+            </span>
+          </div>
+        </a>
+
+        <!-- Menú de Navegación Central (Desktop - Estilo Hotmart) -->
+        <nav aria-label="Menú principal" class="hidden lg:flex items-center gap-6 text-xs font-semibold text-slate-600">
+          <button @click="scrollToSection('para-quien')" class="hover:text-brand-blue transition-colors">
+            Para quién es
+          </button>
+          <button @click="scrollToSection('ecosistema')" class="hover:text-brand-blue transition-colors">
+            Ecosistema
+          </button>
+          <button @click="scrollToSection('calculadora')" class="hover:text-brand-blue transition-colors">
+            Calculadora
+          </button>
+          <button @click="scrollToSection('productos')" class="hover:text-brand-blue transition-colors">
+            Productos
+          </button>
+          <button @click="scrollToSection('testimonios')" class="hover:text-brand-blue transition-colors">
+            Testimonios
+          </button>
+          <button @click="scrollToSection('faq')" class="hover:text-brand-blue transition-colors">
+            Preguntas Frecuentes
+          </button>
+        </nav>
+
+        <!-- Redes y Acciones Duales (Estilo Hotmart) -->
+        <div class="flex items-center gap-2 sm:gap-3">
+          
+          <!-- Redes Sociales Oficiales en Header (Desktop) -->
+          <nav aria-label="Redes sociales oficiales" class="hidden xl:flex items-center gap-1 mr-1">
+            <!-- Facebook -->
+            <a :href="config.socialLinks.facebook" target="_blank" rel="noopener noreferrer" title="Facebook Oficial"
+               class="w-8 h-8 rounded-full flex items-center justify-center text-slate-500 hover:text-brand-blue hover:bg-blue-50 transition-colors">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <!-- Instagram -->
+            <a :href="config.socialLinks.instagram" target="_blank" rel="noopener noreferrer" title="Instagram Oficial"
+               class="w-8 h-8 rounded-full flex items-center justify-center text-slate-500 hover:text-pink-600 hover:bg-pink-50 transition-colors">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+              </svg>
+            </a>
+            <!-- TikTok -->
+            <a :href="config.socialLinks.tiktok" target="_blank" rel="noopener noreferrer" title="TikTok Oficial"
+               class="w-8 h-8 rounded-full flex items-center justify-center text-slate-500 hover:text-black hover:bg-slate-100 transition-colors">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.24 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
+              </svg>
+            </a>
+            <!-- YouTube -->
+            <a :href="config.socialLinks.youtube" target="_blank" rel="noopener noreferrer" title="YouTube Oficial"
+               class="w-8 h-8 rounded-full flex items-center justify-center text-slate-500 hover:text-red-600 hover:bg-red-50 transition-colors">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </a>
+          </nav>
+
+          <!-- Botón WhatsApp Secundario -->
+          <button @click="openWhatsApp()" 
+                  class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors cursor-pointer">
+            <svg class="w-3.5 h-3.5 fill-current text-emerald-600" viewBox="0 0 24 24">
+              <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+            </svg>
+            <span>WhatsApp Directo</span>
+          </button>
+
+          <!-- Botón Destacado Primario -->
+          <button @click="scrollToSection('formulario')" 
+                  class="btn-shine inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-white bg-brand-blue hover:bg-blue-700 shadow-md shadow-blue-800/20 hover:shadow-lg transition-all active:scale-95 cursor-pointer">
+            <span>Recibir orientación</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- ========================================================
+         BARRA MÓVIL "LINK-IN-BIO" RÁPIDA (Optimizada para Redes)
+         ======================================================== -->
+    <div class="lg:hidden bg-white/95 border-b border-slate-200/80 px-3 py-2 overflow-x-auto no-scrollbar shadow-xs">
+      <div class="flex items-center gap-2 min-w-max">
+        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider pl-1">Acceso rápido:</span>
+        <button @click="openWhatsApp()" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500 text-white shadow-xs cursor-pointer">
+          <span>💬 WhatsApp Asesor</span>
+        </button>
+        <button @click="scrollToSection('calculadora')" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-blue-100 text-brand-blue border border-blue-200 cursor-pointer">
+          <span>⚡ Calculadora Rutina</span>
+        </button>
+        <!-- Enlaces a Redes en Móvil -->
+        <a :href="config.socialLinks.facebook" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-full text-xs font-semibold text-blue-700 bg-blue-50 border border-blue-100 flex items-center gap-1">
+          <span>Facebook</span>
+        </a>
+        <a :href="config.socialLinks.instagram" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-full text-xs font-semibold text-pink-600 bg-pink-50 border border-pink-100 flex items-center gap-1">
+          <span>Instagram</span>
+        </a>
+        <a :href="config.socialLinks.tiktok" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-full text-xs font-semibold text-slate-800 bg-slate-100 border border-slate-200 flex items-center gap-1">
+          <span>TikTok</span>
+        </a>
+        <a :href="config.socialLinks.youtube" target="_blank" rel="noopener noreferrer" class="px-2.5 py-1 rounded-full text-xs font-semibold text-red-600 bg-red-50 border border-red-100 flex items-center gap-1">
+          <span>YouTube</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main class="flex-grow">
+
+      <!-- ========================================================
+           2. SECCIÓN HERO (Principal - High Conversion & CRO)
+           ======================================================== -->
+      <section class="relative pt-8 pb-14 md:pt-14 md:pb-20 overflow-hidden">
+        
+        <!-- Elementos decorativos de fondo -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-b from-blue-100/40 via-emerald-50/30 to-transparent pointer-events-none -z-10 blur-3xl"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            
+            <!-- Columna Izquierda: Mensaje Central & CTAs -->
+            <div class="lg:col-span-7 flex flex-col items-start text-left">
+              
+              <!-- Badge de Confianza / Respaldo -->
+              <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-50 border border-blue-200/80 text-brand-blue text-xs font-semibold mb-4 shadow-xs">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                <span>Asesor en línea • Orientación personalizada sin costo</span>
+              </div>
+
+              <!-- Titular Principal con Acentos de Marca -->
+              <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-[48px] font-extrabold text-brand-navy tracking-tight leading-[1.14] mb-4">
+                Una mejor rutina comienza con una <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-blue to-emerald-600">buena orientación.</span>
+              </h1>
+
+              <!-- Subtítulo -->
+              <p class="text-base sm:text-lg text-slate-600 leading-relaxed mb-6 max-w-2xl font-normal">
+                Conoce las opciones de <strong>Immunotec</strong> y recibe atención personalizada para descubrir productos que acompañen tus metas de bienestar, energía celular y vitalidad diaria.
+              </p>
+
+              <!-- Botones de Acción Principal (CTA Dual Estilo Hotmart) -->
+              <div class="w-full sm:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-8">
+                <!-- CTA Primario -->
+                <button @click="scrollToSection('formulario')"
+                        class="btn-shine flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-xl font-bold text-sm sm:text-base text-white bg-brand-blue hover:bg-blue-700 shadow-lg shadow-blue-800/25 hover:shadow-xl hover:-translate-y-0.5 transition-all">
+                  <span>Quiero más información</span>
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                  </svg>
+                </button>
+
+                <!-- CTA Secundario WhatsApp -->
+                <button @click="openWhatsApp()"
+                        class="flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm sm:text-base text-slate-800 bg-white hover:bg-emerald-50 border-2 border-emerald-400/80 shadow-md shadow-emerald-500/10 hover:shadow-lg hover:-translate-y-0.5 transition-all">
+                  <svg class="w-5 h-5 text-emerald-600 fill-current" viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                  </svg>
+                  <span>Hablar con un asesor por WhatsApp</span>
+                </button>
+              </div>
+
+              <!-- Puntos de Confianza Instantáneos (Micro-social proof) -->
+              <div class="grid grid-cols-3 gap-2 sm:gap-4 pt-4 border-t border-slate-200/80 w-full max-w-lg text-slate-600 text-xs sm:text-sm">
+                <div class="flex items-center gap-1.5">
+                  <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  <span class="font-medium text-slate-700">Sin compromiso</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  <span class="font-medium text-slate-700">Respaldo científico</span>
+                </div>
+                <div class="flex items-center gap-1.5">
+                  <svg class="w-4 h-4 text-emerald-600 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  <span class="font-medium text-slate-700">Asesor certificado</span>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- Columna Derecha: Widget Interactivo / Simulación de Chat en Pantalla -->
+            <div class="lg:col-span-5 relative">
+              
+              <div class="relative rounded-3xl overflow-hidden shadow-2xl border border-slate-100 bg-white">
+                
+                <!-- Cabecera de la tarjeta con imagen -->
+                <div class="relative h-44 sm:h-52 w-full overflow-hidden">
+                  <img src="assets/img/hero-wellness.jpg" 
+                       alt="Bienestar y vitalidad Immunotec" 
+                       class="w-full h-full object-cover object-center transform hover:scale-105 transition-transform duration-700">
+                  <div class="absolute inset-0 bg-gradient-to-t from-brand-deep/90 via-brand-deep/40 to-transparent"></div>
+                  
+                  <div class="absolute bottom-3 left-4 right-4 flex items-center justify-between text-white">
+                    <div>
+                      <span class="text-xs font-bold text-accent-mint uppercase tracking-wider block">Nutrición Celular</span>
+                      <h2 class="text-base sm:text-lg font-bold leading-tight">Glutatión & Vitalidad Diaria</h2>
+                    </div>
+                    <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-white/20 backdrop-blur-md border border-white/30 text-white">
+                      45+ Años de Ciencia
+                    </span>
+                  </div>
+                </div>
+
+                <!-- WIDGET INTERACTIVO DE SIMULACIÓN DE CHAT -->
+                <div class="p-4 sm:p-5 bg-slate-50/80">
+                  
+                  <!-- Header del Asesor en el Chat -->
+                  <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-200/80">
+                    <div class="flex items-center gap-2.5">
+                      <div class="relative">
+                        <div class="w-10 h-10 rounded-full bg-white border border-slate-200 overflow-hidden flex items-center justify-center shadow-xs p-0.5">
+                          <img src="assets/img/logo.jpg" alt="Equilibrio y Bienestar" class="w-full h-full object-contain">
+                        </div>
+                        <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-white"></span>
+                      </div>
+                      <div>
+                        <h3 class="text-xs font-bold text-slate-800 leading-tight">Equilibrio y Bienestar</h3>
+                        <span class="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
+                          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Asesor en línea
+                        </span>
+                      </div>
+                    </div>
+                    <span class="text-[10px] text-slate-400">Atención 1:1</span>
+                  </div>
+
+                  <!-- Mensajes del Chat -->
+                  <div class="space-y-2.5 max-h-52 overflow-y-auto pr-1">
+                    <div v-for="msg in chatMessages" :key="msg.id" 
+                         :class="msg.sender === 'advisor' ? 'flex items-start gap-2' : 'flex items-end justify-end'">
+                      
+                      <!-- Burbuja Asesor -->
+                      <div v-if="msg.sender === 'advisor'" 
+                           class="bg-white text-slate-800 text-xs sm:text-[13px] p-3 rounded-2xl rounded-tl-xs shadow-xs border border-slate-200/60 max-w-[88%] leading-relaxed">
+                        <p>{{ msg.text }}</p>
+                      </div>
+
+                      <!-- Burbuja Usuario -->
+                      <div v-else 
+                           class="bg-brand-blue text-white text-xs sm:text-[13px] p-3 rounded-2xl rounded-tr-xs shadow-xs max-w-[85%] leading-relaxed font-medium">
+                        <p>{{ msg.text }}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Opciones Interactivas de Respuesta Rápida -->
+                  <div class="mt-3 pt-3 border-t border-slate-200/60">
+                    <p class="text-[11px] font-semibold text-slate-500 mb-2">Toca una opción para recibir info inmediata:</p>
+                    <div class="flex flex-col gap-1.5">
+                      <button v-for="(opt, idx) in chatOptions" :key="idx"
+                              @click="handleChatOptionClick(opt)"
+                              class="text-left px-3 py-2 rounded-xl text-xs font-medium bg-white hover:bg-blue-50 text-slate-700 hover:text-brand-blue border border-slate-200/80 hover:border-blue-300 transition-all flex items-center justify-between group active:scale-98 cursor-pointer">
+                        <span>{{ opt.text }}</span>
+                        <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-brand-blue group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="mt-3 pt-2">
+                    <button @click="scrollToSection('formulario')" 
+                            class="w-full py-2.5 px-3 rounded-xl bg-accent-mint hover:bg-accent-mintDark/80 text-slate-900 text-xs font-bold transition-colors text-center block shadow-xs cursor-pointer">
+                      👉 Llenar formulario de orientación personalizada
+                    </button>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================
+           CINTA DE MÉTRICAS Y CERTIFICACIONES (ESTILO HOTMART STATS)
+           ======================================================== -->
+      <section class="bg-white border-y border-slate-200/80 py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+          <div class="grid grid-cols-2 md:grid-cols-5 gap-6 text-center divide-y md:divide-y-0 md:divide-x divide-slate-100">
+            
+            <div class="pt-2 md:pt-0">
+              <span class="block text-2xl sm:text-3xl font-black text-brand-blue">+45 Años</span>
+              <span class="text-xs text-slate-500 font-medium">De investigación científica</span>
+            </div>
+
+            <div class="pt-2 md:pt-0">
+              <span class="block text-2xl sm:text-3xl font-black text-emerald-600">+85 Estudios</span>
+              <span class="text-xs text-slate-500 font-medium">Publicados en PubMed</span>
+            </div>
+
+            <div class="pt-2 md:pt-0">
+              <span class="block text-2xl sm:text-3xl font-black text-brand-navy">30+ Países</span>
+              <span class="text-xs text-slate-500 font-medium">Con distribución oficial</span>
+            </div>
+
+            <div class="pt-2 md:pt-0">
+              <span class="block text-2xl sm:text-3xl font-black text-brand-blue">PDR / CPS</span>
+              <span class="text-xs text-slate-500 font-medium">En libros médicos de EE.UU. y CA</span>
+            </div>
+
+            <div class="pt-2 md:pt-0 col-span-2 md:col-span-1">
+              <span class="block text-2xl sm:text-3xl font-black text-emerald-600">Clean Sport</span>
+              <span class="text-xs text-slate-500 font-medium">Informed-Sport Anti-doping</span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================================
+           SECCIÓN ESTILO HOTMART: "PARA QUIÉN ES" (AUDIENCE SELECTOR)
+           ======================================================== -->
+      <section id="para-quien" class="py-16 sm:py-24 bg-slate-50/60 border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+          
+          <div class="text-center max-w-3xl mx-auto mb-10">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold text-brand-blue bg-blue-100/70 uppercase tracking-wider mb-2">
+              Segmentación Personalizada
+            </span>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-navy tracking-tight">
+              Una solución para cada etapa de tu vida
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-2">
+              Explora cómo Immunotec se adapta a tus requerimientos individuales y encuentra tu camino hacia el bienestar.
+            </p>
+          </div>
+
+          <!-- Pestañas Selectoras de Audiencia (Estilo Hotmart Tabs) -->
+          <div class="flex items-center justify-start md:justify-center gap-2 overflow-x-auto no-scrollbar pb-3 mb-8">
+            <button v-for="tab in audienceTabs" :key="tab.id"
+                    @click="activeAudienceTab = tab.id"
+                    class="tab-pill px-4 py-2.5 rounded-2xl text-xs sm:text-sm font-bold flex items-center gap-2 whitespace-nowrap cursor-pointer border transition-all"
+                    :class="activeAudienceTab === tab.id 
+                            ? 'bg-brand-blue text-white border-brand-blue shadow-md shadow-blue-800/20' 
+                            : 'bg-white text-slate-700 border-slate-200 hover:bg-slate-100'">
+              <span>{{ tab.icon }}</span>
+              <span>{{ tab.label }}</span>
+            </button>
+          </div>
+
+          <!-- Tarjeta Bento Dinámica del Segmento Activo -->
+          <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-xl transition-all">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              
+              <!-- Información del Segmento -->
+              <div class="lg:col-span-7">
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 uppercase tracking-wider mb-3">
+                  {{ audienceData[activeAudienceTab].tag }}
+                </span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-brand-navy leading-tight mb-3">
+                  {{ audienceData[activeAudienceTab].title }}
+                </h3>
+                <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
+                  {{ audienceData[activeAudienceTab].subtitle }}
+                </p>
+
+                <!-- Puntos clave del segmento -->
+                <ul class="space-y-3 mb-8">
+                  <li v-for="(feat, fIdx) in audienceData[activeAudienceTab].features" :key="fIdx"
+                      class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
+                    <div class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold text-xs flex-shrink-0 mt-0.5">
+                      ✓
+                    </div>
+                    <span>{{ feat }}</span>
+                  </li>
+                </ul>
+
+                <!-- Estadísticas del segmento -->
+                <div class="grid grid-cols-3 gap-3 pt-4 border-t border-slate-100 mb-6">
+                  <div v-for="(st, sIdx) in audienceData[activeAudienceTab].stats" :key="sIdx"
+                       class="text-left">
+                    <span class="block text-xl font-black text-brand-blue">{{ st.number }}</span>
+                    <span class="text-[11px] text-slate-500 font-medium">{{ st.label }}</span>
+                  </div>
+                </div>
+
+                <!-- CTA del segmento -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                  <button @click="selectGoalAndScroll(audienceData[activeAudienceTab].ctaGoal)"
+                          class="btn-shine px-6 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-brand-blue hover:bg-blue-700 shadow-md shadow-blue-800/20 transition-all cursor-pointer text-center">
+                    {{ audienceData[activeAudienceTab].ctaText }} &rarr;
+                  </button>
+                  <button @click="openWhatsApp('Hola, me interesa la información para ' + audienceData[activeAudienceTab].tag)"
+                          class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-200 transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                    <span>Preguntar por WhatsApp</span>
+                  </button>
+                </div>
+
+              </div>
+
+              <!-- Imagen del Segmento -->
+              <div class="lg:col-span-5">
+                <div class="relative rounded-2xl overflow-hidden shadow-lg border border-slate-100 bg-slate-100">
+                  <img :src="audienceData[activeAudienceTab].image" 
+                       :alt="audienceData[activeAudienceTab].title" 
+                       class="w-full h-72 sm:h-80 object-cover object-center">
+                  <div class="absolute inset-0 bg-gradient-to-t from-brand-deep/85 via-transparent to-transparent"></div>
+                  <div class="absolute bottom-4 left-4 right-4 text-white">
+                    <span class="text-[11px] font-bold text-accent-mint uppercase tracking-wider block">Fórmula Destacada:</span>
+                    <span class="text-sm sm:text-base font-bold">{{ audienceData[activeAudienceTab].recommendedProduct }}</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================
+           ECOSISTEMA IMMUNOTEC (BENTO GRID ESTILO HOTMART)
+           ======================================================== -->
+      <section id="ecosistema" class="py-16 sm:py-24 bg-white border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+          
+          <div class="text-center max-w-3xl mx-auto mb-14">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold text-emerald-800 bg-emerald-100 uppercase tracking-wider mb-2">
+              Ecosistema Integral
+            </span>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-navy tracking-tight">
+              Todo lo que necesitas para tu bienestar celular en un solo lugar
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-2">
+              Conoce los pilares que hacen de Immunotec el referente global en nutrición celular y precursores de glutatión.
+            </p>
+          </div>
+
+          <!-- BENTO GRID -->
+          <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-12 gap-6">
+            
+            <!-- Card 1: Glutatión Maestro (Gran Bento - 8 cols) -->
+            <div class="lg:col-span-8 bento-card p-6 sm:p-8 rounded-3xl flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-4">
+                  <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-brand-blue">
+                    La Ciencia del Glutatión (GSH)
+                  </span>
+                  <span class="text-xs font-bold text-emerald-600">Patente Mundial</span>
+                </div>
+                <h3 class="text-xl sm:text-2xl font-extrabold text-brand-navy mb-3">
+                  El antioxidante maestro que tu cuerpo necesita
+                </h3>
+                <p class="text-slate-600 text-sm leading-relaxed mb-6">
+                  El glutatión no puede absorberse adecuadamente en pastillas convencionales porque los ácidos estomacales lo degradan. <strong>Immunocal®</strong> proporciona cisteína enlazada no desnaturalizada, el sustrato exacto para que tus células sinteticen su propio glutatión.
+                </p>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-4 border-t border-slate-100">
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-100">
+                  <span class="block text-xs font-bold text-brand-navy">Desintoxicación</span>
+                  <span class="text-[11px] text-slate-500">Neutraliza toxinas en hígado y riñones</span>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-100">
+                  <span class="block text-xs font-bold text-brand-navy">Defensa Inmune</span>
+                  <span class="text-[11px] text-slate-500">Multiplica glóbulos blancos y anticuerpos</span>
+                </div>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-100">
+                  <span class="block text-xs font-bold text-brand-navy">Energía Celular</span>
+                  <span class="text-[11px] text-slate-500">Optimiza la función mitocondrial diaria</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Card 2: Reconocimiento Médico (4 cols) -->
+            <div class="lg:col-span-4 bento-card p-6 sm:p-8 rounded-3xl flex flex-col justify-between bg-gradient-to-br from-brand-deep to-brand-navy text-white">
+              <div>
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-white/20 text-accent-mint mb-4">
+                  Aval Médico
+                </span>
+                <h3 class="text-xl font-bold mb-3">
+                  Listado en el PDR y CPS
+                </h3>
+                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">
+                  Presente en el <em>Physicians' Desk Reference</em> (EE.UU.) y el Compendio de Especialidades Farmacéuticas de Canadá para consulta de médicos de todo el mundo.
+                </p>
+              </div>
+              <div class="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-slate-300">
+                <span>PubMed Indexed</span>
+                <span class="font-bold text-white">85+ Ensayos</span>
+              </div>
+            </div>
+
+            <!-- Card 3: Calidad Clean Sport (4 cols) -->
+            <div class="lg:col-span-4 bento-card p-6 sm:p-8 rounded-3xl flex flex-col justify-between">
+              <div>
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 mb-3">
+                  Atletas de Élite
+                </span>
+                <h3 class="text-lg font-bold text-brand-navy mb-2">
+                  Certificación Informed-Sport
+                </h3>
+                <p class="text-slate-600 text-xs leading-relaxed">
+                  Garantía de pureza antidopaje. Utilizado por medallistas olímpicos, futbolistas y maratonistas internacionales.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-emerald-600">
+                ✓ 100% Libre de sustancias prohibidas
+              </div>
+            </div>
+
+            <!-- Card 4: Acompañamiento 1:1 (4 cols) -->
+            <div class="lg:col-span-4 bento-card p-6 sm:p-8 rounded-3xl flex flex-col justify-between">
+              <div>
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-blue-100 text-brand-blue mb-3">
+                  Asesoría Dedicada
+                </span>
+                <h3 class="text-lg font-bold text-brand-navy mb-2">
+                  Atención Humana 1 a 1
+                </h3>
+                <p class="text-slate-600 text-xs leading-relaxed">
+                  No compras solo un producto: recibes orientación en dosis, mejores horarios de toma y acompañamiento constante vía WhatsApp.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-brand-blue">
+                ✓ Sin presiones ni costos ocultos
+              </div>
+            </div>
+
+            <!-- Card 5: Logística Oficial (4 cols) -->
+            <div class="lg:col-span-4 bento-card p-6 sm:p-8 rounded-3xl flex flex-col justify-between">
+              <div>
+                <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-amber-100 text-amber-900 mb-3">
+                  Garantía de Fábrica
+                </span>
+                <h3 class="text-lg font-bold text-brand-navy mb-2">
+                  Entrega Oficial en +30 Países
+                </h3>
+                <p class="text-slate-600 text-xs leading-relaxed">
+                  Producto original despachado directamente desde los almacenes oficiales de Immunotec en tu país con factura y garantía.
+                </p>
+              </div>
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-bold text-slate-700">
+                ✓ Envío rastreado a domicilio
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================
+           SECCIÓN ESTILO HOTMART: CALCULADORA DE RUTINA INTERACTIVA
+           ======================================================== -->
+      <section id="calculadora" class="py-16 sm:py-24 bg-gradient-to-b from-blue-50/60 to-white border-b border-slate-200/80">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6">
+          
+          <div class="text-center max-w-3xl mx-auto mb-12">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold text-brand-blue bg-blue-100 uppercase tracking-wider mb-2">
+              Herramienta Interactiva
+            </span>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-navy tracking-tight">
+              Calcula tu combinación ideal de bienestar
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-2">
+              Responde 3 preguntas breves y descubre el paquete y la rutina sugerida para tus objetivos.
+            </p>
+          </div>
+
+          <div class="glass-card rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-2xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              
+              <!-- Controles de la Calculadora -->
+              <div class="lg:col-span-7 space-y-6">
+                
+                <!-- Pregunta 1: Meta -->
+                <div>
+                  <label class="block text-xs sm:text-sm font-bold text-slate-800 mb-2">
+                    1. ¿Cuál es tu objetivo prioritario?
+                  </label>
+                  <div class="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                    <button type="button" @click="calc.goal = 'inmune'"
+                            class="p-2.5 rounded-xl border text-left text-xs font-bold cursor-pointer transition-all"
+                            :class="calc.goal === 'inmune' ? 'bg-blue-50 border-brand-blue text-brand-blue ring-2 ring-blue-500/20' : 'bg-white border-slate-200 text-slate-700'">
+                      🛡️ Defensas
+                    </button>
+                    <button type="button" @click="calc.goal = 'energia'"
+                            class="p-2.5 rounded-xl border text-left text-xs font-bold cursor-pointer transition-all"
+                            :class="calc.goal === 'energia' ? 'bg-blue-50 border-brand-blue text-brand-blue ring-2 ring-blue-500/20' : 'bg-white border-slate-200 text-slate-700'">
+                      ⚡ Energía
+                    </button>
+                    <button type="button" @click="calc.goal = 'deporte'"
+                            class="p-2.5 rounded-xl border text-left text-xs font-bold cursor-pointer transition-all"
+                            :class="calc.goal === 'deporte' ? 'bg-blue-50 border-brand-blue text-brand-blue ring-2 ring-blue-500/20' : 'bg-white border-slate-200 text-slate-700'">
+                      🏃 Deporte
+                    </button>
+                    <button type="button" @click="calc.goal = 'antiage'"
+                            class="p-2.5 rounded-xl border text-left text-xs font-bold cursor-pointer transition-all"
+                            :class="calc.goal === 'antiage' ? 'bg-blue-50 border-brand-blue text-brand-blue ring-2 ring-blue-500/20' : 'bg-white border-slate-200 text-slate-700'">
+                      🌿 Longevidad
+                    </button>
+                    <button type="button" @click="calc.goal = 'negocio'"
+                            class="p-2.5 rounded-xl border text-left text-xs font-bold cursor-pointer transition-all col-span-2 sm:col-span-1"
+                            :class="calc.goal === 'negocio' ? 'bg-blue-50 border-brand-blue text-brand-blue ring-2 ring-blue-500/20' : 'bg-white border-slate-200 text-slate-700'">
+                      💼 Emprender
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Pregunta 2: Nivel de Actividad -->
+                <div>
+                  <label class="block text-xs sm:text-sm font-bold text-slate-800 mb-2">
+                    2. ¿Cuál es tu nivel de actividad física diaria?
+                  </label>
+                  <div class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    <button type="button" @click="calc.activity = 'sedentario'"
+                            class="p-2 rounded-xl border text-center text-xs font-medium cursor-pointer transition-all"
+                            :class="calc.activity === 'sedentario' ? 'bg-emerald-50 border-emerald-500 text-emerald-800 font-bold' : 'bg-white border-slate-200 text-slate-600'">
+                      Sedentario
+                    </button>
+                    <button type="button" @click="calc.activity = 'moderado'"
+                            class="p-2 rounded-xl border text-center text-xs font-medium cursor-pointer transition-all"
+                            :class="calc.activity === 'moderado' ? 'bg-emerald-50 border-emerald-500 text-emerald-800 font-bold' : 'bg-white border-slate-200 text-slate-600'">
+                      Moderado
+                    </button>
+                    <button type="button" @click="calc.activity = 'intenso'"
+                            class="p-2 rounded-xl border text-center text-xs font-medium cursor-pointer transition-all"
+                            :class="calc.activity === 'intenso' ? 'bg-emerald-50 border-emerald-500 text-emerald-800 font-bold' : 'bg-white border-slate-200 text-slate-600'">
+                      Intenso
+                    </button>
+                    <button type="button" @click="calc.activity = 'atleta'"
+                            class="p-2 rounded-xl border text-center text-xs font-medium cursor-pointer transition-all"
+                            :class="calc.activity === 'atleta' ? 'bg-emerald-50 border-emerald-500 text-emerald-800 font-bold' : 'bg-white border-slate-200 text-slate-600'">
+                      Atleta
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Pregunta 3: Rango de Edad -->
+                <div>
+                  <label class="block text-xs sm:text-sm font-bold text-slate-800 mb-2">
+                    3. Rango de edad:
+                  </label>
+                  <div class="grid grid-cols-3 gap-2">
+                    <button type="button" @click="calc.age = '18-35'"
+                            class="p-2 rounded-xl border text-center text-xs font-medium cursor-pointer transition-all"
+                            :class="calc.age === '18-35' ? 'bg-blue-50 border-brand-blue text-brand-blue font-bold' : 'bg-white border-slate-200 text-slate-600'">
+                      18 a 35 años
+                    </button>
+                    <button type="button" @click="calc.age = '36-50'"
+                            class="p-2 rounded-xl border text-center text-xs font-medium cursor-pointer transition-all"
+                            :class="calc.age === '36-50' ? 'bg-blue-50 border-brand-blue text-brand-blue font-bold' : 'bg-white border-slate-200 text-slate-600'">
+                      36 a 50 años
+                    </button>
+                    <button type="button" @click="calc.age = '51+'"
+                            class="p-2 rounded-xl border text-center text-xs font-medium cursor-pointer transition-all"
+                            :class="calc.age === '51+' ? 'bg-blue-50 border-brand-blue text-brand-blue font-bold' : 'bg-white border-slate-200 text-slate-600'">
+                      51 años o más
+                    </button>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Resultado Dinámico de la Calculadora -->
+              <div class="lg:col-span-5 bg-gradient-to-br from-brand-deep to-brand-navy p-6 rounded-2xl text-white shadow-lg flex flex-col justify-between">
+                <div>
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-[11px] font-bold text-accent-mint uppercase tracking-wider">
+                      Recomendación Calculada
+                    </span>
+                    <span class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-white/20 text-white">
+                      100% Adaptada
+                    </span>
+                  </div>
+
+                  <h3 class="text-lg sm:text-xl font-extrabold mb-2 text-white">
+                    {{ calculatedRecommendation.comboName }}
+                  </h3>
+
+                  <div class="p-3 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 mb-4">
+                    <span class="block text-xs font-bold text-accent-mint">Producto Base:</span>
+                    <span class="text-xs text-white font-medium">{{ calculatedRecommendation.product }}</span>
+                    <span class="block text-xs font-bold text-accent-mint mt-2">Sinergia:</span>
+                    <span class="text-xs text-slate-200">{{ calculatedRecommendation.booster }}</span>
+                  </div>
+
+                  <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                    {{ calculatedRecommendation.benefit }}
+                  </p>
+
+                  <div class="p-2.5 rounded-xl bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 text-xs font-semibold mb-6">
+                    ✨ Estimado: {{ calculatedRecommendation.benefitPct }}
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <button @click="consultCalculatedRoutineOnWhatsApp()"
+                          class="btn-shine w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm text-slate-900 bg-accent-mint hover:bg-emerald-400 transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md">
+                    <span>Pedir este plan por WhatsApp &rarr;</span>
+                  </button>
+                  <button @click="scrollToSection('formulario')"
+                          class="w-full py-2.5 px-3 rounded-xl text-xs font-semibold text-white/80 hover:text-white transition-colors text-center cursor-pointer">
+                    O solicitar por formulario con un asesor
+                  </button>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================
+           3. SECCIÓN "ASÍ DE SIMPLE" (Proceso en 3 Pasos)
+           ======================================================== -->
+      <section id="proceso" class="py-14 sm:py-20 bg-white border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+          
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold text-brand-blue bg-blue-50 uppercase tracking-wider mb-2">
+              Proceso Transparente
+            </span>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-navy tracking-tight">
+              Así de simple es comenzar
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-2">
+              Sin procesos complicados ni presiones. Nuestro objetivo es que conozcas lo que tu cuerpo necesita.
+            </p>
+          </div>
+
+          <!-- Pasos Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+            
+            <!-- Paso 01 -->
+            <div class="relative bg-slate-50/70 hover:bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 hover:border-blue-300 hover:shadow-xl hover:-translate-y-1 transition-all group">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-blue to-blue-700 text-white flex items-center justify-center font-black text-lg mb-5 shadow-md shadow-blue-800/20 group-hover:scale-110 transition-transform">
+                01
+              </div>
+              <h3 class="text-lg font-bold text-brand-navy mb-2">
+                Cuéntanos tu meta
+              </h3>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Comparte lo que buscas mejorar en tu rutina de bienestar: defensas, vitalidad celular, recuperación deportiva o apoyo general.
+              </p>
+              <div class="mt-4 pt-3 border-t border-slate-200/60 flex items-center text-xs font-semibold text-brand-blue">
+                <span>Paso rápido en 1 minuto</span>
+              </div>
+            </div>
+
+            <!-- Paso 02 -->
+            <div class="relative bg-slate-50/70 hover:bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 hover:border-emerald-300 hover:shadow-xl hover:-translate-y-1 transition-all group">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-700 text-white flex items-center justify-center font-black text-lg mb-5 shadow-md shadow-emerald-800/20 group-hover:scale-110 transition-transform">
+                02
+              </div>
+              <h3 class="text-lg font-bold text-brand-navy mb-2">
+                Recibe orientación
+              </h3>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Resolvemos tus dudas y te ayudamos a conocer las alternativas disponibles de Immunotec con información clara y fundamentada.
+              </p>
+              <div class="mt-4 pt-3 border-t border-slate-200/60 flex items-center text-xs font-semibold text-emerald-700">
+                <span>Atención humana y profesional</span>
+              </div>
+            </div>
+
+            <!-- Paso 03 -->
+            <div class="relative bg-slate-50/70 hover:bg-white p-6 sm:p-7 rounded-2xl border border-slate-200/80 hover:border-blue-300 hover:shadow-xl hover:-translate-y-1 transition-all group">
+              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-deep to-brand-navy text-white flex items-center justify-center font-black text-lg mb-5 shadow-md shadow-slate-900/20 group-hover:scale-110 transition-transform">
+                03
+              </div>
+              <h3 class="text-lg font-bold text-brand-navy mb-2">
+                Da el siguiente paso
+              </h3>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Un asesor te contactará para acompañarte de forma personalizada con recomendaciones de uso y promociones oficiales directas.
+              </p>
+              <div class="mt-4 pt-3 border-t border-slate-200/60 flex items-center text-xs font-semibold text-brand-navy">
+                <span>Acompañamiento continuo</span>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================
+           4. SECCIÓN "ELIGE CON INFORMACIÓN" (Prueba Social y Respaldo)
+           ======================================================== -->
+      <section id="respaldo" class="py-16 sm:py-24 bg-gradient-to-b from-slate-50 to-white border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+          
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+            
+            <!-- Columna Izquierda: Contenido y Puntos de Verificación -->
+            <div class="lg:col-span-6">
+              <span class="inline-block px-3 py-1 rounded-full text-xs font-bold text-emerald-800 bg-emerald-100 uppercase tracking-wider mb-3">
+                Respaldo & Confianza
+              </span>
+              <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-navy tracking-tight leading-tight mb-4">
+                El bienestar se construye todos los días.
+              </h2>
+              <p class="text-slate-600 text-sm sm:text-base leading-relaxed mb-6">
+                Elegir cómo cuidar tu salud celular es una de las decisiones más importantes. Te brindamos información seria y acompañamiento cercano para que decidas con total seguridad.
+              </p>
+
+              <!-- Puntos Clave con íconos de verificación (✓) -->
+              <div class="space-y-4 mb-8">
+                
+                <div class="check-pill flex items-start gap-3.5 p-3.5 rounded-xl bg-white border border-slate-200/80 shadow-xs">
+                  <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0 font-bold text-sm mt-0.5">
+                    ✓
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-bold text-slate-800">Información sobre productos Immunotec</h3>
+                    <p class="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                      Conoce a fondo las fórmulas como <strong>Immunocal®</strong>, precursor patentado de glutatión con respaldo en el PDR y CPS médico internacional.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="check-pill flex items-start gap-3.5 p-3.5 rounded-xl bg-white border border-slate-200/80 shadow-xs">
+                  <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0 font-bold text-sm mt-0.5">
+                    ✓
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-bold text-slate-800">Atención personalizada de un asesor</h3>
+                    <p class="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                      Un asesor calificado escucha tus inquietudes específicas, aclara tus dudas y te orienta sin presiones comerciales.
+                    </p>
+                  </div>
+                </div>
+
+                <div class="check-pill flex items-start gap-3.5 p-3.5 rounded-xl bg-white border border-slate-200/80 shadow-xs">
+                  <div class="w-7 h-7 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center flex-shrink-0 font-bold text-sm mt-0.5">
+                    ✓
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-bold text-slate-800">Seguimiento fácil cuando tú lo necesites</h3>
+                    <p class="text-xs text-slate-600 mt-0.5 leading-relaxed">
+                      Respuestas por WhatsApp a tu propio ritmo, soporte en cómo tomar los productos y acceso a promociones directas.
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- CTA sección -->
+              <div class="flex flex-wrap items-center gap-3">
+                <button @click="openWhatsApp('Hola, leí sobre el respaldo de Immunotec y quiero información detallada')" 
+                        class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-emerald-600 hover:bg-emerald-700 shadow-md shadow-emerald-700/20 transition-all cursor-pointer">
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                  </svg>
+                  <span>Consultar por WhatsApp</span>
+                </button>
+                <button @click="scrollToSection('formulario')" 
+                        class="text-xs sm:text-sm font-semibold text-brand-blue hover:underline cursor-pointer">
+                  O llenar formulario breve &rarr;
+                </button>
+              </div>
+
+            </div>
+
+            <!-- Columna Derecha: Bloque de Estadísticas & Visual de Asesoría -->
+            <div class="lg:col-span-6 flex flex-col gap-6">
+              
+              <!-- Tarjeta de Imagen Asesoría -->
+              <div class="relative rounded-3xl overflow-hidden shadow-xl border border-slate-100 bg-white">
+                <img src="assets/img/consultation.jpg" 
+                     alt="Asesoría personalizada de bienestar" 
+                     class="w-full h-64 sm:h-72 object-cover object-center">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand-deep/90 via-transparent to-transparent"></div>
+                <div class="absolute bottom-4 left-5 right-5 text-white">
+                  <span class="text-xs text-accent-mint font-semibold uppercase tracking-wider">Atención Humana</span>
+                  <p class="text-sm font-bold mt-0.5">Asesoría individual adaptada a tus metas de bienestar y salud</p>
+                </div>
+              </div>
+
+              <!-- Bloque de Estadísticas / Destacados Visuales -->
+              <div class="grid grid-cols-3 gap-3 sm:gap-4">
+                
+                <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 text-center shadow-xs">
+                  <span class="block text-2xl sm:text-3xl font-black text-brand-blue leading-none mb-1">
+                    45+
+                  </span>
+                  <span class="text-xs text-slate-600 font-medium leading-tight block">
+                    Años de trayectoria e investigación médica
+                  </span>
+                </div>
+
+                <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 text-center shadow-xs">
+                  <span class="block text-2xl sm:text-3xl font-black text-emerald-600 leading-none mb-1">
+                    1:1
+                  </span>
+                  <span class="text-xs text-slate-600 font-medium leading-tight block">
+                    Orientación dedicada para tus dudas
+                  </span>
+                </div>
+
+                <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200/80 text-center shadow-xs">
+                  <span class="block text-2xl sm:text-3xl font-black text-brand-navy leading-none mb-1">
+                    100%
+                  </span>
+                  <span class="text-xs text-slate-600 font-medium leading-tight block">
+                    Atención pensada para ti y tus metas
+                  </span>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================
+           CATÁLOGO DETALLADO DE PRODUCTOS (FICHAS TÉCNICAS)
+           ======================================================== -->
+      <section id="productos" class="py-16 sm:py-24 bg-white border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+          
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold text-brand-blue bg-blue-50 uppercase tracking-wider mb-2">
+              Línea de Nutrición Celular
+            </span>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-navy tracking-tight">
+              Fórmulas científicamente respaldadas
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-2">
+              Precursores y activadores diseñados con los más estrictos estándares de la biotecnología moderna.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            <!-- Producto 1: Immunocal Regular -->
+            <div class="bento-card p-6 rounded-3xl flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-blue-100 text-brand-blue">
+                    El Clásico Original
+                  </span>
+                  <span class="text-[11px] font-bold text-slate-400">Caja con 30 sobres</span>
+                </div>
+                <h3 class="text-xl font-bold text-brand-navy mb-2">Immunocal® Regular</h3>
+                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                  Aislado de proteína de suero de leche no desnaturalizada con cisteína enlazada bioactiva. Mantiene un sistema inmune fuerte y saludable.
+                </p>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-700 space-y-1.5 mb-5">
+                  <div class="flex items-center gap-1.5 font-medium">✓ Precursor natural de glutatión</div>
+                  <div class="flex items-center gap-1.5 font-medium">✓ Apto para toda la familia</div>
+                  <div class="flex items-center gap-1.5 font-medium">✓ Sin grasa, sin gluten y sin lactosa</div>
+                </div>
+              </div>
+              <button @click="selectGoalAndScroll('Sistema Inmune')" 
+                      class="w-full py-2.5 px-3 rounded-xl bg-brand-light text-brand-blue hover:bg-blue-600 hover:text-white font-bold text-xs transition-colors text-center border border-blue-200 cursor-pointer">
+                Consultar sobre Immunocal Regular &rarr;
+              </button>
+            </div>
+
+            <!-- Producto 2: Immunocal Platinum -->
+            <div class="bento-card p-6 rounded-3xl flex flex-col justify-between border-2 border-brand-blue relative">
+              <span class="absolute -top-3 right-6 px-3 py-0.5 rounded-full text-[10px] font-extrabold bg-brand-blue text-white uppercase tracking-wider shadow-sm">
+                Más Solicitado
+              </span>
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-slate-800 text-white">
+                    Fórmula Avanzada
+                  </span>
+                  <span class="text-[11px] font-bold text-slate-400">Caja con 30 sobres</span>
+                </div>
+                <h3 class="text-xl font-bold text-brand-navy mb-2">Immunocal® Platinum</h3>
+                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                  Contiene todos los beneficios de Immunocal más CMP™ (péptidos moduladores de citocinas) y RMF (fórmula moduladora redox para pH).
+                </p>
+                <div class="p-3 rounded-xl bg-blue-50/50 border border-blue-100 text-xs text-slate-700 space-y-1.5 mb-5">
+                  <div class="flex items-center gap-1.5 font-medium">✓ Ideal para adultos, personas activas y atletas</div>
+                  <div class="flex items-center gap-1.5 font-medium">✓ Apoya la salud muscular, ósea y articular</div>
+                  <div class="flex items-center gap-1.5 font-medium">✓ Ayuda a equilibrar los niveles de pH</div>
+                </div>
+              </div>
+              <button @click="selectGoalAndScroll('Rendimiento Deportivo')" 
+                      class="btn-shine w-full py-2.5 px-3 rounded-xl bg-brand-blue text-white hover:bg-blue-700 font-bold text-xs transition-colors text-center shadow-xs cursor-pointer">
+                Consultar sobre Platinum &rarr;
+              </button>
+            </div>
+
+            <!-- Producto 3: Immunocal Booster Nrf2 -->
+            <div class="bento-card p-6 rounded-3xl flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-100 text-emerald-800">
+                    Activador Genético Nrf2
+                  </span>
+                  <span class="text-[11px] font-bold text-slate-400">Caja con 30 sobres</span>
+                </div>
+                <h3 class="text-xl font-bold text-brand-navy mb-2">Immunocal Booster</h3>
+                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                  Impulsado por el exclusivo catalizador Nrf2 con sulforafano de semillas de brócoli y más de 50 frutas y verduras orgánicas.
+                </p>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-700 space-y-1.5 mb-5">
+                  <div class="flex items-center gap-1.5 font-medium">✓ Activa genes de defensa antioxidante</div>
+                  <div class="flex items-center gap-1.5 font-medium">✓ Multiplica el poder del glutatión hasta por 3x</div>
+                  <div class="flex items-center gap-1.5 font-medium">✓ Sabor cítrico natural sin azúcar</div>
+                </div>
+              </div>
+              <button @click="selectGoalAndScroll('Energía & Vitalidad')" 
+                      class="w-full py-2.5 px-3 rounded-xl bg-emerald-50 text-emerald-700 hover:bg-emerald-600 hover:text-white font-bold text-xs transition-colors text-center border border-emerald-200 cursor-pointer">
+                Consultar sobre Booster &rarr;
+              </button>
+            </div>
+
+            <!-- Producto 4: Booster Energy Performance -->
+            <div class="bento-card p-6 rounded-3xl flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-amber-100 text-amber-900">
+                    Energía Sostenida
+                  </span>
+                  <span class="text-[11px] font-bold text-slate-400">30 sobres</span>
+                </div>
+                <h3 class="text-xl font-bold text-brand-navy mb-2">Booster Energy Performance</h3>
+                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                  Energía rápida y sostenida con 3 fuentes naturales de cafeína (té verde, café verde y guaraná) más el activador genético Nrf2.
+                </p>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-700 space-y-1.5 mb-5">
+                  <div class="flex items-center gap-1.5 font-medium">✓ Hasta 6 horas de energía sin nerviosismo</div>
+                  <div class="flex items-center gap-1.5 font-medium">✓ Enfoque mental y agudeza cognitiva</div>
+                  <div class="flex items-center gap-1.5 font-medium">✓ Ideal para entrenamientos y trabajo intenso</div>
+                </div>
+              </div>
+              <button @click="selectGoalAndScroll('Energía & Vitalidad')" 
+                      class="w-full py-2.5 px-3 rounded-xl bg-amber-50 text-amber-800 hover:bg-amber-600 hover:text-white font-bold text-xs transition-colors text-center border border-amber-200 cursor-pointer">
+                Consultar sobre Energy &rarr;
+              </button>
+            </div>
+
+            <!-- Producto 5: Omega Gen V -->
+            <div class="bento-card p-6 rounded-3xl flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-blue-100 text-brand-blue">
+                    Salud Cardiovascular
+                  </span>
+                  <span class="text-[11px] font-bold text-slate-400">120 cápsulas</span>
+                </div>
+                <h3 class="text-xl font-bold text-brand-navy mb-2">Omega Gen V</h3>
+                <p class="text-xs text-slate-600 leading-relaxed mb-4">
+                  Fórmula 5 en 1 con ácidos grasos Omega-3 (EPA/DHA), CoQ10, Vitamina E, Cúrcuma y Piperina para máxima biodisponibilidad.
+                </p>
+                <div class="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs text-slate-700 space-y-1.5 mb-5">
+                  <div class="flex items-center gap-1.5 font-medium">✓ Protección para el corazón y vasos sanguíneos</div>
+                  <div class="flex items-center gap-1.5 font-medium">✓ Apoyo a la función cerebral y memoria</div>
+                  <div class="flex items-center gap-1.5 font-medium">✓ Potente soporte antiinflamatorio natural</div>
+                </div>
+              </div>
+              <button @click="selectGoalAndScroll('Salud General & Longevidad')" 
+                      class="w-full py-2.5 px-3 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-800 hover:text-white font-bold text-xs transition-colors text-center border border-slate-200 cursor-pointer">
+                Consultar sobre Omega Gen V &rarr;
+              </button>
+            </div>
+
+            <!-- Producto 6: Paquetes y Membresías de Ahorro -->
+            <div class="bento-card p-6 rounded-3xl flex flex-col justify-between bg-gradient-to-br from-emerald-500 to-emerald-700 text-white">
+              <div>
+                <div class="flex items-center justify-between mb-3">
+                  <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-white/20 text-accent-mint">
+                    Mayor Ahorro
+                  </span>
+                  <span class="text-[11px] font-bold text-emerald-100">Descuento de Fábrica</span>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Combos & Membresías</h3>
+                <p class="text-xs text-emerald-50 leading-relaxed mb-4">
+                  Adquiere paquetes familiares o de inicio con precios de cliente preferente o mayorista con hasta un 45% de descuento sobre el precio regular.
+                </p>
+                <div class="p-3 rounded-xl bg-white/10 text-xs text-white space-y-1.5 mb-5">
+                  <div class="flex items-center gap-1.5 font-medium">✓ Directo de laboratorio oficial</div>
+                  <div class="flex items-center gap-1.5 font-medium">✓ Acceso a promociones mensuales</div>
+                  <div class="flex items-center gap-1.5 font-medium">✓ Sin compromisos de compra forzosa</div>
+                </div>
+              </div>
+              <button @click="openWhatsApp('Hola, quiero conocer los paquetes con descuento mayorista de Immunotec en mi país')" 
+                      class="btn-shine w-full py-2.5 px-3 rounded-xl bg-white text-emerald-800 hover:bg-emerald-50 font-bold text-xs transition-colors text-center cursor-pointer shadow-md">
+                Ver precios de combos en mi país &rarr;
+              </button>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================
+           TESTIMONIOS Y PRUEBA SOCIAL (ESTILO HOTMART REVIEWS)
+           ======================================================== -->
+      <section id="testimonios" class="py-16 sm:py-24 bg-slate-50/60 border-b border-slate-200/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+          
+          <div class="text-center max-w-3xl mx-auto mb-14">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold text-emerald-800 bg-emerald-100 uppercase tracking-wider mb-2">
+              Historias Reales
+            </span>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-navy tracking-tight">
+              Personas reales. Resultados respaldados por la ciencia.
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-2">
+              Descubre cómo la nutrición celular de Immunotec acompaña a miles de familias y profesionales.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            
+            <div v-for="(test, tIdx) in testimonials" :key="tIdx"
+                 class="bento-card p-6 rounded-3xl flex flex-col justify-between">
+              <div>
+                <!-- Estrellas y Badge -->
+                <div class="flex items-center justify-between mb-3">
+                  <div class="flex text-amber-400 text-sm">
+                    ★★★★★
+                  </div>
+                  <span class="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200">
+                    Verificado
+                  </span>
+                </div>
+
+                <div class="text-xs font-bold text-brand-blue mb-2">
+                  "{{ test.highlight }}"
+                </div>
+
+                <p class="text-xs text-slate-600 leading-relaxed mb-6 italic">
+                  "{{ test.text }}"
+                </p>
+              </div>
+
+              <!-- Autor del Testimonio -->
+              <div class="pt-4 border-t border-slate-100 flex items-center gap-3">
+                <div class="w-10 h-10 rounded-full bg-brand-blue text-white flex items-center justify-center font-bold text-xs shadow-xs">
+                  {{ test.avatar }}
+                </div>
+                <div>
+                  <h3 class="text-xs font-bold text-brand-navy leading-tight">{{ test.name }}</h3>
+                  <span class="text-[11px] text-slate-500 block">{{ test.role }}</span>
+                  <span class="text-[10px] text-slate-400 block">{{ test.city }}</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================
+           PREGUNTAS FRECUENTES (FAQ ACORDEÓN ESTILO HOTMART)
+           ======================================================== -->
+      <section id="faq" class="py-16 sm:py-24 bg-white border-b border-slate-200/80">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+          
+          <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold text-brand-blue bg-blue-100 uppercase tracking-wider mb-2">
+              Resuelve tus Dudas
+            </span>
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-navy tracking-tight">
+              Preguntas Frecuentes
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base mt-2">
+              Todo lo que necesitas saber antes de iniciar tu rutina de bienestar con Immunotec.
+            </p>
+          </div>
+
+          <!-- Acordeón Interactivo de Preguntas -->
+          <div class="space-y-3">
+            <div v-for="(item, index) in faqList" :key="index"
+                 class="border rounded-2xl transition-all overflow-hidden"
+                 :class="openFaqIndex === index ? 'border-brand-blue bg-blue-50/20 shadow-sm' : 'border-slate-200 bg-white hover:border-slate-300'">
+              
+              <button @click="toggleFaq(index)"
+                      type="button"
+                      class="w-full py-4 px-5 sm:px-6 text-left flex items-center justify-between gap-4 cursor-pointer focus:outline-none">
+                <span class="text-sm sm:text-base font-bold text-brand-navy">
+                  {{ item.question }}
+                </span>
+                <span class="w-7 h-7 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center text-sm font-bold flex-shrink-0 transition-transform duration-200"
+                      :class="openFaqIndex === index ? 'rotate-180 bg-brand-blue text-white' : ''">
+                  ↓
+                </span>
+              </button>
+
+              <div v-show="openFaqIndex === index" 
+                   class="px-5 sm:px-6 pb-5 pt-1 text-xs sm:text-sm text-slate-600 leading-relaxed border-t border-slate-100/60">
+                <p>{{ item.answer }}</p>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="mt-8 text-center bg-slate-50 p-6 rounded-2xl border border-slate-200">
+            <p class="text-xs sm:text-sm text-slate-700 font-medium mb-3">
+              ¿Tienes una pregunta específica sobre tu caso o país?
+            </p>
+            <button @click="openWhatsApp('Hola, tengo una pregunta puntual sobre Immunotec:')"
+                    class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-emerald-600 hover:bg-emerald-700 transition-colors cursor-pointer">
+              <span>Hacer una pregunta directa por WhatsApp</span>
+            </button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================
+           5. SECCIÓN DE CAPTURA DE DATOS (Formulario Lead Generation)
+           ======================================================== -->
+      <section id="formulario" class="py-16 sm:py-24 bg-ambient-gradient relative">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+          
+          <div class="glass-card rounded-3xl p-6 sm:p-10 md:p-12 shadow-2xl relative overflow-hidden">
+            
+            <!-- Barra de acento superior -->
+            <div class="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-brand-blue via-emerald-400 to-brand-navy"></div>
+
+            <!-- Cabecera del Formulario -->
+            <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold text-emerald-800 bg-emerald-100 mb-3">
+                <svg class="w-3.5 h-3.5 text-emerald-700" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M10 1.944A11.954 11.954 0 012.166 5C2.056 5.649 2 6.319 2 7c0 5.225 3.34 9.67 8 11.317C14.66 16.67 18 12.225 18 7c0-.682-.057-1.35-.166-2.001A11.954 11.954 0 0110 1.944zM11 14a1 1 0 11-2 0 1 1 0 012 0zm0-7a1 1 0 10-2 0v3a1 1 0 102 0V7z" clip-rule="evenodd"></path>
+                </svg>
+                Orientación sin compromiso y atención personalizada
+              </span>
+              
+              <h2 class="text-2xl sm:text-3xl md:text-4xl font-extrabold text-brand-navy tracking-tight">
+                Hablemos de tus metas.
+              </h2>
+              
+              <p class="text-slate-600 text-sm sm:text-base mt-2">
+                Déjanos tus datos y un asesor se comunicará contigo para resolver tus dudas de forma personalizada y recomendarte las mejores alternativas.
+              </p>
+            </div>
+
+            <!-- ESTADO DE ÉXITO TRAS EL ENVÍO (CONEXIÓN DIRECTA A WHATSAPP) -->
+            <div v-if="submitted" class="animate-fade-in text-center py-10 px-4 sm:px-8 bg-gradient-to-b from-emerald-50/80 to-white rounded-3xl border border-emerald-200 shadow-lg">
+              
+              <div class="w-16 h-16 rounded-2xl bg-emerald-500 text-white flex items-center justify-center mx-auto mb-4 text-2xl shadow-lg shadow-emerald-500/25">
+                <svg class="w-8 h-8 fill-current" viewBox="0 0 24 24">
+                  <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                </svg>
+              </div>
+
+              <span class="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-2 bg-emerald-100 text-emerald-800">
+                Atención Directa por WhatsApp
+              </span>
+
+              <h3 class="text-xl sm:text-2xl md:text-3xl font-extrabold text-slate-900 mb-3 tracking-tight">
+                {{ submitSuccessMessage }}
+              </h3>
+
+              <div class="max-w-md mx-auto space-y-4">
+                <p class="text-slate-600 text-sm leading-relaxed">
+                  Hemos preparado tus datos y meta de bienestar para tu asesoría personalizada 1 a 1. Si no se abrió la ventana automáticamente, pulsa el botón a continuación:
+                </p>
+                <button @click="openWhatsApp()" 
+                        class="btn-shine inline-flex items-center justify-center gap-2.5 w-full py-4 px-6 rounded-2xl font-black text-base text-white bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 shadow-xl shadow-emerald-600/30 hover:scale-[1.01] transition-all cursor-pointer">
+                  <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                  </svg>
+                  <span>Abrir chat de WhatsApp ahora</span>
+                </button>
+              </div>
+
+              <!-- Botón para reiniciar o enviar otra solicitud -->
+              <div class="pt-6">
+                <button @click="resetForm()" 
+                        class="text-xs text-slate-400 hover:text-slate-600 underline cursor-pointer">
+                  &larr; Enviar otra consulta o cambiar datos
+                </button>
+              </div>
+
+            </div>
+
+            <!-- FORMULARIO REACTIVO (VUE 3 - EXCLUSIVO WHATSAPP) -->
+            <form v-else @submit.prevent="submitForm" class="space-y-6">
+              
+              <!-- 1. Campo Nombre y 2. Teléfono / WhatsApp -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                
+                <div>
+                  <label for="nombre" class="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5">
+                    Tu nombre completo <span class="text-red-500">*</span>
+                  </label>
+                  <div class="relative">
+                    <input id="nombre" 
+                           v-model="form.name"
+                           type="text" 
+                           placeholder="Tu nombre y apellido"
+                           class="w-full px-4 py-3 rounded-xl border bg-white text-slate-800 text-sm custom-input shadow-xs"
+                           :class="errors.name ? 'border-red-400 bg-red-50/30' : 'border-slate-300 focus:border-brand-blue'">
+                  </div>
+                  <span v-if="errors.name" class="text-xs text-red-500 mt-1 block font-medium">
+                    {{ errors.name }}
+                  </span>
+                </div>
+
+                <div>
+                  <label for="telefono" class="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5">
+                    Teléfono / WhatsApp <span class="text-red-500">*</span>
+                  </label>
+                  <div class="relative">
+                    <input id="telefono" 
+                           v-model="form.phone"
+                           type="tel" 
+                           placeholder="Ej: +52 244 123 4567"
+                           class="w-full px-4 py-3 rounded-xl border bg-white text-slate-800 text-sm custom-input shadow-xs"
+                           :class="errors.phone ? 'border-red-400 bg-red-50/30' : 'border-slate-300 focus:border-brand-blue'">
+                  </div>
+                  <span v-if="errors.phone" class="text-xs text-red-500 mt-1 block font-medium">
+                    {{ errors.phone }}
+                  </span>
+                </div>
+
+              </div>
+
+              <!-- 3. Correo electrónico (Opcional) -->
+              <div>
+                <label for="email" class="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5">
+                  Correo electrónico <span class="text-slate-400 text-xs font-normal">(Opcional)</span>
+                </label>
+                <div class="relative">
+                  <input id="email" 
+                         v-model="form.email"
+                         type="email" 
+                         placeholder="tu@correo.com (opcional)"
+                         class="w-full px-4 py-3 rounded-xl border bg-white text-slate-800 text-sm custom-input shadow-xs"
+                         :class="errors.email ? 'border-red-400 bg-red-50/30' : 'border-slate-300 focus:border-brand-blue'">
+                </div>
+                <span v-if="errors.email" class="text-xs text-red-500 mt-1 block font-medium">
+                  {{ errors.email }}
+                </span>
+              </div>
+
+              <!-- 4. Menú Desplegable / Opciones Rápidas de Meta -->
+              <div>
+                <label class="block text-xs sm:text-sm font-bold text-slate-700 mb-2">
+                  ¿Qué te interesa conocer principalmente? <span class="text-red-500">*</span>
+                </label>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+                  <button type="button" 
+                          v-for="goal in wellnessGoals" :key="goal.id"
+                          @click="form.goal = goal.label"
+                          class="p-3 rounded-xl border text-left transition-all flex items-center gap-2.5 cursor-pointer"
+                          :class="form.goal === goal.label ? 'bg-blue-50/80 border-brand-blue ring-2 ring-blue-500/20 shadow-xs' : 'bg-white border-slate-200 hover:border-slate-300 hover:bg-slate-50'">
+                    <span class="text-xl flex-shrink-0">{{ goal.icon }}</span>
+                    <div>
+                      <span class="text-xs font-bold block" :class="form.goal === goal.label ? 'text-brand-blue' : 'text-slate-800'">
+                        {{ goal.label }}
+                      </span>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 5. ¿Qué te interesa conocer? (Área de texto) -->
+              <div>
+                <label for="mensaje" class="block text-xs sm:text-sm font-bold text-slate-700 mb-1.5">
+                  Cuéntanos brevemente tus dudas u objetivos <span class="text-slate-400 text-xs font-normal">(Opcional)</span>
+                </label>
+                <textarea id="mensaje" 
+                          v-model="form.message"
+                          rows="3"
+                          placeholder="Cuéntanos brevemente qué buscas mejorar, si padeces fatiga, buscas prevención o apoyo específico..."
+                          class="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-brand-blue bg-white text-slate-800 text-sm custom-input shadow-xs"></textarea>
+              </div>
+
+              <!-- Botones de Envío y CTA Principal -->
+              <div class="pt-2 flex flex-col gap-3">
+                
+                <button type="submit" 
+                        :disabled="isSubmitting"
+                        class="btn-shine w-full py-4 px-6 rounded-2xl font-black text-base sm:text-lg text-white bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 shadow-xl shadow-emerald-600/30 hover:shadow-2xl hover:-translate-y-0.5 transition-all flex items-center justify-center gap-3 cursor-pointer disabled:opacity-50">
+                  <span v-if="!isSubmitting" class="flex items-center gap-2">
+                    <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                    </svg>
+                    <span>Quiero recibir orientación por WhatsApp &rarr;</span>
+                  </span>
+                  <span v-else class="flex items-center gap-2">
+                    <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                      <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Conectando con WhatsApp...
+                  </span>
+                </button>
+
+                <button type="button" 
+                        @click="openWhatsApp()"
+                        class="w-full py-3 px-4 rounded-xl font-bold text-xs sm:text-sm text-slate-700 hover:text-emerald-700 bg-slate-100/80 hover:bg-emerald-50 transition-colors flex items-center justify-center gap-2 cursor-pointer">
+                  <svg class="w-4 h-4 text-emerald-600 fill-current" viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                  </svg>
+                  <span>¿Prefieres respuesta inmediata? Chatea directamente en WhatsApp</span>
+                </button>
+
+              </div>
+
+              <p class="text-[11px] text-slate-500 text-center flex items-center justify-center gap-1.5 pt-2">
+                <svg class="w-3.5 h-3.5 text-slate-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                </svg>
+                <span>Tus datos son 100% confidenciales. No compartimos tu información con terceros ni enviamos spam.</span>
+              </p>
+
+            </form>
+
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ========================================================
+           BANNER DE CIERRE DE ALTA CONVERSIÓN (ESTILO HOTMART)
+           ======================================================== -->
+      <section class="py-16 sm:py-20 bg-gradient-to-r from-brand-navy via-brand-blue to-brand-deep text-white text-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-blue-400/20 via-transparent to-transparent pointer-events-none"></div>
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+          <span class="inline-block px-3.5 py-1 rounded-full text-xs font-bold bg-white/20 text-accent-mint uppercase tracking-wider mb-4 border border-white/20">
+            Tu bienestar comienza hoy
+          </span>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-black tracking-tight leading-tight mb-4">
+            Da el primer paso hacia una versión más saludable y con más energía.
+          </h2>
+          <p class="text-sm sm:text-base text-slate-200 max-w-2xl mx-auto mb-8 font-normal">
+            Estamos aquí para acompañarte con información científica, seguimiento honesto y promociones oficiales de fábrica.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button @click="scrollToSection('formulario')" 
+                    class="btn-shine w-full sm:w-auto px-8 py-4 rounded-xl font-black text-sm sm:text-base text-brand-navy bg-white hover:bg-slate-100 shadow-xl shadow-black/20 transition-all cursor-pointer">
+              Solicitar orientación sin compromiso &rarr;
+            </button>
+            <button @click="openWhatsApp()" 
+                    class="w-full sm:w-auto px-7 py-4 rounded-xl font-bold text-sm sm:text-base text-white bg-emerald-600 hover:bg-emerald-500 shadow-lg shadow-emerald-900/30 transition-all flex items-center justify-center gap-2 cursor-pointer border border-emerald-400/30">
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+              </svg>
+              <span>Escribir por WhatsApp ahora</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ========================================================
+         6. PIE DE PÁGINA (Mega Footer Estilo Hotmart)
+         ======================================================== -->
+    <footer class="bg-brand-navy text-slate-300 pt-14 pb-8 border-t border-slate-800">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-12 border-b border-slate-800">
+          
+          <!-- Columna 1: Marca y Propósito -->
+          <div class="lg:col-span-4">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-xl bg-white p-0.5 border border-slate-700 overflow-hidden flex items-center justify-center flex-shrink-0">
+                <img src="assets/img/logo.jpg" alt="Equilibrio y Bienestar Logo" class="w-full h-full object-contain">
+              </div>
+              <span class="text-xl font-extrabold text-white">
+                Equilibrio y Bienestar <span class="text-blue-400 font-light text-base">| Immunotec</span>
+              </span>
+            </div>
+            <p class="text-xs text-slate-400 leading-relaxed mb-4 max-w-sm">
+              Plataforma digital independiente de orientación, nutrición celular y asesoramiento sobre la ciencia del glutatión con los productos originales de Immunotec Inc.
+            </p>
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 text-emerald-400 text-xs font-semibold border border-slate-700 mb-3">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Asesor Independiente Certificado</span>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-slate-400">
+              <svg class="w-3.5 h-3.5 text-blue-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              <a :href="'mailto:' + config.advisor.email" class="hover:text-blue-300 transition-colors">
+                {{ config.advisor.email }}
+              </a>
+            </div>
+          </div>
+
+          <!-- Columna 2: Navegación de Soluciones -->
+          <div class="lg:col-span-3">
+            <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">
+              Ecosistema de Bienestar
+            </h4>
+            <ul class="space-y-2 text-xs">
+              <li><button @click="scrollToSection('para-quien')" class="hover:text-white transition-colors cursor-pointer">Para quién es</button></li>
+              <li><button @click="scrollToSection('ecosistema')" class="hover:text-white transition-colors cursor-pointer">Ciencia del Glutatión (GSH)</button></li>
+              <li><button @click="scrollToSection('calculadora')" class="hover:text-white transition-colors cursor-pointer">Calculadora de Rutina</button></li>
+              <li><button @click="scrollToSection('productos')" class="hover:text-white transition-colors cursor-pointer">Catálogo de Fórmulas</button></li>
+              <li><button @click="scrollToSection('testimonios')" class="hover:text-white transition-colors cursor-pointer">Casos de Éxito</button></li>
+              <li><button @click="scrollToSection('faq')" class="hover:text-white transition-colors cursor-pointer">Preguntas Frecuentes</button></li>
+            </ul>
+          </div>
+
+          <!-- Columna 3: Redes Sociales Oficiales -->
+          <div class="lg:col-span-2">
+            <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">
+              Redes Sociales
+            </h4>
+            <div class="flex flex-col space-y-2.5 text-xs">
+              <a :href="config.socialLinks.tiktok" target="_blank" rel="noopener" class="hover:text-white transition-colors flex items-center gap-2">
+                <span>TikTok</span>
+              </a>
+              <a :href="config.socialLinks.instagram" target="_blank" rel="noopener" class="hover:text-white transition-colors flex items-center gap-2">
+                <span>Instagram</span>
+              </a>
+              <a :href="config.socialLinks.facebook" target="_blank" rel="noopener" class="hover:text-white transition-colors flex items-center gap-2">
+                <span>Facebook</span>
+              </a>
+              <a :href="config.socialLinks.youtube" target="_blank" rel="noopener" class="hover:text-white transition-colors flex items-center gap-2">
+                <span>YouTube</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Columna 4: Contacto Inmediato -->
+          <div class="lg:col-span-3">
+            <h4 class="text-xs font-bold text-white uppercase tracking-wider mb-3">
+              Atención Directa
+            </h4>
+            <p class="text-xs text-slate-400 leading-relaxed mb-3">
+              ¿Deseas comprar con precio preferente o unirte como distribuidor independiente?
+            </p>
+            <button @click="openWhatsApp()" 
+                    class="w-full py-2.5 px-4 rounded-xl text-xs font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-sm">
+              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+              </svg>
+              <span>Escribir por WhatsApp</span>
+            </button>
+            <a :href="'mailto:' + config.advisor.email" 
+               class="mt-2.5 w-full py-2.5 px-4 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white border border-slate-700 transition-colors flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+              <span class="truncate">{{ config.advisor.email }}</span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Descargo de Responsabilidad Legal & Copyright -->
+        <div class="pt-8 text-center md:text-left flex flex-col md:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+          <div class="max-w-4xl leading-relaxed">
+            <p class="mb-1.5">
+              <strong>Aviso Legal / Descargo de Responsabilidad:</strong> Este sitio web es operado y administrado de forma independiente por un <strong>Asesor / Consultor Independiente de Immunotec</strong>. Este portal no representa la página web corporativa central de Immunotec Inc. Las declaraciones contenidas en esta página no han sido evaluadas por agencias gubernamentales sanitarias para diagnosticar, mitigar, tratar, curar o prevenir enfermedades específicas. Los productos Immunotec son suplementos nutricionales de calidad premium. Todos los nombres comerciales son marcas registradas de Immunotec Inc.
+            </p>
+            <p>
+              Derechos reservados &copy; 2026. Plataforma de Asesoría de Bienestar Celular.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-3 text-slate-400 flex-shrink-0">
+            <button @click="scrollToSection('formulario')" class="hover:text-white underline cursor-pointer">
+              Formulario
+            </button>
+            <span>&bull;</span>
+            <button @click="openWhatsApp()" class="hover:text-white underline cursor-pointer">
+              WhatsApp
+            </button>
+            <span>&bull;</span>
+            <a :href="'mailto:' + config.advisor.email" class="hover:text-white underline">
+              Correo
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+    <!-- ========================================================
+         BOTÓN FLOTANTE DIRECTO A WHATSAPP
+         ======================================================== -->
+    <div class="fixed bottom-5 right-5 z-50 flex flex-col items-end">
+      
+      <!-- Mini Tooltip / Popover llamativo -->
+      <div v-if="!floatingChatOpen" 
+           @click="openWhatsApp()"
+           class="mb-2 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white text-slate-800 text-xs font-bold shadow-lg border border-slate-100 cursor-pointer animate-float">
+        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+        <span>¿Tienes dudas? Chatea aquí</span>
+      </div>
+
+      <!-- Botón Flotante Principal -->
+      <button @click="openWhatsApp()"
+              title="Hablar con un asesor por WhatsApp"
+              aria-label="Hablar con un asesor por WhatsApp"
+              class="animate-pulse-glow w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center shadow-xl shadow-emerald-600/40 active:scale-90 transition-all relative cursor-pointer">
+        
+        <!-- Notificación Badge -->
+        <span class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-[11px] font-black flex items-center justify-center border-2 border-white">
+          1
+        </span>
+
+        <!-- Icono WhatsApp SVG -->
+        <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
+          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+        </svg>
+      </button>
+
+    </div>
+
+  </div>
+
+  <!-- SCRIPTS EXTERNOS & DE LA APLICACIÓN -->
+  <!-- Vue 3 Global CDN -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  
+  <!-- Configuración del Asesor & Pixels -->
+  <script src="assets/js/config.js"></script>
+  
+  <!-- Lógica Reactiva de la Aplicación -->
+  <script src="assets/js/app.js"></script>
+
+</body>
+</html>
