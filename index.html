@@ -275,8 +275,89 @@
                 Conoce las opciones de <strong>Immunotec</strong> y recibe atención personalizada para descubrir productos que acompañen tus metas de bienestar, energía celular y vitalidad diaria.
               </p>
 
-              <!-- SELECCIÓN DE ASESORES DIRECTOS POR WHATSAPP -->
-              <div class="w-full mb-8">
+              <!-- BOTONES PRINCIPALES DE DECISIÓN (LLAMATIVOS Y DE ALTA CONVERSIÓN) -->
+              <div class="w-full flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 mb-6">
+                
+                <!-- Botón 1: Quiero Comprar -->
+                <button @click="showHeroSection('comprar')"
+                        type="button"
+                        class="btn-shine group relative flex-1 flex items-center justify-between p-4 sm:p-5 rounded-2xl transition-all duration-300 cursor-pointer text-left shadow-lg active:scale-95"
+                        :class="heroActiveSection === 'comprar' 
+                          ? 'bg-gradient-to-r from-emerald-500 via-emerald-600 to-teal-600 text-white shadow-emerald-500/35 ring-4 ring-emerald-300/70 scale-[1.02]' 
+                          : 'bg-white hover:bg-emerald-50/70 text-slate-800 border-2 border-emerald-500/80 hover:border-emerald-600 shadow-emerald-600/10 hover:shadow-xl hover:-translate-y-0.5'">
+                  
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center transition-all shadow-md flex-shrink-0"
+                         :class="heroActiveSection === 'comprar' ? 'bg-white/20 text-white' : 'bg-emerald-100 text-emerald-700'">
+                      <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <span class="block text-base sm:text-lg font-black tracking-tight"
+                            :class="heroActiveSection === 'comprar' ? 'text-white' : 'text-slate-900 group-hover:text-emerald-700'">
+                        Quiero Comprar
+                      </span>
+                      <span class="block text-xs font-semibold"
+                            :class="heroActiveSection === 'comprar' ? 'text-emerald-100' : 'text-slate-500'">
+                        Ver 4 asesores disponibles &rarr;
+                      </span>
+                    </div>
+                  </div>
+
+                  <span class="w-8 h-8 rounded-full flex items-center justify-center transition-all"
+                        :class="heroActiveSection === 'comprar' ? 'bg-white text-emerald-700 rotate-90 shadow-sm' : 'bg-emerald-50 text-emerald-600 group-hover:translate-x-1'">
+                    <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                    </svg>
+                  </span>
+                </button>
+
+                <!-- Botón 2: Hablar con Especialista -->
+                <button @click="showHeroSection('especialista')"
+                        type="button"
+                        class="btn-shine group relative flex-1 flex items-center justify-between p-4 sm:p-5 rounded-2xl transition-all duration-300 cursor-pointer text-left shadow-lg active:scale-95"
+                        :class="heroActiveSection === 'especialista' 
+                          ? 'bg-gradient-to-r from-brand-blue via-blue-700 to-indigo-700 text-white shadow-blue-600/35 ring-4 ring-blue-300/70 scale-[1.02]' 
+                          : 'bg-white hover:bg-blue-50/70 text-slate-800 border-2 border-brand-blue/80 hover:border-brand-blue shadow-blue-700/10 hover:shadow-xl hover:-translate-y-0.5'">
+                  
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center transition-all shadow-md flex-shrink-0"
+                         :class="heroActiveSection === 'especialista' ? 'bg-white/20 text-white' : 'bg-blue-100 text-brand-blue'">
+                      <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                        <path d="M17 10.5V7c0-.55-.45-1-1-1H4c-.55 0-1 .45-1 1v10c0 .55.45 1 1 1h12c.55 0 1-.45 1-1v-3.5l4 4v-11l-4 4zM10 15l-3.5-3.5 1.41-1.41L10 12.17l4.59-4.59L16 9l-6 6z"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <span class="block text-base sm:text-lg font-black tracking-tight"
+                            :class="heroActiveSection === 'especialista' ? 'text-white' : 'text-slate-900 group-hover:text-brand-blue'">
+                        Hablar con Especialista
+                      </span>
+                      <span class="block text-xs font-semibold"
+                            :class="heroActiveSection === 'especialista' ? 'text-blue-100' : 'text-slate-500'">
+                        Ver video del especialista &rarr;
+                      </span>
+                    </div>
+                  </div>
+
+                  <span class="w-8 h-8 rounded-full flex items-center justify-center transition-all"
+                        :class="heroActiveSection === 'especialista' ? 'bg-white text-brand-blue rotate-90 shadow-sm' : 'bg-blue-50 text-brand-blue group-hover:translate-x-1'">
+                    <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                    </svg>
+                  </span>
+                </button>
+
+              </div>
+
+              <!-- MENSAJE DE ORIENTACIÓN CUANDO NINGUNO ESTÁ ABIERTO -->
+              <div v-if="!heroActiveSection" class="w-full mb-6 py-3.5 px-4 rounded-2xl bg-blue-50/70 border border-blue-200/80 text-center text-xs sm:text-sm font-semibold text-slate-700 flex items-center justify-center gap-2">
+                <span class="text-base">👆</span>
+                <span>Toca <strong>"Quiero Comprar"</strong> para contactar a un asesor o <strong>"Hablar con Especialista"</strong> para ver el video explicativo.</span>
+              </div>
+
+              <!-- CONTENIDO 1: SELECCIÓN DE 4 ASESORES DIRECTOS (SE MUESTRA AL PULSAR "QUIERO COMPRAR") -->
+              <div v-show="heroActiveSection === 'comprar'" class="w-full mb-8 animate-fade-in">
                 
                 <!-- Encabezado del Módulo de Asesores -->
                 <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
@@ -387,6 +468,60 @@
                   <span class="text-xs text-slate-500 font-medium">o llena el formulario para recibir asesoría personalizada.</span>
                 </div>
 
+              </div>
+
+              <!-- CONTENIDO 2: REPRODUCTOR DE VIDEO DEL ESPECIALISTA (SE MUESTRA AL PULSAR "HABLAR CON ESPECIALISTA") -->
+              <div v-show="heroActiveSection === 'especialista'" class="w-full mb-8 animate-fade-in">
+                <div class="rounded-3xl overflow-hidden bg-slate-900 text-white p-4 sm:p-5 shadow-2xl border border-slate-700/80 relative">
+                  
+                  <!-- Cabecera del Video -->
+                  <div class="flex flex-wrap items-center justify-between gap-2 mb-3">
+                    <div class="flex items-center gap-2">
+                      <span class="flex h-2.5 w-2.5 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                      </span>
+                      <span class="text-xs sm:text-sm font-bold text-white uppercase tracking-wider">
+                        Video Informativo del Especialista
+                      </span>
+                    </div>
+                    <span class="text-[11px] font-semibold bg-white/10 px-2.5 py-0.5 rounded-full text-emerald-400 border border-white/10">
+                      Immunotec & Bienestar
+                    </span>
+                  </div>
+
+                  <!-- Reproductor HTML5 -->
+                  <div class="relative w-full rounded-2xl overflow-hidden bg-black shadow-inner flex items-center justify-center">
+                    <video id="specialistVideo"
+                           src="assets/video/M1.mp4"
+                           controls
+                           playsinline
+                           preload="metadata"
+                           class="w-full max-h-[460px] object-contain mx-auto rounded-2xl bg-black">
+                      <source src="assets/video/M1.mp4" type="video/mp4">
+                      Tu navegador no soporta la reproducción de video HTML5.
+                    </video>
+                  </div>
+
+                  <!-- Pie del Video con Llamado a la Acción -->
+                  <div class="mt-4 pt-3.5 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+                    <div class="text-left w-full sm:w-auto">
+                      <p class="text-xs sm:text-sm font-bold text-white">¿Tienes preguntas sobre el video?</p>
+                      <p class="text-[11px] text-slate-400">Escríbele directamente a nuestro especialista por WhatsApp.</p>
+                    </div>
+
+                    <a :href="getAdvisorWhatsAppUrl(selectedAdvisor || advisors[0], '¡Hola! Vi el video del especialista en la página de Immunotec y me gustaría recibir orientación personalizada.')"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       class="w-full sm:w-auto px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-emerald-500 hover:bg-emerald-600 shadow-lg shadow-emerald-500/25 flex items-center justify-center gap-2 transition-all cursor-pointer flex-shrink-0">
+                      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                      </svg>
+                      <span>Hablar con Especialista por WhatsApp</span>
+                    </a>
+                  </div>
+
+                </div>
               </div>
 
               <!-- Puntos de Confianza Instantáneos (Micro-social proof) -->

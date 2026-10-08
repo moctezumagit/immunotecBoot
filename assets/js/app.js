@@ -136,6 +136,28 @@ const app = createApp({
       }
     };
 
+    // Estado del selector principal en Hero ("Quiero Comprar" vs "Hablar con Especialista")
+    const heroActiveSection = ref(null);
+
+    const showHeroSection = (section) => {
+      heroActiveSection.value = section;
+
+      if (section === 'especialista') {
+        setTimeout(() => {
+          const vid = document.getElementById('specialistVideo');
+          if (vid) {
+            vid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            vid.play().catch(() => {});
+          }
+        }, 150);
+      } else if (section === 'comprar') {
+        const vid = document.getElementById('specialistVideo');
+        if (vid) {
+          vid.pause();
+        }
+      }
+    };
+
     // Estado del Formulario
     const form = reactive({
       name: '',
@@ -763,6 +785,8 @@ const app = createApp({
       contactAdvisor,
       getAdvisorWhatsAppUrl,
       normalizeMexicanWhatsApp,
+      heroActiveSection,
+      showHeroSection,
       form,
       errors,
       wellnessGoals,
