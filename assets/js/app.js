@@ -136,6 +136,322 @@ const app = createApp({
       }
     };
 
+    // =========================================================================
+    // EMBUDO DE VIDEO INTERACTIVO CON RAMIFICACIÓN CONDICIONAL (CLIPS M1 A M5)
+    // =========================================================================
+    const funnelSteps = {
+      1: {
+        id: 1,
+        title: "Paso 1: Presentación & Calificación",
+        subtitle: "Evaluación inicial de bienestar",
+        badge: "Paso 1 de 4",
+        progress: 25,
+        videoSrc: "assets/video/M1.mp4",
+        questionTitle: "Pregunta de Calificación 1",
+        questionDesc: "¿Deseas continuar hacia tu plan personalizado de bienestar y salud celular?",
+        yesText: "Sí, continuar",
+        yesSubtext: "Pasa al video 2",
+        noText: "No en este momento",
+        noSubtext: "Finalizar consulta",
+        nextYes: 2,
+        nextNo: 5
+      },
+      2: {
+        id: 2,
+        title: "Paso 2: Evaluación de Salud Celular",
+        subtitle: "Profundizando en tus prioridades",
+        badge: "Paso 2 de 4",
+        progress: 50,
+        videoSrc: "assets/video/M2.mp4",
+        questionTitle: "Pregunta de Calificación 2",
+        questionDesc: "¿Estás dispuesto(a) a incorporar una rutina con respaldo científico para tus metas de salud?",
+        yesText: "Sí, me interesa",
+        yesSubtext: "Pasa al video 3",
+        noText: "No por ahora",
+        noSubtext: "Finalizar consulta",
+        nextYes: 3,
+        nextNo: 5
+      },
+      3: {
+        id: 3,
+        title: "Paso 3: Compromiso & Orientación 1 a 1",
+        subtitle: "Validación para sesión con especialista",
+        badge: "Paso 3 de 4",
+        progress: 75,
+        videoSrc: "assets/video/M3.mp4",
+        questionTitle: "Pregunta de Calificación 3",
+        questionDesc: "¿Te gustaría recibir orientación personalizada 1 a 1 con un especialista sin costo?",
+        yesText: "Sí, quiero hablar con un especialista",
+        yesSubtext: "Pasa a elegir horario de llamada",
+        noText: "No por ahora",
+        noSubtext: "Finalizar consulta",
+        nextYes: 4,
+        nextNo: 5
+      },
+      4: {
+        id: 4,
+        title: "Paso 4: Coordinación de Llamada",
+        subtitle: "Selecciona tu momento preferido",
+        badge: "Paso Final",
+        progress: 100,
+        videoSrc: "assets/video/M4.mp4",
+        questionTitle: "¿Cuándo prefieres que hablemos?",
+        questionDesc: "Elige la alternativa que mejor se adapte a tu horario y ritmo de vida:"
+      },
+      5: {
+        id: 5,
+        title: "Agradecimiento & Comunidad",
+        subtitle: "Recursos y contenido gratuito",
+        badge: "Finalizado",
+        progress: 100,
+        videoSrc: "assets/video/M5.mp4",
+        isDisqualified: true,
+        messageTitle: "Gracias por tu sinceridad",
+        messageDesc: "En este momento nuestro programa podría no adaptarse a lo que buscas, pero te invitamos a seguir nuestro contenido gratuito en redes sociales y explorar nuestra comunidad."
+      }
+    };
+
+    const videoFunnel = reactive({
+      currentStep: 1,
+      isPlaying: false,
+      isPausedForAnswer: false,
+      hasEnded: false,
+      autoplayBlocked: false,
+      selectedSlotOption: null, // 'proxima_hora' | 'hoy_dia' | 'elegir_fecha'
+      bookingSubmitted: false,
+      calendarUrl: '',
+      whatsappBookingUrl: '',
+      bookingForm: {
+        name: '',
+        phone: '',
+        timeSlot: 'Mañana (9:00 AM - 12:00 PM)',
+        date: new Date().toISOString().split('T')[0],
+        time: '11:00',
+        notes: ''
+      },
+      bookingErrors: {
+        name: '',
+        phone: ''
+      }
+    });
+
+    const currentFunnelStepData = computed(() => {
+      return funnelSteps[videoFunnel.currentStep] || funnelSteps[1];
+    });
+
+    // Control de reproducción del video interactivo
+    const playFunnelStep = (stepNumber) => {
+      videoFunnel.currentStep = stepNumber;
+      videoFunnel.isPausedForAnswer = false;
+      videoFunnel.hasEnded = false;
+      videoFunnel.autoplayBlocked = false;
+      if (stepNumber !== 4) {
+        videoFunnel.selectedSlotOption = null;
+        videoFunnel.bookingSubmitted = false;
+      }
+
+      setTimeout(() => {
+        const vid = document.getElementById('funnelVideoPlayer');
+        if (vid) {
+          const stepData = funnelSteps[stepNumber];
+          if (stepData && !vid.src.includes(stepData.videoSrc)) {
+            vid.src = stepData.videoSrc;
+            vid.load();
+          }
+          vid.currentTime = 0;
+          const playPromise = vid.play();
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              videoFunnel.isPlaying = true;
+              videoFunnel.autoplayBlocked = false;
+            }).catch((err) => {
+              console.log('[Video Funnel] Autoplay pausado o bloqueado por navegador:', err);
+              videoFunnel.autoplayBlocked = true;
+              videoFunnel.isPlaying = false;
+            });
+          }
+        }
+      }, 100);
+    };
+
+    const answerFunnelQuestion = (isYes) => {
+      const stepData = funnelSteps[videoFunnel.currentStep];
+      if (!stepData) return;
+
+      const nextStep = isYes ? stepData.nextYes : stepData.nextNo;
+      triggerPixelEvent('CustomEvent', {
+        content_name: `Video Funnel Paso ${videoFunnel.currentStep} -> ${isYes ? 'SI' : 'NO'}`,
+        step: videoFunnel.currentStep,
+        answer: isYes ? 'YES' : 'NO',
+        nextStep: nextStep
+      });
+
+      playFunnelStep(nextStep);
+    };
+
+    const restartFunnel = () => {
+      videoFunnel.currentStep = 1;
+      videoFunnel.selectedSlotOption = null;
+      videoFunnel.bookingSubmitted = false;
+      videoFunnel.bookingErrors.name = '';
+      videoFunnel.bookingErrors.phone = '';
+      playFunnelStep(1);
+    };
+
+    const replayCurrentFunnelVideo = () => {
+      const vid = document.getElementById('funnelVideoPlayer');
+      if (vid) {
+        vid.currentTime = 0;
+        vid.play().then(() => {
+          videoFunnel.isPlaying = true;
+          videoFunnel.isPausedForAnswer = false;
+          videoFunnel.hasEnded = false;
+          videoFunnel.autoplayBlocked = false;
+        }).catch(() => {});
+      }
+    };
+
+    const onFunnelVideoEnded = () => {
+      videoFunnel.isPlaying = false;
+      videoFunnel.isPausedForAnswer = true;
+      videoFunnel.hasEnded = true;
+    };
+
+    const onFunnelVideoPlay = () => {
+      videoFunnel.isPlaying = true;
+      videoFunnel.autoplayBlocked = false;
+    };
+
+    const onFunnelVideoPause = () => {
+      videoFunnel.isPlaying = false;
+      videoFunnel.isPausedForAnswer = true;
+    };
+
+    // Opción A: En la próxima hora
+    const selectOptionA_ProximaHora = () => {
+      videoFunnel.selectedSlotOption = 'proxima_hora';
+      
+      const customMessage = `¡Hola! Acabo de ver el video interactivo de Immunotec y solicito una llamada en la próxima hora para revisar mi plan y orientación personalizada.`;
+      
+      // Enviar registro asíncrono a Google Sheets
+      sendToGoogleSheets({
+        name: 'Interesado en llamada urgente',
+        phone: '',
+        email: '',
+        goal: 'Llamada urgente en la próxima hora',
+        message: 'Solicitud inmediata generada desde Opción A del embudo interactivo (M4)',
+        source: 'Video Funnel M4 - Próxima Hora',
+        submittedAt: new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })
+      });
+      
+      triggerPixelEvent('Lead', {
+        content_name: 'Video Funnel: Llamada próxima hora',
+        channel: 'WhatsApp'
+      });
+
+      openWhatsApp(customMessage);
+    };
+
+    // Opción B: Hoy durante el día
+    const selectOptionB_HoyDia = () => {
+      videoFunnel.selectedSlotOption = 'hoy_dia';
+      videoFunnel.bookingSubmitted = false;
+    };
+
+    // Opción C: Elegir día y hora
+    const selectOptionC_ElegirFecha = () => {
+      videoFunnel.selectedSlotOption = 'elegir_fecha';
+      videoFunnel.bookingSubmitted = false;
+    };
+
+    // Generador de enlace directo a Google Calendar
+    const createGoogleCalendarUrl = ({ title, details, dateStr, timeStr, durationMinutes = 30 }) => {
+      try {
+        const [year, month, day] = dateStr.split('-').map(Number);
+        const [hour, minute] = timeStr.split(':').map(Number);
+        const startDate = new Date(year, month - 1, day, hour, minute);
+        const endDate = new Date(startDate.getTime() + durationMinutes * 60000);
+
+        const pad = (n) => String(n).padStart(2, '0');
+        const formatGCal = (d) => `${d.getFullYear()}${pad(d.getMonth() + 1)}${pad(d.getDate())}T${pad(d.getHours())}${pad(d.getMinutes())}00`;
+
+        const dates = `${formatGCal(startDate)}/${formatGCal(endDate)}`;
+        return `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${dates}&details=${encodeURIComponent(details)}&location=${encodeURIComponent('Llamada telefónica / WhatsApp')}`;
+      } catch (err) {
+        return 'https://calendar.google.com';
+      }
+    };
+
+    // Confirmación y envío del formulario de reserva (Opciones B y C)
+    const submitBookingFunnel = async () => {
+      videoFunnel.bookingErrors.name = '';
+      videoFunnel.bookingErrors.phone = '';
+
+      if (!videoFunnel.bookingForm.name.trim()) {
+        videoFunnel.bookingErrors.name = 'Por favor ingresa tu nombre completo.';
+        return;
+      }
+      if (!videoFunnel.bookingForm.phone.trim()) {
+        videoFunnel.bookingErrors.phone = 'Por favor ingresa tu número de WhatsApp para contactarte.';
+        return;
+      }
+
+      const isHoy = videoFunnel.selectedSlotOption === 'hoy_dia';
+      const slotText = isHoy ? videoFunnel.bookingForm.timeSlot : `${videoFunnel.bookingForm.date} a las ${videoFunnel.bookingForm.time} hrs`;
+
+      // Calcular fecha/hora aproximada para Google Calendar
+      let dateForCalendar = videoFunnel.bookingForm.date;
+      let timeForCalendar = videoFunnel.bookingForm.time || '11:00';
+      if (isHoy) {
+        dateForCalendar = new Date().toISOString().split('T')[0];
+        if (videoFunnel.bookingForm.timeSlot.includes('Mañana')) timeForCalendar = '10:30';
+        else if (videoFunnel.bookingForm.timeSlot.includes('Mediodía') || videoFunnel.bookingForm.timeSlot.includes('Tarde')) timeForCalendar = '14:00';
+        else timeForCalendar = '18:00';
+      }
+
+      const eventTitle = `Orientación Immunotec - ${videoFunnel.bookingForm.name.trim()}`;
+      const eventDetails = `Cita de orientación 1 a 1 de bienestar celular con especialista Immunotec.\nCliente: ${videoFunnel.bookingForm.name.trim()}\nWhatsApp: ${videoFunnel.bookingForm.phone.trim()}\nHorario seleccionado: ${slotText}\nHoja de Registro: https://docs.google.com/spreadsheets/d/1PB66cmuNtO3IHkrKeSmiHiAdnHXUow_x-r6Zx9EFjZY/edit?gid=0#gid=0`;
+
+      const calUrl = createGoogleCalendarUrl({
+        title: eventTitle,
+        details: eventDetails,
+        dateStr: dateForCalendar,
+        timeStr: timeForCalendar
+      });
+      videoFunnel.calendarUrl = calUrl;
+
+      // Mensaje para confirmar por WhatsApp
+      const waMessage = `¡Hola! Acabo de registrar mi cita en el video interactivo de Immunotec.\n\n👤 *Nombre:* ${videoFunnel.bookingForm.name.trim()}\n📱 *WhatsApp:* ${videoFunnel.bookingForm.phone.trim()}\n📅 *Horario preferido:* ${slotText}\n\nQuedo a la espera de la llamada para mi orientación.`;
+      
+      const activeAdv = selectedAdvisor.value || advisors.value[0];
+      videoFunnel.whatsappBookingUrl = getAdvisorWhatsAppUrl(activeAdv, waMessage);
+
+      // Guardar en Google Sheets (Hoja de cálculo en la nube)
+      await sendToGoogleSheets({
+        name: videoFunnel.bookingForm.name.trim(),
+        phone: videoFunnel.bookingForm.phone.trim(),
+        email: '',
+        goal: `Cita Video Funnel: ${slotText}`,
+        message: `Cliente agendó desde Embudo Interactivo M4 (${videoFunnel.selectedSlotOption}). Horario: ${slotText}. Notas: ${videoFunnel.bookingForm.notes || 'Ninguna'}`,
+        source: 'Video Interactivo Funnel',
+        submittedAt: new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })
+      });
+
+      triggerPixelEvent('Schedule', {
+        content_name: `Cita Video Funnel: ${slotText}`,
+        user_name: videoFunnel.bookingForm.name.trim()
+      });
+
+      videoFunnel.bookingSubmitted = true;
+
+      // Abrir Google Calendar en nueva pestaña
+      try {
+        window.open(calUrl, '_blank');
+      } catch (e) {
+        console.warn('Popup blocker calendar:', e);
+      }
+    };
+
     // Estado del selector principal en Hero ("Quiero Comprar" vs "Hablar con Especialista")
     const heroActiveSection = ref(null);
 
@@ -144,14 +460,14 @@ const app = createApp({
 
       if (section === 'especialista') {
         setTimeout(() => {
-          const vid = document.getElementById('specialistVideo');
-          if (vid) {
-            vid.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-            vid.play().catch(() => {});
+          const el = document.getElementById('videoFunnelContainer');
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           }
+          playFunnelStep(videoFunnel.currentStep || 1);
         }, 150);
       } else if (section === 'comprar') {
-        const vid = document.getElementById('specialistVideo');
+        const vid = document.getElementById('funnelVideoPlayer');
         if (vid) {
           vid.pause();
         }
@@ -815,7 +1131,22 @@ const app = createApp({
       openFaqIndex,
       toggleFaq,
       faqList,
-      testimonials
+      testimonials,
+      // Embudo de Video Interactivo (M1 a M5)
+      funnelSteps,
+      videoFunnel,
+      currentFunnelStepData,
+      playFunnelStep,
+      answerFunnelQuestion,
+      restartFunnel,
+      replayCurrentFunnelVideo,
+      onFunnelVideoEnded,
+      onFunnelVideoPlay,
+      onFunnelVideoPause,
+      selectOptionA_ProximaHora,
+      selectOptionB_HoyDia,
+      selectOptionC_ElegirFecha,
+      submitBookingFunnel
     };
   }
 });

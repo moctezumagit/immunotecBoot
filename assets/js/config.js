@@ -85,9 +85,8 @@ window.APP_CONFIG = {
 
   // --- CONEXIÓN AUTOMÁTICA A GOOGLE SHEETS ---
   // Pega aquí la URL de tu aplicación web creada en Google Apps Script
-  // Cada vez que un usuario envíe el formulario o solicite su rutina, se guardará
-  // automáticamente una nueva fila en tu hoja de Google Sheets Y se abrirá WhatsApp.
-  // (Ver instrucciones en el archivo 'google-apps-script.js')
+  // URL de la hoja de cálculo oficial en Google Sheets
+  leadsSpreadsheetUrl: "https://docs.google.com/spreadsheets/d/1PB66cmuNtO3IHkrKeSmiHiAdnHXUow_x-r6Zx9EFjZY/edit?gid=0#gid=0",
   googleSheetsUrl: "https://script.google.com/macros/s/AKfycbx9eZqg145tH7e0u0n1n4UnOOcNN42YDEqu7_PXp9Kay2F1YPcCLKGCcch4PFuVDRvD/exec", // Ej: "https://script.google.com/macros/s/AKfycb.../exec"
 
   // --- DESTINO ADICIONAL DEL FORMULARIO DE LEADS ---
