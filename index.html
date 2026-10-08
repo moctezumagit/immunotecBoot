@@ -296,10 +296,10 @@
                 </div>
 
                 <!-- Grid de las 4 Tarjetas de Asesores -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 mb-4">
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 mb-3">
                   <div v-for="adv in advisors" 
                        :key="adv.id"
-                       @click="contactAdvisor(adv)"
+                       @click="selectAdvisor(adv)"
                        :class="selectedAdvisor?.id === adv.id ? 'ring-2 ring-emerald-500 border-emerald-500 bg-emerald-50/40 shadow-md shadow-emerald-500/10' : 'border-slate-200/90 bg-white hover:border-emerald-400 hover:shadow-lg hover:shadow-emerald-500/10'"
                        class="group relative flex flex-col items-center p-3 sm:p-3.5 rounded-2xl border transition-all duration-300 text-center cursor-pointer hover:-translate-y-1">
                     
@@ -332,16 +332,47 @@
                       {{ adv.phoneDisplay }}
                     </span>
 
-                    <!-- Botón de Contacto por WhatsApp -->
-                    <button type="button" 
-                            class="w-full mt-2.5 py-1.5 px-2 rounded-xl text-[11px] sm:text-xs font-bold text-white bg-emerald-500 hover:bg-emerald-600 group-hover:bg-emerald-600 shadow-xs group-hover:shadow-md flex items-center justify-center gap-1.5 transition-all">
+                    <!-- Enlace Directo Nativo a WhatsApp -->
+                    <a :href="getAdvisorWhatsAppUrl(adv)"
+                       target="_blank"
+                       rel="noopener noreferrer"
+                       @click.stop="selectAdvisor(adv)"
+                       class="w-full mt-2.5 py-1.5 px-2 rounded-xl text-[11px] sm:text-xs font-bold text-white bg-emerald-500 hover:bg-emerald-600 group-hover:bg-emerald-600 shadow-xs group-hover:shadow-md flex items-center justify-center gap-1.5 transition-all cursor-pointer">
                       <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                         <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
                       </svg>
                       <span>WhatsApp</span>
-                    </button>
+                    </a>
 
                   </div>
+                </div>
+
+                <!-- PANEL ACTIVO DEL ASESOR SELECCIONADO (CONEXIÓN 100% VALIDADA) -->
+                <div v-if="selectedAdvisor" 
+                     class="mb-4 p-3.5 sm:p-4 rounded-2xl bg-gradient-to-r from-emerald-50 via-white to-blue-50/50 border border-emerald-300 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-3">
+                  <div class="flex items-center gap-3 w-full sm:w-auto">
+                    <img :src="selectedAdvisor.image" 
+                         :alt="selectedAdvisor.name"
+                         :style="{ objectPosition: selectedAdvisor.objectPosition || 'center top' }"
+                         class="w-12 h-12 rounded-full object-cover border-2 border-emerald-500 shadow-xs flex-shrink-0">
+                    <div>
+                      <div class="flex items-center gap-1.5 flex-wrap">
+                        <span class="text-xs sm:text-sm font-bold text-slate-900">Asesor seleccionado: {{ selectedAdvisor.name }}</span>
+                        <span class="text-[10px] font-semibold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-full">En línea</span>
+                      </div>
+                      <p class="text-xs text-slate-600 font-mono mt-0.5">WhatsApp directo: +52 {{ selectedAdvisor.phoneDisplay }}</p>
+                    </div>
+                  </div>
+
+                  <a :href="getAdvisorWhatsAppUrl(selectedAdvisor)"
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     class="w-full sm:w-auto px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm text-white bg-emerald-600 hover:bg-emerald-700 shadow-md shadow-emerald-600/25 flex items-center justify-center gap-2 transition-all cursor-pointer flex-shrink-0">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                    </svg>
+                    <span>Chatear con {{ selectedAdvisor.name }}</span>
+                  </a>
                 </div>
 
                 <!-- Botón de Más Información (Formulario General) -->
@@ -1456,13 +1487,16 @@
                 <p class="text-slate-600 text-sm leading-relaxed">
                   Hemos preparado tus datos y meta de bienestar para tu asesoría personalizada 1 a 1. Si no se abrió la ventana automáticamente, pulsa el botón a continuación:
                 </p>
-                <button @click="openWhatsApp()" 
-                        class="btn-shine inline-flex items-center justify-center gap-2.5 w-full py-4 px-6 rounded-2xl font-black text-base text-white bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 shadow-xl shadow-emerald-600/30 hover:scale-[1.01] transition-all cursor-pointer">
+                <a :href="buildWhatsAppUrl()" 
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   @click="openWhatsApp()"
+                   class="btn-shine inline-flex items-center justify-center gap-2.5 w-full py-4 px-6 rounded-2xl font-black text-base text-white bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 shadow-xl shadow-emerald-600/30 hover:scale-[1.01] transition-all cursor-pointer">
                   <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
                     <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
                   </svg>
                   <span>Abrir chat de WhatsApp ahora</span>
-                </button>
+                </a>
               </div>
 
               <!-- Botón para reiniciar o enviar otra solicitud -->

@@ -12,8 +12,8 @@ window.APP_CONFIG = {
     role: "Consultor de Bienestar y Salud Celular Immunotec",
     city: "México / Internacional",
     email: "equilibrionutricion8@gmail.com", // Tu correo electrónico oficial
-    // Número de WhatsApp con código de país 52 (México) + 2227708716 = 522227708716
-    whatsappNumber: "522227708716",
+    // Número de WhatsApp con código de país 52 (México) + 1 para celular + 2227708716 = 5212227708716
+    whatsappNumber: "5212227708716",
     // Mensaje predeterminado al hacer clic en el botón flotante
     whatsappDefaultMessage: "¡Hola! Vi tu página de Equilibrio y Bienestar y quiero información personalizada sobre los productos Immunotec."
   },
@@ -26,7 +26,7 @@ window.APP_CONFIG = {
       role: "Consultora en Bienestar y Salud Celular",
       specialty: "Salud Familiar",
       phone: "2431067294",
-      whatsappNumber: "522431067294",
+      whatsappNumber: "5212431067294",
       phoneDisplay: "243 106 7294",
       image: "assets/img/asesores/asesor-1.jpg",
       objectPosition: "center 15%",
@@ -39,7 +39,7 @@ window.APP_CONFIG = {
       role: "Consultor en Vitalidad y Envejecimiento Saludable",
       specialty: "Vitalidad Activa",
       phone: "2441235715",
-      whatsappNumber: "522441235715",
+      whatsappNumber: "5212441235715",
       phoneDisplay: "244 123 5715",
       image: "assets/img/asesores/asesor-2.jpg",
       objectPosition: "center 12%",
@@ -52,7 +52,7 @@ window.APP_CONFIG = {
       role: "Consultora en Nutrición Celular y Estilo de Vida",
       specialty: "Nutrición & Rutinas",
       phone: "2227708716",
-      whatsappNumber: "522227708716",
+      whatsappNumber: "5212227708716",
       phoneDisplay: "222 770 8716",
       image: "assets/img/asesores/asesor-3.jpg",
       objectPosition: "center 20%",
@@ -65,7 +65,7 @@ window.APP_CONFIG = {
       role: "Consultor en Rendimiento Deportivo y Fuerza",
       specialty: "Deporte & Fitness",
       phone: "2225688665",
-      whatsappNumber: "522225688665",
+      whatsappNumber: "5212225688665",
       phoneDisplay: "222 568 8665",
       image: "assets/img/asesores/asesor-4.png",
       objectPosition: "center 18%",

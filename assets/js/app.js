@@ -32,6 +32,22 @@ const app = createApp({
       pixels: {}
     };
 
+    // Función para normalizar números celulares de México (+52 1 [10 dígitos]) para WhatsApp
+    const normalizeMexicanWhatsApp = (num) => {
+      if (!num) return '5212227708716';
+      const digits = String(num).replace(/\D/g, '');
+      if (digits.length === 13 && digits.startsWith('521')) {
+        return digits;
+      }
+      if (digits.length === 12 && digits.startsWith('52')) {
+        return '521' + digits.substring(2);
+      }
+      if (digits.length === 10) {
+        return '521' + digits;
+      }
+      return digits;
+    };
+
     // Lista de asesores disponibles para atención personalizada
     const advisors = ref(config.advisors || [
       {
@@ -40,9 +56,10 @@ const app = createApp({
         role: "Consultora en Bienestar y Salud Celular",
         specialty: "Salud Familiar",
         phone: "2431067294",
-        whatsappNumber: "522431067294",
+        whatsappNumber: "5212431067294",
         phoneDisplay: "243 106 7294",
         image: "assets/img/asesores/asesor-1.jpg",
+        objectPosition: "center 15%",
         status: "En línea",
         customMessage: "¡Hola Claudia! Vi tu perfil en la página de Immunotec y deseo orientación personalizada sobre salud y bienestar celular."
       },
@@ -52,9 +69,10 @@ const app = createApp({
         role: "Consultor en Vitalidad y Envejecimiento Saludable",
         specialty: "Vitalidad Activa",
         phone: "2441235715",
-        whatsappNumber: "522441235715",
+        whatsappNumber: "5212441235715",
         phoneDisplay: "244 123 5715",
         image: "assets/img/asesores/asesor-2.jpg",
+        objectPosition: "center 12%",
         status: "En línea",
         customMessage: "¡Hola Roberto! Vi tu perfil en la página de Immunotec y quiero información sobre suplementación para vitalidad y salud."
       },
@@ -64,9 +82,10 @@ const app = createApp({
         role: "Consultora en Nutrición Celular y Estilo de Vida",
         specialty: "Nutrición & Rutinas",
         phone: "2227708716",
-        whatsappNumber: "522227708716",
+        whatsappNumber: "5212227708716",
         phoneDisplay: "222 770 8716",
         image: "assets/img/asesores/asesor-3.jpg",
+        objectPosition: "center 20%",
         status: "En línea",
         customMessage: "¡Hola Mariana! Vi tu perfil en la página de Immunotec y me gustaría conocer la mejor rutina para energía y defensas."
       },
@@ -76,9 +95,10 @@ const app = createApp({
         role: "Consultor en Rendimiento Deportivo y Fuerza",
         specialty: "Deporte & Fitness",
         phone: "2225688665",
-        whatsappNumber: "522225688665",
+        whatsappNumber: "5212225688665",
         phoneDisplay: "222 568 8665",
         image: "assets/img/asesores/asesor-4.png",
+        objectPosition: "center 18%",
         status: "En línea",
         customMessage: "¡Hola David! Vi tu perfil en la página de Immunotec y busco asesoría sobre suplementación deportiva y rendimiento celular."
       }
@@ -90,16 +110,30 @@ const app = createApp({
       selectedAdvisor.value = adv;
     };
 
-    const contactAdvisor = (adv) => {
+    // Genera enlace universal y validado a WhatsApp (funciona en móvil, desktop y web)
+    const getAdvisorWhatsAppUrl = (adv, customMsg = null) => {
+      if (!adv) return '#';
+      const phone = normalizeMexicanWhatsApp(adv.whatsappNumber || adv.phone);
+      const message = customMsg || adv.customMessage || config.advisor.whatsappDefaultMessage;
+      return `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
+    };
+
+    const contactAdvisor = (adv, event = null) => {
       selectedAdvisor.value = adv;
       triggerPixelEvent('Contact', {
         content_name: `WhatsApp Asesor: ${adv.name}`,
         advisor_phone: adv.phone,
         status: 'Advisor Chat Initiated'
       });
-      const text = adv.customMessage || config.advisor.whatsappDefaultMessage;
-      const url = `https://wa.me/${adv.whatsappNumber}?text=${encodeURIComponent(text)}`;
-      window.open(url, '_blank');
+      const url = getAdvisorWhatsAppUrl(adv);
+      try {
+        const win = window.open(url, '_blank');
+        if (!win || win.closed || typeof win.closed === 'undefined') {
+          window.location.href = url;
+        }
+      } catch (e) {
+        window.location.href = url;
+      }
     };
 
     // Estado del Formulario
@@ -480,10 +514,11 @@ const app = createApp({
       }
     };
 
-    // Construcción del enlace personalizado de WhatsApp
+    // Construcción del enlace personalizado de WhatsApp (Normalizado y con fallback)
     const buildWhatsAppUrl = (customText = null) => {
       const activeAdvisor = selectedAdvisor.value;
-      const phone = activeAdvisor?.whatsappNumber || config.advisor.whatsappNumber || '522227708716';
+      const rawPhone = activeAdvisor?.whatsappNumber || config.advisor.whatsappNumber || '5212227708716';
+      const phone = normalizeMexicanWhatsApp(rawPhone);
       const advisorName = activeAdvisor?.name || config.advisor.name;
       let message = customText;
 
@@ -502,17 +537,24 @@ const app = createApp({
         }
       }
 
-      return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+      return `https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(message)}`;
     };
 
-    // Apertura directa de WhatsApp con tracking de Contacto
+    // Apertura directa de WhatsApp con protección anti-bloqueo de ventanas emergentes
     const openWhatsApp = (customText = null) => {
       triggerPixelEvent('Contact', {
         content_name: 'WhatsApp Click',
         status: 'Advisor Chat Initiated'
       });
       const url = buildWhatsAppUrl(customText);
-      window.open(url, '_blank');
+      try {
+        const win = window.open(url, '_blank');
+        if (!win || win.closed || typeof win.closed === 'undefined') {
+          window.location.href = url;
+        }
+      } catch (e) {
+        window.location.href = url;
+      }
     };
 
     // Registro asíncrono en Google Sheets (Google Apps Script Web App)
@@ -719,6 +761,8 @@ const app = createApp({
       selectedAdvisor,
       selectAdvisor,
       contactAdvisor,
+      getAdvisorWhatsAppUrl,
+      normalizeMexicanWhatsApp,
       form,
       errors,
       wellnessGoals,
@@ -733,6 +777,7 @@ const app = createApp({
       submitForm,
       goToForm,
       openWhatsApp,
+      buildWhatsAppUrl,
       resetForm,
       selectGoalAndScroll,
       scrollToSection,
