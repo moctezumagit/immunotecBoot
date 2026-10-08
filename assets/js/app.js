@@ -410,7 +410,7 @@ const app = createApp({
       }
 
       const eventTitle = `Orientación Immunotec - ${videoFunnel.bookingForm.name.trim()}`;
-      const eventDetails = `Cita de orientación 1 a 1 de bienestar celular con especialista Immunotec.\nCliente: ${videoFunnel.bookingForm.name.trim()}\nWhatsApp: ${videoFunnel.bookingForm.phone.trim()}\nHorario seleccionado: ${slotText}\nHoja de Registro: https://docs.google.com/spreadsheets/d/1PB66cmuNtO3IHkrKeSmiHiAdnHXUow_x-r6Zx9EFjZY/edit?gid=0#gid=0`;
+      const eventDetails = `Cita de orientación 1 a 1 de bienestar celular con especialista Immunotec.\nCliente: ${videoFunnel.bookingForm.name.trim()}\nWhatsApp: ${videoFunnel.bookingForm.phone.trim()}\nHorario seleccionado: ${slotText}`;
 
       const calUrl = createGoogleCalendarUrl({
         title: eventTitle,
