@@ -18,6 +18,62 @@ window.APP_CONFIG = {
     whatsappDefaultMessage: "¡Hola! Vi tu página de Equilibrio y Bienestar y quiero información personalizada sobre los productos Immunotec."
   },
 
+  // --- EQUIPO DE ASESORES DIRECTOS (WHATSAPP INDIVIDUAL) ---
+  advisors: [
+    {
+      id: 1,
+      name: "Asesora Claudia",
+      role: "Consultora en Bienestar y Salud Celular",
+      specialty: "Salud Familiar",
+      phone: "2431067294",
+      whatsappNumber: "522431067294",
+      phoneDisplay: "243 106 7294",
+      image: "assets/img/asesores/asesor-1.jpg",
+      objectPosition: "center 15%",
+      status: "En línea",
+      customMessage: "¡Hola Claudia! Vi tu perfil en la página de Immunotec y deseo orientación personalizada sobre salud y bienestar celular."
+    },
+    {
+      id: 2,
+      name: "Asesor Roberto",
+      role: "Consultor en Vitalidad y Envejecimiento Saludable",
+      specialty: "Vitalidad Activa",
+      phone: "2441235715",
+      whatsappNumber: "522441235715",
+      phoneDisplay: "244 123 5715",
+      image: "assets/img/asesores/asesor-2.jpg",
+      objectPosition: "center 12%",
+      status: "En línea",
+      customMessage: "¡Hola Roberto! Vi tu perfil en la página de Immunotec y quiero información sobre suplementación para vitalidad y salud."
+    },
+    {
+      id: 3,
+      name: "Asesora Mariana",
+      role: "Consultora en Nutrición Celular y Estilo de Vida",
+      specialty: "Nutrición & Rutinas",
+      phone: "2227708716",
+      whatsappNumber: "522227708716",
+      phoneDisplay: "222 770 8716",
+      image: "assets/img/asesores/asesor-3.jpg",
+      objectPosition: "center 20%",
+      status: "En línea",
+      customMessage: "¡Hola Mariana! Vi tu perfil en la página de Immunotec y me gustaría conocer la mejor rutina para energía y defensas."
+    },
+    {
+      id: 4,
+      name: "Asesor David",
+      role: "Consultor en Rendimiento Deportivo y Fuerza",
+      specialty: "Deporte & Fitness",
+      phone: "2225688665",
+      whatsappNumber: "522225688665",
+      phoneDisplay: "222 568 8665",
+      image: "assets/img/asesores/asesor-4.png",
+      objectPosition: "center 18%",
+      status: "En línea",
+      customMessage: "¡Hola David! Vi tu perfil en la página de Immunotec y busco asesoría sobre suplementación deportiva y rendimiento celular."
+    }
+  ],
+
   // --- ENLACES A TUS REDES SOCIALES OFICIALES ---
   socialLinks: {
     facebook: "https://www.facebook.com/share/1DWUMNvaXq/",

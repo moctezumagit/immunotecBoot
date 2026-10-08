@@ -32,6 +32,76 @@ const app = createApp({
       pixels: {}
     };
 
+    // Lista de asesores disponibles para atención personalizada
+    const advisors = ref(config.advisors || [
+      {
+        id: 1,
+        name: "Asesora Claudia",
+        role: "Consultora en Bienestar y Salud Celular",
+        specialty: "Salud Familiar",
+        phone: "2431067294",
+        whatsappNumber: "522431067294",
+        phoneDisplay: "243 106 7294",
+        image: "assets/img/asesores/asesor-1.jpg",
+        status: "En línea",
+        customMessage: "¡Hola Claudia! Vi tu perfil en la página de Immunotec y deseo orientación personalizada sobre salud y bienestar celular."
+      },
+      {
+        id: 2,
+        name: "Asesor Roberto",
+        role: "Consultor en Vitalidad y Envejecimiento Saludable",
+        specialty: "Vitalidad Activa",
+        phone: "2441235715",
+        whatsappNumber: "522441235715",
+        phoneDisplay: "244 123 5715",
+        image: "assets/img/asesores/asesor-2.jpg",
+        status: "En línea",
+        customMessage: "¡Hola Roberto! Vi tu perfil en la página de Immunotec y quiero información sobre suplementación para vitalidad y salud."
+      },
+      {
+        id: 3,
+        name: "Asesora Mariana",
+        role: "Consultora en Nutrición Celular y Estilo de Vida",
+        specialty: "Nutrición & Rutinas",
+        phone: "2227708716",
+        whatsappNumber: "522227708716",
+        phoneDisplay: "222 770 8716",
+        image: "assets/img/asesores/asesor-3.jpg",
+        status: "En línea",
+        customMessage: "¡Hola Mariana! Vi tu perfil en la página de Immunotec y me gustaría conocer la mejor rutina para energía y defensas."
+      },
+      {
+        id: 4,
+        name: "Asesor David",
+        role: "Consultor en Rendimiento Deportivo y Fuerza",
+        specialty: "Deporte & Fitness",
+        phone: "2225688665",
+        whatsappNumber: "522225688665",
+        phoneDisplay: "222 568 8665",
+        image: "assets/img/asesores/asesor-4.png",
+        status: "En línea",
+        customMessage: "¡Hola David! Vi tu perfil en la página de Immunotec y busco asesoría sobre suplementación deportiva y rendimiento celular."
+      }
+    ]);
+
+    const selectedAdvisor = ref(advisors.value[0] || null);
+
+    const selectAdvisor = (adv) => {
+      selectedAdvisor.value = adv;
+    };
+
+    const contactAdvisor = (adv) => {
+      selectedAdvisor.value = adv;
+      triggerPixelEvent('Contact', {
+        content_name: `WhatsApp Asesor: ${adv.name}`,
+        advisor_phone: adv.phone,
+        status: 'Advisor Chat Initiated'
+      });
+      const text = adv.customMessage || config.advisor.whatsappDefaultMessage;
+      const url = `https://wa.me/${adv.whatsappNumber}?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    };
+
     // Estado del Formulario
     const form = reactive({
       name: '',
@@ -412,12 +482,14 @@ const app = createApp({
 
     // Construcción del enlace personalizado de WhatsApp
     const buildWhatsAppUrl = (customText = null) => {
-      const phone = config.advisor.whatsappNumber || '522227708716';
+      const activeAdvisor = selectedAdvisor.value;
+      const phone = activeAdvisor?.whatsappNumber || config.advisor.whatsappNumber || '522227708716';
+      const advisorName = activeAdvisor?.name || config.advisor.name;
       let message = customText;
 
       if (!message) {
         if (form.name.trim()) {
-          message = `¡Hola ${config.advisor.name}! 👋\n\n` +
+          message = `¡Hola ${advisorName}! 👋\n\n` +
                     `Mi nombre es *${form.name.trim()}*.\n` +
                     (form.phone.trim() ? `📱 Mi WhatsApp: *${form.phone.trim()}*\n` : '') +
                     (form.email.trim() ? `📧 Correo: ${form.email.trim()}\n` : '') +
@@ -426,7 +498,7 @@ const app = createApp({
                     (utmParams.source ? `📍 Origen: Redes Sociales (${utmParams.source})\n` : '') +
                     `\nQuisiera recibir orientación personalizada sobre los productos Immunotec.`;
         } else {
-          message = config.advisor.whatsappDefaultMessage || "¡Hola! Vi tu página de Equilibrio y Bienestar y quiero información sobre los productos Immunotec.";
+          message = activeAdvisor?.customMessage || config.advisor.whatsappDefaultMessage || "¡Hola! Vi tu página de Equilibrio y Bienestar y quiero información sobre los productos Immunotec.";
         }
       }
 
@@ -643,6 +715,10 @@ const app = createApp({
 
     return {
       config,
+      advisors,
+      selectedAdvisor,
+      selectAdvisor,
+      contactAdvisor,
       form,
       errors,
       wellnessGoals,
