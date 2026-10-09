@@ -18,6 +18,15 @@ window.APP_CONFIG = {
     whatsappDefaultMessage: "¡Hola! Vi tu página de Equilibrio y Bienestar y quiero información personalizada sobre los productos Immunotec."
   },
 
+  // --- MOTOR DE INTELIGENCIA ARTIFICIAL (GOOGLE GEMINI) ---
+  // Pega aquí tu clave de API de Gemini (o configúrala desde el botón de engranaje en el chat)
+  gemini: {
+    apiKey: "", // Ej: "AIzaSy..." (Si la dejas vacía, podrás ingresarla directamente en la ventana de chat)
+    model: "gemini-3.8-flash",
+    assistantName: "Sofía",
+    assistantRole: "Especialista en Bienestar Celular & Asesoría IA"
+  },
+
   // --- EQUIPO DE ASESORES DIRECTOS (WHATSAPP INDIVIDUAL) ---
   advisors: [
     {

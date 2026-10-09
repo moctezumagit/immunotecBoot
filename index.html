@@ -2239,32 +2239,295 @@
     </footer>
 
     <!-- ========================================================
-         BOTÓN FLOTANTE DIRECTO A WHATSAPP
+         CHATBOT INTELIGENTE DE BIENESTAR CON GEMINI & CIERRE DE VENTAS
+         ======================================================== -->
+
+    <!-- Ventana Flotante del Chatbot IA -->
+    <transition name="chat-slide">
+      <div v-show="floatingChatOpen" 
+           class="fixed bottom-20 right-3 sm:right-6 z-50 w-[94vw] sm:w-[410px] h-[580px] max-h-[82vh] bg-white rounded-3xl shadow-2xl flex flex-col overflow-hidden border border-slate-200/90 chat-window-shadow">
+        
+        <!-- Encabezado del Chatbot -->
+        <div class="bg-gradient-to-r from-brand-navy via-brand-blue to-brand-navy text-white px-4 py-3 sm:py-3.5 flex items-center justify-between shadow-md">
+          <div class="flex items-center gap-2.5">
+            <div class="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/10 p-0.5 border border-white/20 flex items-center justify-center overflow-hidden flex-shrink-0">
+              <img src="assets/img/logo.jpg" alt="Sofía Asistente" class="w-full h-full object-cover rounded-full">
+              <span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-emerald-400 border border-brand-navy animate-pulse"></span>
+            </div>
+            <div class="flex flex-col">
+              <div class="flex items-center gap-1.5">
+                <span class="text-sm font-extrabold tracking-tight">Sofía</span>
+                <span class="text-[10px] px-1.5 py-0.2 rounded-full bg-blue-500/30 text-blue-200 border border-blue-400/30 font-mono font-semibold">Gemini IA</span>
+              </div>
+              <span class="text-[10px] text-blue-200 font-medium">Asesora en Nutrición Celular • En línea</span>
+            </div>
+          </div>
+
+          <!-- Botones de Acción en Header -->
+          <div class="flex items-center gap-1">
+            <!-- Botón Configuración API Key -->
+            <button @click="openApiKeyModal()" 
+                    :title="geminiChat.hasKey ? 'Gemini conectado (clic para cambiar clave)' : 'Configurar clave de Gemini'" 
+                    class="w-7 h-7 rounded-lg flex items-center justify-center text-blue-200 hover:text-white hover:bg-white/10 transition-colors relative cursor-pointer">
+              <span v-if="!geminiChat.hasKey" class="absolute -top-1 -right-1 w-2 h-2 rounded-full bg-amber-400 animate-ping"></span>
+              <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </button>
+
+            <!-- Botón Reiniciar Conversación -->
+            <button @click="clearChatHistory()" 
+                    title="Reiniciar chat" 
+                    class="w-7 h-7 rounded-lg flex items-center justify-center text-blue-200 hover:text-white hover:bg-white/10 transition-colors cursor-pointer">
+              <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+            </button>
+
+            <!-- Botón Cerrar / Minimizar -->
+            <button @click="toggleFloatingChat()" 
+                    title="Minimizar" 
+                    class="w-7 h-7 rounded-lg flex items-center justify-center text-blue-200 hover:text-white hover:bg-white/10 transition-colors cursor-pointer">
+              <svg class="w-4 h-4 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Banner de estado si falta API Key -->
+        <div v-if="!geminiChat.hasKey" 
+             @click="openApiKeyModal()"
+             class="bg-amber-50 border-b border-amber-200 text-amber-800 text-[11px] px-3 py-1.5 flex items-center justify-between cursor-pointer hover:bg-amber-100 transition-colors">
+          <div class="flex items-center gap-1.5">
+            <span>🔑</span>
+            <span class="font-semibold">Activa tu clave gratuita de Gemini para chatear.</span>
+          </div>
+          <span class="underline font-bold text-amber-900 text-[10px]">Configurar &rarr;</span>
+        </div>
+
+        <!-- Cuerpo de Mensajes con Scroll -->
+        <div id="chatMessagesScroll" 
+             class="flex-1 overflow-y-auto p-3.5 sm:p-4 space-y-3 bg-slate-50/70 text-xs sm:text-sm">
+          
+          <div v-for="msg in botMessages" 
+               :key="msg.id" 
+               class="flex flex-col"
+               :class="msg.role === 'user' ? 'items-end' : 'items-start'">
+            
+            <!-- Mensaje de Usuario -->
+            <div v-if="msg.role === 'user'" 
+                 class="chat-bubble-user p-3 max-w-[85%] text-left rounded-2xl rounded-tr-xs text-white shadow-xs">
+              <p class="leading-relaxed whitespace-pre-wrap">{{ msg.text }}</p>
+              <span class="block text-[9px] text-blue-100 text-right mt-1 opacity-80">{{ msg.time }}</span>
+            </div>
+
+            <!-- Mensaje del Asistente (Sofía) -->
+            <div v-else class="flex items-start gap-2 max-w-[94%]">
+              <div class="w-6 h-6 rounded-full bg-brand-blue text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5 shadow-xs">
+                S
+              </div>
+              <div class="flex flex-col items-start w-full">
+                <div class="chat-bubble-bot p-3.5 w-full text-left rounded-2xl rounded-tl-xs text-slate-800 shadow-xs">
+                  <div class="leading-relaxed prose prose-sm max-w-none space-y-1.5 text-xs sm:text-sm"
+                       v-html="formatMarkdown(msg.text)"></div>
+                  
+                  <!-- Tarjeta Interactiva de Asesor Oficial de WhatsApp (Cierre de Ventas) -->
+                  <div v-if="msg.advisorCard" 
+                       class="mt-3 p-3 bg-gradient-to-br from-emerald-50 via-teal-50 to-blue-50 border-2 border-emerald-400/80 rounded-2xl shadow-sm text-left animate-fade-in">
+                    
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="inline-flex items-center gap-1 text-[10px] font-extrabold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full uppercase tracking-wider">
+                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                        Asesor Asignado
+                      </span>
+                      <span class="text-[10px] font-semibold text-slate-500 font-mono">{{ msg.advisorCard.phoneDisplay }}</span>
+                    </div>
+
+                    <div class="flex items-center gap-2.5 mb-2.5">
+                      <div class="w-10 h-10 rounded-full overflow-hidden p-0.5 bg-emerald-500 flex-shrink-0">
+                        <img :src="msg.advisorCard.image" :alt="msg.advisorCard.name" class="w-full h-full object-cover rounded-full">
+                      </div>
+                      <div class="flex flex-col">
+                        <span class="text-xs font-bold text-slate-900 leading-tight">{{ msg.advisorCard.name }}</span>
+                        <span class="text-[10px] text-emerald-700 font-semibold">{{ msg.advisorCard.specialty }}</span>
+                        <span class="text-[10px] text-slate-500">Producto sugerido: <strong class="text-slate-700">{{ msg.advisorCard.product }}</strong></span>
+                      </div>
+                    </div>
+
+                    <!-- Botón Directo a WhatsApp -->
+                    <a :href="msg.advisorCard.whatsappUrl" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="w-full py-2 px-3 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-emerald-600/25 transition-transform active:scale-95 cursor-pointer">
+                      <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+                      </svg>
+                      <span>Abrir WhatsApp con {{ msg.advisorCard.name.split(' ')[1] || msg.advisorCard.name }}</span>
+                    </a>
+                  </div>
+
+                  <span class="block text-[9px] text-slate-400 text-right mt-1">{{ msg.time }}</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Indicador Animado de Razonamiento (Thinking) -->
+          <div v-if="geminiChat.isThinking" class="flex items-start gap-2">
+            <div class="w-6 h-6 rounded-full bg-brand-blue text-white flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">
+              S
+            </div>
+            <div class="chat-bubble-bot px-4 py-2.5 rounded-2xl rounded-tl-xs flex items-center gap-2 text-xs text-slate-500 shadow-xs">
+              <span class="font-medium text-slate-600">Sofía está razonando</span>
+              <div class="flex items-center gap-1">
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+                <span class="typing-dot"></span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Chips de Preguntas Rápidas (Quick Replies) -->
+        <div class="p-2 bg-slate-100/80 border-t border-slate-200/80 flex items-center gap-1.5 overflow-x-auto no-scrollbar flex-shrink-0">
+          <button v-for="chip in botQuickChips" 
+                  :key="chip.label" 
+                  @click="sendBotMessage(chip.query)" 
+                  type="button"
+                  class="quick-chip px-2.5 py-1 rounded-full text-[11px] font-semibold whitespace-nowrap cursor-pointer shadow-2xs">
+            {{ chip.label }}
+          </button>
+        </div>
+
+        <!-- Barra de Entrada y Envío -->
+        <div class="p-2.5 sm:p-3 bg-white border-t border-slate-200 flex items-center gap-2 flex-shrink-0">
+          <input v-model="geminiChat.inputText" 
+                 @keyup.enter="sendBotMessage()" 
+                 type="text" 
+                 :placeholder="geminiChat.hasKey ? 'Escribe tu pregunta de salud o Immunocal...' : 'Configura tu API Key primero 👆'" 
+                 class="flex-1 px-3.5 py-2 text-xs sm:text-sm bg-slate-100 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand-blue focus:bg-white text-slate-800 placeholder-slate-400">
+          
+          <button @click="sendBotMessage()" 
+                  :disabled="geminiChat.isThinking || !geminiChat.inputText.trim()" 
+                  class="w-9 h-9 rounded-xl bg-brand-blue hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed text-white flex items-center justify-center transition-all shadow-sm active:scale-95 cursor-pointer flex-shrink-0">
+            <svg class="w-4 h-4 fill-none stroke-current stroke-2 -rotate-45 ml-0.5" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+          </button>
+        </div>
+
+      </div>
+    </transition>
+
+    <!-- MODAL DE CONFIGURACIÓN DE GEMINI API KEY -->
+    <div v-if="geminiChat.apiKeyModalOpen" 
+         class="fixed inset-0 z-[60] bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+      <div class="bg-white rounded-3xl p-5 sm:p-6 max-w-md w-full shadow-2xl border border-slate-200 text-slate-800 animate-fade-in">
+        
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-xl bg-blue-100 text-brand-blue flex items-center justify-center text-sm font-bold">
+              🔑
+            </div>
+            <div>
+              <h3 class="text-sm sm:text-base font-extrabold text-brand-navy">Conectar con Google Gemini</h3>
+              <p class="text-[11px] text-slate-500">Cero suscripciones fijas • Plan gratuito oficial</p>
+            </div>
+          </div>
+          <button @click="closeApiKeyModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold p-1">&times;</button>
+        </div>
+
+        <p class="text-xs text-slate-600 mb-3 leading-relaxed">
+          Pega aquí tu clave de API de <strong>Google AI Studio</strong>. Se guardará de forma privada en tu navegador para que el chatbot de ventas opere de forma autónoma.
+        </p>
+
+        <div class="mb-3">
+          <label class="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-1">Clave de API de Gemini:</label>
+          <div class="relative">
+            <input v-model="geminiChat.apiKeyInput" 
+                   :type="geminiChat.showKey ? 'text' : 'password'" 
+                   placeholder="AIzaSy..." 
+                   class="w-full px-3 py-2 text-xs font-mono rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-brand-blue pr-10">
+            <button type="button" 
+                    @click="geminiChat.showKey = !geminiChat.showKey" 
+                    class="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 text-xs">
+              {{ geminiChat.showKey ? '👁️ Ocultar' : '👁️ Ver' }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Estado / Mensaje de prueba -->
+        <div v-if="geminiChat.apiKeyStatusMessage" 
+             class="p-2.5 rounded-xl text-xs font-medium mb-3"
+             :class="{
+               'bg-blue-50 text-brand-blue border border-blue-200': geminiChat.apiKeyStatus === 'testing',
+               'bg-emerald-50 text-emerald-800 border border-emerald-200': geminiChat.apiKeyStatus === 'valid',
+               'bg-red-50 text-red-800 border border-red-200': geminiChat.apiKeyStatus === 'invalid'
+             }">
+          {{ geminiChat.apiKeyStatusMessage }}
+        </div>
+
+        <div class="flex items-center gap-2 mb-4">
+          <a href="https://aistudio.google.com/" 
+             target="_blank" 
+             rel="noopener noreferrer" 
+             class="text-[11px] text-brand-blue hover:underline font-semibold flex items-center gap-1">
+            <span>¿No tienes tu clave? Obtenla gratis en Google AI Studio &rarr;</span>
+          </a>
+        </div>
+
+        <div class="flex items-center justify-end gap-2">
+          <button @click="closeApiKeyModal()" 
+                  type="button" 
+                  class="px-4 py-2 rounded-xl text-xs font-semibold text-slate-600 hover:bg-slate-100 transition-colors">
+            Cerrar
+          </button>
+          <button @click="saveAndTestApiKey()" 
+                  type="button" 
+                  :disabled="geminiChat.apiKeyStatus === 'testing' || !geminiChat.apiKeyInput.trim()"
+                  class="px-5 py-2 rounded-xl text-xs font-bold text-white bg-brand-blue hover:bg-blue-700 transition-all shadow-md disabled:opacity-50">
+            <span v-if="geminiChat.apiKeyStatus === 'testing'">Validando...</span>
+            <span v-else>Guardar y Conectar</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ========================================================
+         BOTÓN FLOTANTE PRINCIPAL (ABRE EL CHATBOT IA)
          ======================================================== -->
     <div class="fixed bottom-5 right-5 z-50 flex flex-col items-end">
       
       <!-- Mini Tooltip / Popover llamativo -->
       <div v-if="!floatingChatOpen" 
-           @click="goToForm()"
+           @click="toggleFloatingChat()"
            class="mb-2 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-white text-slate-800 text-xs font-bold shadow-lg border border-slate-100 cursor-pointer animate-float">
-        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-        <span>¿Tienes dudas? Chatea aquí</span>
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
+        <span>💬 ¿Dudas de salud? Chatea con Sofía</span>
       </div>
 
       <!-- Botón Flotante Principal -->
-      <button @click="goToForm()"
-              title="Hablar con un asesor por WhatsApp"
-              aria-label="Hablar con un asesor por WhatsApp"
-              class="animate-pulse-glow w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white flex items-center justify-center shadow-xl shadow-emerald-600/40 active:scale-90 transition-all relative cursor-pointer">
+      <button @click="toggleFloatingChat()"
+              :title="floatingChatOpen ? 'Minimizar asistente' : 'Chatear con el Asistente IA de Bienestar'"
+              :aria-label="floatingChatOpen ? 'Minimizar asistente' : 'Chatear con el Asistente IA de Bienestar'"
+              class="animate-pulse-glow w-14 h-14 rounded-full bg-gradient-to-tr from-brand-blue via-blue-600 to-emerald-500 hover:from-blue-700 hover:to-emerald-600 text-white flex items-center justify-center shadow-xl shadow-blue-900/30 active:scale-90 transition-all relative cursor-pointer">
         
-        <!-- Notificación Badge -->
-        <span class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-[11px] font-black flex items-center justify-center border-2 border-white">
+        <!-- Notificación Badge si está cerrado -->
+        <span v-if="!floatingChatOpen" class="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-red-500 text-white text-[11px] font-black flex items-center justify-center border-2 border-white animate-bounce">
           1
         </span>
 
-        <!-- Icono WhatsApp SVG -->
-        <svg class="w-7 h-7 fill-current" viewBox="0 0 24 24">
-          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+        <!-- Icono Chat / Cerrar -->
+        <svg v-if="!floatingChatOpen" class="w-7 h-7 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+        <svg v-else class="w-7 h-7 fill-none stroke-current stroke-2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>
 
@@ -2278,6 +2541,12 @@
   
   <!-- Configuración del Asesor & Pixels -->
   <script src="assets/js/config.js"></script>
+  
+  <!-- Base de Conocimiento Oficial Immunotec -->
+  <script src="assets/js/knowledge-base.js"></script>
+  
+  <!-- Motor de Chatbot Autónomo con Gemini & Derivación a WhatsApp -->
+  <script src="assets/js/gemini-bot.js"></script>
   
   <!-- Lógica Reactiva de la Aplicación -->
   <script src="assets/js/app.js"></script>

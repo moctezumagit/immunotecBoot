@@ -734,6 +734,168 @@ const app = createApp({
     const floatingChatOpen = ref(false);
     const unreadMessagesCount = ref(1);
 
+    // =========================================================================
+    // INTEGRACIÓN DEL CHATBOT AUTÓNOMO CON GOOGLE GEMINI
+    // =========================================================================
+    const geminiChat = reactive({
+      isThinking: false,
+      apiKeyModalOpen: false,
+      apiKeyInput: '',
+      apiKeyStatus: '', // 'testing' | 'valid' | 'invalid'
+      apiKeyStatusMessage: '',
+      showKey: false,
+      inputText: '',
+      hasKey: false
+    });
+
+    const defaultWelcomeBotMessage = {
+      id: 'welcome-1',
+      role: 'assistant',
+      text: '¡Hola! 👋 Soy **Sofía**, tu Asesora Virtual Especialista en Bienestar Celular de **Equilibrio y Bienestar** (Asesores Oficiales de Immunotec).\n\nEstoy lista para orientarte sobre cómo blindar tus defensas, elevar tu energía celular y recomendarte la fórmula ideal de Immunotec.\n\n¿En qué te gustaría que te apoye hoy?',
+      time: 'En línea',
+      advisorCard: null
+    };
+
+    const botMessages = ref([defaultWelcomeBotMessage]);
+
+    const botQuickChips = [
+      { label: '🛡️ ¿Qué es el Glutatión?', query: '¿Qué es el Glutatión y por qué las pastillas normales no funcionan?' },
+      { label: '⚖️ Regular vs Platinum', query: '¿Cuál es la diferencia entre Immunocal Regular e Immunocal Platinum y cuál me recomiendas?' },
+      { label: '🥤 ¿Cómo se prepara?', query: '¿Cómo se prepara correctamente Immunocal para no alterar sus propiedades?' },
+      { label: '📦 Precios con Descuento', query: 'Quiero conocer los paquetes oficiales con descuento y cómo hacer mi pedido con un asesor.' },
+      { label: '🏃 Para Deportistas', query: '¿Qué beneficios ofrece Immunocal para deportistas o personas que van al gimnasio?' },
+      { label: '👨‍⚕️ ¿Contraindicaciones?', query: '¿Immunocal tiene contraindicaciones, efectos secundarios o lactosa?' }
+    ];
+
+    const scrollToChatBottom = () => {
+      setTimeout(() => {
+        const el = document.getElementById('chatMessagesScroll');
+        if (el) {
+          el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+        }
+      }, 100);
+    };
+
+    const formatMarkdown = (text) => {
+      if (!text) return '';
+      let escaped = String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+      escaped = escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+      escaped = escaped.replace(/\*(.*?)\*/g, '<em>$1</em>');
+      escaped = escaped.replace(/(?:^|\n)[*-]\s+(.+)/g, '<li class="ml-3 list-disc my-0.5">$1</li>');
+      escaped = escaped.replace(/\n\n/g, '<div class="h-2"></div>');
+      escaped = escaped.replace(/\n/g, '<br/>');
+      return escaped;
+    };
+
+    const toggleFloatingChat = () => {
+      floatingChatOpen.value = !floatingChatOpen.value;
+      unreadMessagesCount.value = 0;
+      if (floatingChatOpen.value) {
+        scrollToChatBottom();
+      }
+    };
+
+    const openApiKeyModal = () => {
+      geminiChat.apiKeyModalOpen = true;
+      geminiChat.apiKeyInput = (window.geminiSalesBot && window.geminiSalesBot.loadApiKey()) || '';
+      geminiChat.apiKeyStatus = '';
+      geminiChat.apiKeyStatusMessage = '';
+    };
+
+    const closeApiKeyModal = () => {
+      geminiChat.apiKeyModalOpen = false;
+    };
+
+    const saveAndTestApiKey = async () => {
+      const key = (geminiChat.apiKeyInput || '').trim();
+      if (!key) {
+        geminiChat.apiKeyStatus = 'invalid';
+        geminiChat.apiKeyStatusMessage = 'Por favor ingresa tu clave de API de Gemini.';
+        return;
+      }
+      geminiChat.apiKeyStatus = 'testing';
+      geminiChat.apiKeyStatusMessage = 'Validando conexión con Google Gemini...';
+
+      try {
+        if (window.geminiSalesBot) {
+          await window.geminiSalesBot.testApiKey(key);
+          window.geminiSalesBot.setApiKey(key);
+        }
+        geminiChat.hasKey = true;
+        geminiChat.apiKeyStatus = 'valid';
+        geminiChat.apiKeyStatusMessage = '¡Clave validada con éxito! El asistente IA está listo para responder.';
+        setTimeout(() => {
+          geminiChat.apiKeyModalOpen = false;
+        }, 1200);
+      } catch (err) {
+        geminiChat.apiKeyStatus = 'invalid';
+        geminiChat.apiKeyStatusMessage = `Error al validar: ${err.message}`;
+      }
+    };
+
+    const sendBotMessage = async (customText = null) => {
+      const textToSend = customText || geminiChat.inputText;
+      if (!textToSend || !textToSend.trim()) return;
+
+      if (!window.geminiSalesBot || !window.geminiSalesBot.hasApiKey()) {
+        openApiKeyModal();
+        return;
+      }
+
+      geminiChat.inputText = '';
+      geminiChat.isThinking = true;
+
+      // Si sólo teníamos el de bienvenida, sincronizamos
+      if (botMessages.value.length === 1 && botMessages.value[0].id === 'welcome-1') {
+        window.geminiSalesBot.history = [botMessages.value[0]];
+      }
+
+      botMessages.value.push({
+        id: Date.now(),
+        role: 'user',
+        text: textToSend.trim(),
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        advisorCard: null
+      });
+      scrollToChatBottom();
+
+      try {
+        const responseObj = await window.geminiSalesBot.sendMessage(textToSend.trim());
+        if (responseObj) {
+          botMessages.value.push(responseObj);
+        }
+      } catch (err) {
+        console.error('[Chatbot Error]:', err);
+        if (err.message === 'API_KEY_REQUIRED') {
+          openApiKeyModal();
+        } else {
+          botMessages.value.push({
+            id: Date.now() + 1,
+            role: 'assistant',
+            text: `⚠️ Detalle de conexión: ${err.message}. Puedes revisar tu clave en ⚙️ o contactar directamente a uno de nuestros asesores oficiales en WhatsApp.`,
+            time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            advisorCard: window.geminiSalesBot ? window.geminiSalesBot.buildAdvisorCard(advisors.value[0], 'Immunocal', 'Consulta directa') : null
+          });
+        }
+      } finally {
+        geminiChat.isThinking = false;
+        scrollToChatBottom();
+      }
+    };
+
+    const clearChatHistory = () => {
+      if (confirm('¿Deseas reiniciar la conversación con Sofía?')) {
+        if (window.geminiSalesBot) {
+          window.geminiSalesBot.clearChat();
+        }
+        botMessages.value = [defaultWelcomeBotMessage];
+        scrollToChatBottom();
+      }
+    };
+
     // Detección de parámetros de campaña (UTM) desde Redes Sociales
     const utmParams = reactive({
       source: '',
@@ -1090,6 +1252,15 @@ const app = createApp({
         if (found) form.goal = found.label;
       }
 
+      // Inicialización de estado de Gemini Bot
+      if (window.geminiSalesBot) {
+        geminiChat.hasKey = window.geminiSalesBot.hasApiKey();
+        const hasStored = window.geminiSalesBot.loadStoredHistory();
+        if (hasStored && window.geminiSalesBot.history.length > 0) {
+          botMessages.value = [...window.geminiSalesBot.history];
+        }
+      }
+
       console.log('Landing Immunotec inicializada. Origen detectado:', utmParams.source);
     });
 
@@ -1146,7 +1317,18 @@ const app = createApp({
       selectOptionA_ProximaHora,
       selectOptionB_HoyDia,
       selectOptionC_ElegirFecha,
-      submitBookingFunnel
+      submitBookingFunnel,
+      // Chatbot Inteligente con Gemini
+      geminiChat,
+      botMessages,
+      botQuickChips,
+      toggleFloatingChat,
+      openApiKeyModal,
+      closeApiKeyModal,
+      saveAndTestApiKey,
+      sendBotMessage,
+      clearChatHistory,
+      formatMarkdown
     };
   }
 });
