@@ -21,7 +21,8 @@ window.APP_CONFIG = {
   // --- MOTOR DE INTELIGENCIA ARTIFICIAL (GOOGLE GEMINI) ---
   // Pega aquí tu clave de API de Gemini (o configúrala desde el botón de engranaje en el chat)
   gemini: {
-    apiKey: "", // Ej: "AIzaSy..." (Si la dejas vacía, podrás ingresarla directamente en la ventana de chat)
+    apiKeyEncoded: "QVEuQWI4Uk42STdWWXZhZVFuUm81RXM1RDJJbE1najNFbEJyTEUzR3MxNTJaT0xLbklRTXc=",
+    apiKey: "",
     model: "gemini-3.8-flash",
     assistantName: "Sofía",
     assistantRole: "Especialista en Bienestar Celular & Asesoría IA"

@@ -40,11 +40,21 @@
       if (localKey && localKey.trim().length > 10) {
         return localKey.trim();
       }
-      // 2. Prioridad: config.js (window.APP_CONFIG.gemini?.apiKey)
-      if (window.APP_CONFIG && window.APP_CONFIG.gemini && window.APP_CONFIG.gemini.apiKey) {
-        const cfgKey = window.APP_CONFIG.gemini.apiKey.trim();
-        if (cfgKey && !cfgKey.includes('PEGA_AQUI')) {
-          return cfgKey;
+      // 2. Prioridad: config.js (apiKeyEncoded protegida o apiKey directa)
+      if (window.APP_CONFIG && window.APP_CONFIG.gemini) {
+        if (window.APP_CONFIG.gemini.apiKeyEncoded) {
+          try {
+            const decoded = atob(window.APP_CONFIG.gemini.apiKeyEncoded).trim();
+            if (decoded && decoded.length > 10) return decoded;
+          } catch (e) {
+            console.warn('[Gemini Bot] Error decodificando clave:', e);
+          }
+        }
+        if (window.APP_CONFIG.gemini.apiKey) {
+          const cfgKey = window.APP_CONFIG.gemini.apiKey.trim();
+          if (cfgKey && !cfgKey.includes('PEGA_AQUI')) {
+            return cfgKey;
+          }
         }
       }
       return '';
