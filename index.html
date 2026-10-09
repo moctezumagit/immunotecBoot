@@ -476,14 +476,15 @@
                    ======================================================== -->
               <div v-if="videoFunnel.isOpen" 
                    class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-slate-950/90 backdrop-blur-md overflow-y-auto animate-fade-in"
-                   @click.self="closeVideoFunnelModal">
+                   @click.self="canCloseFunnelModal ? closeVideoFunnelModal() : null">
                 
                 <!-- Contenedor del Modal -->
                 <div class="relative w-full max-w-2xl bg-black rounded-3xl overflow-hidden shadow-2xl border border-slate-700/80 my-auto flex flex-col text-white">
                   
-                  <!-- Botón Discreto para Cerrar Ventana Emergente -->
-                  <button type="button" 
-                          @click="closeVideoFunnelModal"
+                  <!-- Botón Discreto para Cerrar Ventana Emergente (Solo visible cuando se permite cerrar el flujo) -->
+                  <button v-if="canCloseFunnelModal"
+                          type="button" 
+                          @click="closeVideoFunnelModal()"
                           aria-label="Cerrar video"
                           title="Cerrar y ver la página"
                           class="absolute top-3 right-3 z-30 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-slate-300 hover:text-white flex items-center justify-center border border-white/20 transition-all cursor-pointer backdrop-blur-xs">
@@ -571,12 +572,9 @@
                         </button>
                       </div>
 
-                      <div class="mt-3 flex items-center justify-between text-xs text-slate-400">
+                      <div class="mt-3 flex items-center justify-center text-xs text-slate-400">
                         <button type="button" @click="replayCurrentFunnelVideo" class="underline text-slate-400 hover:text-white cursor-pointer">
                           ↺ Volver a ver este video
-                        </button>
-                        <button type="button" @click="closeVideoFunnelModal" class="underline text-slate-400 hover:text-white cursor-pointer">
-                          Continuar a la página
                         </button>
                       </div>
                     </div>
@@ -643,12 +641,9 @@
                           </div>
                         </div>
 
-                        <div class="flex items-center justify-between text-xs text-slate-400 pt-1 border-t border-slate-800/80">
+                        <div class="flex items-center justify-center text-xs text-slate-400 pt-1 border-t border-slate-800/80">
                           <button type="button" @click="replayCurrentFunnelVideo" class="underline text-slate-400 hover:text-white cursor-pointer">
                             ↺ Volver a ver este video
-                          </button>
-                          <button type="button" @click="closeVideoFunnelModal" class="underline text-slate-400 hover:text-white cursor-pointer">
-                            Cerrar y continuar a la página
                           </button>
                         </div>
                       </div>
@@ -679,14 +674,41 @@
                           </button>
                         </div>
 
-                        <div class="mb-3.5">
-                          <span class="text-[11px] font-bold uppercase tracking-wider text-blue-400 flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
-                            <span>Paso Final • Agenda y Contacto con Especialista</span>
-                          </span>
-                          <h3 class="text-lg sm:text-xl font-black text-white mt-1">¿Cuándo prefieres que hablemos?</h3>
-                          <p class="text-xs sm:text-sm text-slate-300 mt-0.5">Elige tu alternativa preferida para recibir tu orientación personalizada con {{ selectedAdvisor.name }}:</p>
+                        <!-- PANTALLA DE CONFIRMACIÓN PARA OPCIÓN A (INMEDIATO) -->
+                        <div v-if="videoFunnel.immediateSubmitted" class="py-4 text-center animate-fade-in">
+                          <div class="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center mx-auto mb-2 text-2xl font-bold">
+                            ✓
+                          </div>
+                          <h4 class="text-base sm:text-lg font-black text-white">¡Mensaje enviado con éxito!</h4>
+                          <p class="text-xs sm:text-sm text-slate-300 mt-1 max-w-md mx-auto leading-relaxed">
+                            Tu solicitud ya fue enviada con éxito. Tu asesor seleccionado, <strong class="text-emerald-300 font-bold">{{ selectedAdvisor.name }}</strong>, se contactará contigo dentro de la siguiente hora.
+                          </p>
+
+                          <div class="mt-4 flex flex-wrap items-center justify-center gap-2.5">
+                            <a :href="videoFunnel.whatsappImmediateUrl"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 flex items-center gap-2 shadow-md hover:shadow-lg transition-all cursor-pointer">
+                              <span>💬 Abrir chat con {{ selectedAdvisor.name }}</span>
+                            </a>
+                            <button type="button"
+                                    @click="closeVideoFunnelModal(true)"
+                                    class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-slate-800 hover:bg-slate-700 border border-slate-600 flex items-center gap-2 shadow-md transition-all cursor-pointer">
+                              <span>✓ Cerrar video y continuar</span>
+                            </button>
+                          </div>
                         </div>
+
+                        <!-- CUANDO NO SE HA ENVIADO EN INMEDIATO: MOSTRAR OPCIONES DE AGENDA -->
+                        <div v-else>
+                          <div class="mb-3.5">
+                            <span class="text-[11px] font-bold uppercase tracking-wider text-blue-400 flex items-center gap-1.5">
+                              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>
+                              <span>Paso Final • Agenda y Contacto con Especialista</span>
+                            </span>
+                            <h3 class="text-lg sm:text-xl font-black text-white mt-1">¿Cuándo prefieres que hablemos?</h3>
+                            <p class="text-xs sm:text-sm text-slate-300 mt-0.5">Elige tu alternativa preferida para recibir tu orientación personalizada con {{ selectedAdvisor.name }}:</p>
+                          </div>
 
                         <!-- Opciones A, B, C -->
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
@@ -837,12 +859,18 @@
                                class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 flex items-center gap-2 shadow-md hover:shadow-lg transition-all">
                               <span>💬 Confirmar por WhatsApp con {{ selectedAdvisor.name }}</span>
                             </a>
+                            <button type="button"
+                                    @click="closeVideoFunnelModal(true)"
+                                    class="px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold text-white bg-slate-800 hover:bg-slate-700 border border-slate-600 flex items-center gap-2 shadow-md transition-all cursor-pointer">
+                              <span>✓ Cerrar video y continuar</span>
+                            </button>
                           </div>
                         </div>
 
                       </div>
                     </div>
                   </div>
+                </div>
 
                     <!-- PASO 5: DESCALIFICACIÓN Y DESPEDIDA CORDIAL (M5) -->
                     <div v-if="videoFunnel.currentStep === 5" class="text-center">
@@ -865,8 +893,8 @@
                         <button @click="restartFunnel" type="button" class="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-slate-800 hover:bg-slate-700 border border-slate-600 inline-flex items-center gap-2 cursor-pointer transition-colors shadow-sm">
                           <span>↺ Volver a iniciar el video interactivo</span>
                         </button>
-                        <button @click="closeVideoFunnelModal" type="button" class="px-5 py-2.5 rounded-xl text-xs font-bold text-emerald-400 hover:text-emerald-300 underline cursor-pointer">
-                          Continuar a la página
+                        <button @click="closeVideoFunnelModal(true)" type="button" class="px-5 py-2.5 rounded-xl text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-500 rounded-xl flex items-center gap-1.5 cursor-pointer shadow-md transition-all">
+                          <span>✓ Cerrar video y ver la página</span>
                         </button>
                       </div>
                     </div>

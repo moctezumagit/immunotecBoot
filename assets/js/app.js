@@ -221,6 +221,8 @@ const app = createApp({
       selectedSlotOption: null, // 'proxima_hora' | 'hoy_dia' | 'elegir_fecha'
       advisorSelectedInFunnel: false, // Controla si ya se seleccionó el asesor en el Paso 4 antes de agendar
       bookingSubmitted: false,
+      immediateSubmitted: false, // Controla si ya se envió la solicitud inmediata (Opción A)
+      whatsappImmediateUrl: '',
       calendarUrl: '',
       whatsappBookingUrl: '',
       bookingForm: {
@@ -248,9 +250,10 @@ const app = createApp({
       videoFunnel.hasEnded = false;
       videoFunnel.autoplayBlocked = false;
       videoFunnel.advisorSelectedInFunnel = false;
+      videoFunnel.bookingSubmitted = false;
+      videoFunnel.immediateSubmitted = false;
       if (stepNumber !== 4) {
         videoFunnel.selectedSlotOption = null;
-        videoFunnel.bookingSubmitted = false;
       }
 
       setTimeout(() => {
@@ -297,6 +300,7 @@ const app = createApp({
       videoFunnel.selectedSlotOption = null;
       videoFunnel.advisorSelectedInFunnel = false;
       videoFunnel.bookingSubmitted = false;
+      videoFunnel.immediateSubmitted = false;
       videoFunnel.bookingErrors.name = '';
       videoFunnel.bookingErrors.phone = '';
       playFunnelStep(1);
@@ -356,6 +360,9 @@ const app = createApp({
       const activeAdv = selectedAdvisor.value || advisors.value[0];
       const customMessage = `¡Hola ${activeAdv.name}! Acabo de ver el video interactivo de Immunotec y solicito una llamada en la próxima hora para revisar mi plan y orientación personalizada.`;
       
+      const waUrl = getAdvisorWhatsAppUrl(activeAdv, customMessage);
+      videoFunnel.whatsappImmediateUrl = waUrl;
+
       // Enviar registro asíncrono a Google Sheets
       sendToGoogleSheets({
         name: 'Interesado en llamada urgente',
@@ -375,14 +382,13 @@ const app = createApp({
         advisor: activeAdv.name
       });
 
-      const waUrl = getAdvisorWhatsAppUrl(activeAdv, customMessage);
+      // Se marca como enviado para mostrar pantalla de confirmación y permitir cerrar el video
+      videoFunnel.immediateSubmitted = true;
+
       try {
-        const win = window.open(waUrl, '_blank');
-        if (!win || win.closed || typeof win.closed === 'undefined') {
-          window.location.href = waUrl;
-        }
+        window.open(waUrl, '_blank');
       } catch (e) {
-        window.location.href = waUrl;
+        console.warn('Popup blocked:', e);
       }
     };
 
@@ -489,6 +495,17 @@ const app = createApp({
       }
     };
 
+    // Control estricto de cierre del modal del video interactivo:
+    // Solo permitido cuando:
+    // 1. Llega al Paso 5 (seleccionó "No" en alguna pregunta -> Descalificación / Gracias por tu sinceridad)
+    // 2. En Paso 4 se envió la solicitud inmediata (Opción A -> Mensaje enviado con éxito)
+    // 3. En Paso 4 se agendó cita (Opción B / C -> Cita registrada con éxito)
+    const canCloseFunnelModal = computed(() => {
+      if (videoFunnel.currentStep === 5) return true;
+      if (videoFunnel.currentStep === 4 && (videoFunnel.bookingSubmitted || videoFunnel.immediateSubmitted)) return true;
+      return false;
+    });
+
     // Control de la Ventana Emergente (Modal) del Video Interactivo
     const openVideoFunnelModal = (step = null) => {
       videoFunnel.isOpen = true;
@@ -496,7 +513,11 @@ const app = createApp({
       playFunnelStep(targetStep);
     };
 
-    const closeVideoFunnelModal = () => {
+    const closeVideoFunnelModal = (force = false) => {
+      if (!force && !canCloseFunnelModal.value) {
+        console.log('[Video Funnel] Cierre bloqueado: el usuario debe completar el flujo');
+        return;
+      }
       videoFunnel.isOpen = false;
       const vid = document.getElementById('funnelVideoPlayer');
       if (vid) {
@@ -513,7 +534,7 @@ const app = createApp({
       if (section === 'especialista') {
         openVideoFunnelModal();
       } else if (section === 'comprar') {
-        closeVideoFunnelModal();
+        closeVideoFunnelModal(true);
       }
     };
 
@@ -1197,7 +1218,8 @@ const app = createApp({
       selectOptionB_HoyDia,
       selectOptionC_ElegirFecha,
       submitBookingFunnel,
-      chooseAdvisorInFunnel
+      chooseAdvisorInFunnel,
+      canCloseFunnelModal
     };
   }
 });
