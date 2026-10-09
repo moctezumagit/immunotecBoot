@@ -212,6 +212,7 @@ const app = createApp({
     };
 
     const videoFunnel = reactive({
+      isOpen: false, // Controla la visibilidad de la ventana emergente al entrar y al hacer clic
       currentStep: 1,
       isPlaying: false,
       isPausedForAnswer: false,
@@ -313,8 +314,15 @@ const app = createApp({
 
     const onFunnelVideoEnded = () => {
       videoFunnel.isPlaying = false;
-      videoFunnel.isPausedForAnswer = true;
       videoFunnel.hasEnded = true;
+      videoFunnel.isPausedForAnswer = true;
+      // Desplazamiento suave para visibilidad de la pregunta en pantallas móviles
+      setTimeout(() => {
+        const qBox = document.getElementById('funnelQuestionContainer');
+        if (qBox) {
+          qBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, 150);
     };
 
     const onFunnelVideoPlay = () => {
@@ -324,7 +332,6 @@ const app = createApp({
 
     const onFunnelVideoPause = () => {
       videoFunnel.isPlaying = false;
-      videoFunnel.isPausedForAnswer = true;
     };
 
     // Opción A: En la próxima hora
@@ -452,6 +459,21 @@ const app = createApp({
       }
     };
 
+    // Control de la Ventana Emergente (Modal) del Video Interactivo
+    const openVideoFunnelModal = (step = null) => {
+      videoFunnel.isOpen = true;
+      const targetStep = step || videoFunnel.currentStep || 1;
+      playFunnelStep(targetStep);
+    };
+
+    const closeVideoFunnelModal = () => {
+      videoFunnel.isOpen = false;
+      const vid = document.getElementById('funnelVideoPlayer');
+      if (vid) {
+        vid.pause();
+      }
+    };
+
     // Estado del selector principal en Hero ("Quiero Comprar" vs "Hablar con Especialista")
     const heroActiveSection = ref(null);
 
@@ -459,18 +481,9 @@ const app = createApp({
       heroActiveSection.value = section;
 
       if (section === 'especialista') {
-        setTimeout(() => {
-          const el = document.getElementById('videoFunnelContainer');
-          if (el) {
-            el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }
-          playFunnelStep(videoFunnel.currentStep || 1);
-        }, 150);
+        openVideoFunnelModal();
       } else if (section === 'comprar') {
-        const vid = document.getElementById('funnelVideoPlayer');
-        if (vid) {
-          vid.pause();
-        }
+        closeVideoFunnelModal();
       }
     };
 
@@ -1091,6 +1104,11 @@ const app = createApp({
       }
 
       console.log('Landing Immunotec inicializada. Origen detectado:', utmParams.source);
+
+      // Mostrar video interactivo automáticamente como ventana emergente al entrar a la página
+      setTimeout(() => {
+        openVideoFunnelModal(1);
+      }, 400);
     });
 
     return {
@@ -1136,6 +1154,8 @@ const app = createApp({
       funnelSteps,
       videoFunnel,
       currentFunnelStepData,
+      openVideoFunnelModal,
+      closeVideoFunnelModal,
       playFunnelStep,
       answerFunnelQuestion,
       restartFunnel,
