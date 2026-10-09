@@ -1,0 +1,24 @@
+{
+  "name": "immunotec-whatsapp-ai-agent",
+  "version": "1.0.0",
+  "description": "Agente autónomo de WhatsApp conectado a Google Gemini y Base de Conocimiento Immunotec vía WhatsApp Cloud API",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [
+    "whatsapp",
+    "gemini",
+    "bot",
+    "immunotec",
+    "meta-cloud-api"
+  ],
+  "author": "Equilibrio y Bienestar",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^1.7.9",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2"
+  }
+}
