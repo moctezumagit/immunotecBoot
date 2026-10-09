@@ -219,6 +219,7 @@ const app = createApp({
       hasEnded: false,
       autoplayBlocked: false,
       selectedSlotOption: null, // 'proxima_hora' | 'hoy_dia' | 'elegir_fecha'
+      advisorSelectedInFunnel: false, // Controla si ya se seleccionó el asesor en el Paso 4 antes de agendar
       bookingSubmitted: false,
       calendarUrl: '',
       whatsappBookingUrl: '',
@@ -246,6 +247,7 @@ const app = createApp({
       videoFunnel.isPausedForAnswer = false;
       videoFunnel.hasEnded = false;
       videoFunnel.autoplayBlocked = false;
+      videoFunnel.advisorSelectedInFunnel = false;
       if (stepNumber !== 4) {
         videoFunnel.selectedSlotOption = null;
         videoFunnel.bookingSubmitted = false;
@@ -293,6 +295,7 @@ const app = createApp({
     const restartFunnel = () => {
       videoFunnel.currentStep = 1;
       videoFunnel.selectedSlotOption = null;
+      videoFunnel.advisorSelectedInFunnel = false;
       videoFunnel.bookingSubmitted = false;
       videoFunnel.bookingErrors.name = '';
       videoFunnel.bookingErrors.phone = '';
@@ -334,29 +337,53 @@ const app = createApp({
       videoFunnel.isPlaying = false;
     };
 
-    // Opción A: En la próxima hora
+    // Selección de asesor dentro del embudo interactivo (Paso 4 previo al agendamiento)
+    const chooseAdvisorInFunnel = (adv) => {
+      selectAdvisor(adv);
+      videoFunnel.advisorSelectedInFunnel = true;
+      setTimeout(() => {
+        const agendaBox = document.getElementById('funnelAgendaSection');
+        if (agendaBox) {
+          agendaBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, 100);
+    };
+
+    // Opción A: En la próxima hora (conecta directo con el asesor seleccionado)
     const selectOptionA_ProximaHora = () => {
       videoFunnel.selectedSlotOption = 'proxima_hora';
       
-      const customMessage = `¡Hola! Acabo de ver el video interactivo de Immunotec y solicito una llamada en la próxima hora para revisar mi plan y orientación personalizada.`;
+      const activeAdv = selectedAdvisor.value || advisors.value[0];
+      const customMessage = `¡Hola ${activeAdv.name}! Acabo de ver el video interactivo de Immunotec y solicito una llamada en la próxima hora para revisar mi plan y orientación personalizada.`;
       
       // Enviar registro asíncrono a Google Sheets
       sendToGoogleSheets({
         name: 'Interesado en llamada urgente',
         phone: '',
         email: '',
-        goal: 'Llamada urgente en la próxima hora',
-        message: 'Solicitud inmediata generada desde Opción A del embudo interactivo (M4)',
-        source: 'Video Funnel M4 - Próxima Hora',
+        advisor: activeAdv.name,
+        advisorPhone: activeAdv.phone,
+        goal: `Llamada urgente en la próxima hora con ${activeAdv.name}`,
+        message: `Solicitud inmediata generada desde Opción A del embudo interactivo (M4) con ${activeAdv.name}`,
+        source: `Video Funnel M4 - Próxima Hora (${activeAdv.name})`,
         submittedAt: new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })
       });
       
       triggerPixelEvent('Lead', {
-        content_name: 'Video Funnel: Llamada próxima hora',
-        channel: 'WhatsApp'
+        content_name: `Video Funnel: Llamada próxima hora con ${activeAdv.name}`,
+        channel: 'WhatsApp',
+        advisor: activeAdv.name
       });
 
-      openWhatsApp(customMessage);
+      const waUrl = getAdvisorWhatsAppUrl(activeAdv, customMessage);
+      try {
+        const win = window.open(waUrl, '_blank');
+        if (!win || win.closed || typeof win.closed === 'undefined') {
+          window.location.href = waUrl;
+        }
+      } catch (e) {
+        window.location.href = waUrl;
+      }
     };
 
     // Opción B: Hoy durante el día
@@ -389,7 +416,7 @@ const app = createApp({
       }
     };
 
-    // Confirmación y envío del formulario de reserva (Opciones B y C)
+    // Confirmación y envío del formulario de reserva (Opciones B y C con el asesor seleccionado)
     const submitBookingFunnel = async () => {
       videoFunnel.bookingErrors.name = '';
       videoFunnel.bookingErrors.phone = '';
@@ -403,6 +430,7 @@ const app = createApp({
         return;
       }
 
+      const activeAdv = selectedAdvisor.value || advisors.value[0];
       const isHoy = videoFunnel.selectedSlotOption === 'hoy_dia';
       const slotText = isHoy ? videoFunnel.bookingForm.timeSlot : `${videoFunnel.bookingForm.date} a las ${videoFunnel.bookingForm.time} hrs`;
 
@@ -416,8 +444,8 @@ const app = createApp({
         else timeForCalendar = '18:00';
       }
 
-      const eventTitle = `Orientación Immunotec - ${videoFunnel.bookingForm.name.trim()}`;
-      const eventDetails = `Cita de orientación 1 a 1 de bienestar celular con especialista Immunotec.\nCliente: ${videoFunnel.bookingForm.name.trim()}\nWhatsApp: ${videoFunnel.bookingForm.phone.trim()}\nHorario seleccionado: ${slotText}`;
+      const eventTitle = `Orientación Immunotec con ${activeAdv.name} - ${videoFunnel.bookingForm.name.trim()}`;
+      const eventDetails = `Cita de orientación 1 a 1 de bienestar celular con ${activeAdv.name} (${activeAdv.phoneDisplay}).\nCliente: ${videoFunnel.bookingForm.name.trim()}\nWhatsApp: ${videoFunnel.bookingForm.phone.trim()}\nHorario seleccionado: ${slotText}`;
 
       const calUrl = createGoogleCalendarUrl({
         title: eventTitle,
@@ -427,26 +455,28 @@ const app = createApp({
       });
       videoFunnel.calendarUrl = calUrl;
 
-      // Mensaje para confirmar por WhatsApp
-      const waMessage = `¡Hola! Acabo de registrar mi cita en el video interactivo de Immunotec.\n\n👤 *Nombre:* ${videoFunnel.bookingForm.name.trim()}\n📱 *WhatsApp:* ${videoFunnel.bookingForm.phone.trim()}\n📅 *Horario preferido:* ${slotText}\n\nQuedo a la espera de la llamada para mi orientación.`;
+      // Mensaje para confirmar por WhatsApp directamente al asesor seleccionado
+      const waMessage = `¡Hola ${activeAdv.name}! Acabo de registrar mi cita en el video interactivo de Immunotec.\n\n👤 *Nombre:* ${videoFunnel.bookingForm.name.trim()}\n📱 *WhatsApp:* ${videoFunnel.bookingForm.phone.trim()}\n📅 *Horario preferido:* ${slotText}\n\nQuedo a la espera de la llamada para mi orientación con usted.`;
       
-      const activeAdv = selectedAdvisor.value || advisors.value[0];
       videoFunnel.whatsappBookingUrl = getAdvisorWhatsAppUrl(activeAdv, waMessage);
 
-      // Guardar en Google Sheets (Hoja de cálculo en la nube)
+      // Guardar en Google Sheets (Hoja de cálculo en la nube con el asesor asignado)
       await sendToGoogleSheets({
         name: videoFunnel.bookingForm.name.trim(),
         phone: videoFunnel.bookingForm.phone.trim(),
         email: '',
-        goal: `Cita Video Funnel: ${slotText}`,
-        message: `Cliente agendó desde Embudo Interactivo M4 (${videoFunnel.selectedSlotOption}). Horario: ${slotText}. Notas: ${videoFunnel.bookingForm.notes || 'Ninguna'}`,
-        source: 'Video Interactivo Funnel',
+        advisor: activeAdv.name,
+        advisorPhone: activeAdv.phone,
+        goal: `Cita con ${activeAdv.name}: ${slotText}`,
+        message: `Cliente agendó desde Embudo Interactivo M4 (${videoFunnel.selectedSlotOption}) con ${activeAdv.name}. Horario: ${slotText}. Notas: ${videoFunnel.bookingForm.notes || 'Ninguna'}`,
+        source: `Video Interactivo Funnel (${activeAdv.name})`,
         submittedAt: new Date().toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })
       });
 
       triggerPixelEvent('Schedule', {
-        content_name: `Cita Video Funnel: ${slotText}`,
-        user_name: videoFunnel.bookingForm.name.trim()
+        content_name: `Cita Video Funnel con ${activeAdv.name}: ${slotText}`,
+        user_name: videoFunnel.bookingForm.name.trim(),
+        advisor: activeAdv.name
       });
 
       videoFunnel.bookingSubmitted = true;
@@ -1166,7 +1196,8 @@ const app = createApp({
       selectOptionA_ProximaHora,
       selectOptionB_HoyDia,
       selectOptionC_ElegirFecha,
-      submitBookingFunnel
+      submitBookingFunnel,
+      chooseAdvisorInFunnel
     };
   }
 });
