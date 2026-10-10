@@ -13,3 +13,6 @@ Thumbs.db
 *.sw?
 *.code-workspace
 serve.ps1
+.env
+whatsapp-agent/.env
+node_modules/

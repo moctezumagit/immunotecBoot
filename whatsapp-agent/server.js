@@ -52,7 +52,7 @@ ESTRATEGIA DE VENTAS EN WHATSAPP:
  * 1. VERIFICACIÓN DEL WEBHOOK DE META (MÉTODO GET)
  * Meta envía este reto cuando registras la URL en el panel de desarrolladores.
  */
-app.get('/webhook', (req) => {
+app.get('/webhook', (req, res) => {
   const mode = req.query['hub.mode'];
   const token = req.query['hub.verify_token'];
   const challenge = req.query['hub.challenge'];
