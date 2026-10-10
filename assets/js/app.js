@@ -212,9 +212,10 @@ const app = createApp({
     };
 
     const videoFunnel = reactive({
-      isOpen: false, // Controla la visibilidad de la ventana emergente al entrar y al hacer clic
+      isOpen: true, // Abierto por defecto para que aparezca de inmediato al ingresar
       currentStep: 1,
       isPlaying: false,
+      isMuted: true, // Inicia silenciado para garantizar 100% de éxito en autoplay en cualquier navegador
       isPausedForAnswer: false,
       hasEnded: false,
       autoplayBlocked: false,
@@ -243,7 +244,7 @@ const app = createApp({
       return funnelSteps[videoFunnel.currentStep] || funnelSteps[1];
     });
 
-    // Control de reproducción del video interactivo
+    // Control de reproducción del video interactivo con soporte de Autoplay garantizado
     const playFunnelStep = (stepNumber) => {
       videoFunnel.currentStep = stepNumber;
       videoFunnel.isPausedForAnswer = false;
@@ -256,28 +257,87 @@ const app = createApp({
         videoFunnel.selectedSlotOption = null;
       }
 
-      setTimeout(() => {
+      const attemptPlay = (retries = 0) => {
         const vid = document.getElementById('funnelVideoPlayer');
-        if (vid) {
-          const stepData = funnelSteps[stepNumber];
-          if (stepData && !vid.src.includes(stepData.videoSrc)) {
-            vid.src = stepData.videoSrc;
-            vid.load();
+        if (!vid) {
+          if (retries < 20) {
+            setTimeout(() => attemptPlay(retries + 1), 50);
           }
-          vid.currentTime = 0;
+          return;
+        }
+
+        const stepData = funnelSteps[stepNumber];
+        if (stepData && !vid.src.includes(stepData.videoSrc)) {
+          vid.src = stepData.videoSrc;
+          vid.load();
+        }
+        vid.currentTime = 0;
+
+        // Si el usuario ya activó el sonido previamente, intentar reproducir con audio
+        if (!videoFunnel.isMuted) {
+          vid.muted = false;
+          const playPromise = vid.play();
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              videoFunnel.isPlaying = true;
+              videoFunnel.isMuted = false;
+              videoFunnel.autoplayBlocked = false;
+            }).catch((err) => {
+              console.log('[Video Funnel] Audio restringido en paso, iniciando en modo silenciado:', err);
+              vid.muted = true;
+              videoFunnel.isMuted = true;
+              vid.play().then(() => {
+                videoFunnel.isPlaying = true;
+                videoFunnel.autoplayBlocked = false;
+              }).catch(() => {
+                videoFunnel.autoplayBlocked = true;
+                videoFunnel.isPlaying = false;
+              });
+            });
+          }
+        } else {
+          // Modo silenciado inicial: permitido al 100% por todos los navegadores móviles y desktop
+          vid.muted = true;
+          videoFunnel.isMuted = true;
           const playPromise = vid.play();
           if (playPromise !== undefined) {
             playPromise.then(() => {
               videoFunnel.isPlaying = true;
               videoFunnel.autoplayBlocked = false;
             }).catch((err) => {
-              console.log('[Video Funnel] Autoplay pausado o bloqueado por navegador:', err);
+              console.warn('[Video Funnel] Autoplay silenciado bloqueado por navegador:', err);
               videoFunnel.autoplayBlocked = true;
               videoFunnel.isPlaying = false;
             });
           }
         }
-      }, 100);
+      };
+
+      setTimeout(() => attemptPlay(0), 50);
+    };
+
+    // Activar sonido con un solo toque (reinicio suave al inicio si apenas comenzó)
+    const unmuteVideo = () => {
+      const vid = document.getElementById('funnelVideoPlayer');
+      if (vid) {
+        vid.muted = false;
+        videoFunnel.isMuted = false;
+        videoFunnel.autoplayBlocked = false;
+        if (vid.currentTime < 4) {
+          vid.currentTime = 0;
+        }
+        vid.play().then(() => {
+          videoFunnel.isPlaying = true;
+        }).catch((e) => {
+          console.warn('[Video Funnel] Error activando audio:', e);
+        });
+      }
+    };
+
+    const handleVideoClick = () => {
+      if (videoFunnel.isMuted) {
+        unmuteVideo();
+      }
     };
 
     const answerFunnelQuestion = (isYes) => {
@@ -1141,25 +1201,36 @@ const app = createApp({
 
     // Inicialización y captura de UTMs
     onMounted(() => {
-      const urlParams = new URLSearchParams(window.location.search);
-      utmParams.source = urlParams.get('utm_source') || (document.referrer ? new URL(document.referrer).hostname : 'Direct');
-      utmParams.medium = urlParams.get('utm_medium') || '';
-      utmParams.campaign = urlParams.get('utm_campaign') || '';
-      utmParams.term = urlParams.get('utm_term') || '';
-      utmParams.content = urlParams.get('utm_content') || '';
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        let referrerHost = 'Direct';
+        try {
+          if (document.referrer) {
+            referrerHost = new URL(document.referrer).hostname || 'Direct';
+          }
+        } catch (eRef) {
+          referrerHost = 'Direct';
+        }
 
-      const metaParam = urlParams.get('meta') || urlParams.get('goal');
-      if (metaParam) {
-        const found = wellnessGoals.find(g => g.id.toLowerCase() === metaParam.toLowerCase());
-        if (found) form.goal = found.label;
+        utmParams.source = urlParams.get('utm_source') || referrerHost;
+        utmParams.medium = urlParams.get('utm_medium') || '';
+        utmParams.campaign = urlParams.get('utm_campaign') || '';
+        utmParams.term = urlParams.get('utm_term') || '';
+        utmParams.content = urlParams.get('utm_content') || '';
+
+        const metaParam = urlParams.get('meta') || urlParams.get('goal');
+        if (metaParam) {
+          const found = wellnessGoals.find(g => g.id.toLowerCase() === metaParam.toLowerCase());
+          if (found) form.goal = found.label;
+        }
+
+        console.log('Landing Immunotec inicializada. Origen detectado:', utmParams.source);
+      } catch (initErr) {
+        console.warn('Error inicializando parámetros UTM:', initErr);
       }
 
-      console.log('Landing Immunotec inicializada. Origen detectado:', utmParams.source);
-
-      // Mostrar video interactivo automáticamente como ventana emergente al entrar a la página
-      setTimeout(() => {
-        openVideoFunnelModal(1);
-      }, 400);
+      // Iniciar el embudo de video interactivo inmediatamente
+      openVideoFunnelModal(1);
     });
 
     return {
@@ -1208,6 +1279,8 @@ const app = createApp({
       openVideoFunnelModal,
       closeVideoFunnelModal,
       playFunnelStep,
+      unmuteVideo,
+      handleVideoClick,
       answerFunnelQuestion,
       restartFunnel,
       replayCurrentFunnelVideo,
@@ -1225,3 +1298,4 @@ const app = createApp({
 });
 
 app.mount('#app');
+

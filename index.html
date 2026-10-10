@@ -500,18 +500,29 @@
                            @ended="onFunnelVideoEnded"
                            @play="onFunnelVideoPlay"
                            @pause="onFunnelVideoPause"
+                           @click="handleVideoClick"
+                           autoplay
+                           muted
                            playsinline
                            webkit-playsinline
                            controls
-                           class="w-full max-h-[70vh] object-contain mx-auto bg-black">
+                           class="w-full max-h-[70vh] object-contain mx-auto bg-black cursor-pointer">
                       <source :src="currentFunnelStepData.videoSrc" type="video/mp4">
                       Tu navegador no soporta video HTML5.
                     </video>
 
+                    <!-- Botón / Banner Flotante Pulsante: Activar Sonido mientras reproduce en silenciado -->
+                    <div v-if="videoFunnel.isMuted && videoFunnel.isPlaying"
+                         @click.stop="unmuteVideo"
+                         class="absolute top-4 inset-x-0 mx-auto w-fit z-30 bg-emerald-600/95 hover:bg-emerald-500 text-white px-5 py-2.5 rounded-full shadow-2xl flex items-center gap-2.5 cursor-pointer animate-bounce backdrop-blur-md border border-emerald-300 transition-all active:scale-95">
+                      <span class="text-base sm:text-lg">🔊</span>
+                      <span class="text-xs sm:text-sm font-extrabold tracking-wide uppercase">Toca para activar el sonido</span>
+                    </div>
+
                     <!-- Overlay para iniciar con audio si el navegador pausó autoplay al entrar a la página -->
                     <div v-if="videoFunnel.autoplayBlocked" 
-                         @click="replayCurrentFunnelVideo"
-                         class="absolute inset-0 bg-black/75 backdrop-blur-xs flex flex-col items-center justify-center cursor-pointer text-white p-6 z-20">
+                         @click="unmuteVideo"
+                         class="absolute inset-0 bg-black/80 backdrop-blur-xs flex flex-col items-center justify-center cursor-pointer text-white p-6 z-20">
                       <div class="w-16 h-16 rounded-full bg-emerald-500 hover:bg-emerald-400 flex items-center justify-center shadow-2xl animate-pulse mb-3 transition-transform hover:scale-105">
                         <svg class="w-8 h-8 text-white fill-current ml-1" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                       </div>
@@ -2363,10 +2374,10 @@
   <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
   
   <!-- Configuración del Asesor & Pixels -->
-  <script src="assets/js/config.js"></script>
+  <script src="assets/js/config.js?v=2.2"></script>
   
   <!-- Lógica Reactiva de la Aplicación -->
-  <script src="assets/js/app.js"></script>
+  <script src="assets/js/app.js?v=2.2"></script>
 
 </body>
 </html>
