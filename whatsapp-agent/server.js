@@ -16,7 +16,7 @@ const META_ACCESS_TOKEN = process.env.META_ACCESS_TOKEN;
 const META_PHONE_NUMBER_ID = process.env.META_PHONE_NUMBER_ID;
 const META_VERIFY_TOKEN = process.env.META_VERIFY_TOKEN;
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY;
-const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
+const GEMINI_MODEL = process.env.GEMINI_MODEL || 'gemini-flash-latest';
 
 // Memoria de conversación por número de teléfono del cliente
 const conversations = new Map();
@@ -88,13 +88,17 @@ app.post('/webhook', async (req, res) => {
 
       // Verificar si hay mensajes entrantes (ignorar notificaciones de entrega/leído)
       if (value && value.messages && value.messages.length > 0) {
-        const message = value.messages[0];
-        const from = message.from; // Número de WhatsApp del cliente (ej: 5212227708716)
+        // Normalizar número telefónico (en México Meta añade un '1' a móviles: 521XXXXXXXXXX -> 52XXXXXXXXXX)
+        let from = message.from;
+        if (from && from.startsWith('521') && from.length === 13) {
+          from = '52' + from.substring(3);
+        }
+
         const messageType = message.type;
 
         if (messageType === 'text') {
           const userText = message.text.body;
-          console.log(`[WhatsApp Inbound] De: ${from} | Mensaje: "${userText}"`);
+          console.log(`[WhatsApp Inbound] De: ${from} (original: ${message.from}) | Mensaje: "${userText}"`);
 
           // Marcar como leído
           await markMessageAsRead(message.id);
