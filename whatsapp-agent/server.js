@@ -86,8 +86,11 @@ app.post('/webhook', async (req, res) => {
       const change = entry && entry.changes && entry.changes[0];
       const value = change && change.value;
 
+      console.log('[Webhook POST received]:', JSON.stringify(body));
+
       // Verificar si hay mensajes entrantes (ignorar notificaciones de entrega/leído)
       if (value && value.messages && value.messages.length > 0) {
+        const message = value.messages[0];
         // Normalizar número telefónico (en México Meta añade un '1' a móviles: 521XXXXXXXXXX -> 52XXXXXXXXXX)
         let from = message.from;
         if (from && from.startsWith('521') && from.length === 13) {
